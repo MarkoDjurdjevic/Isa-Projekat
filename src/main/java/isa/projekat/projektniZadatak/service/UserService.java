@@ -1,7 +1,10 @@
 package isa.projekat.projektniZadatak.service;
 
+import isa.projekat.projektniZadatak.Enums.UserRoleEnum;
 import isa.projekat.projektniZadatak.model.Users;
+import isa.projekat.projektniZadatak.model.dto.RegistrationDTO;
 import isa.projekat.projektniZadatak.repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,8 @@ import java.util.Objects;
 public class UserService {
 
     private final UserRepository userRepository;
+
+
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -32,7 +37,7 @@ public class UserService {
     }
 
    @Transactional
-   public void updateUser(Long userId,String name,String email,String address,String city,String country,String phone,
+   public void updateUser(Long userId,String name,String email,String adress,String city,String country,String phone,
                          String information){
         Users users =userRepository.findById(userId).orElseThrow(()->new IllegalStateException("User with that id does not exist"));
 
@@ -44,8 +49,8 @@ public class UserService {
             users.setEmail(email);
         }
 
-        if(address!=null&&address.length()>0&&!Objects.equals(users.getAddress(),address)){
-            users.setAddress(address);
+        if(adress!=null&&adress.length()>0&&!Objects.equals(users.getAdress(),adress)){
+            users.setAdress(adress);
         }
 
         if(city!=null&&city.length()>0&&!Objects.equals(users.getCity(),city)){
@@ -64,5 +69,15 @@ public class UserService {
             users.setInformation(information);
         }
 
+    }
+    public Users register(RegistrationDTO registrationDTO){
+        Users users = registrationDTO.convertToUser(registrationDTO);
+        users.setUserRoleEnum(UserRoleEnum.REGISTERED_USER);
+        users = userRepository.save(users);
+        return users;
+    }
+
+    public List<Users> getUsersByName(String name, String lastname){
+        return userRepository.findUserByName(name, lastname);
     }
 }

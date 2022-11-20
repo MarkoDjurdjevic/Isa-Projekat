@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -50,6 +51,41 @@ public class CentreService {
         if(address != null && address.length() > 0 && !Objects.equals(centre.getAdress(), address)){
             centre.setAdress(address);
         }
+
+    }
+
+
+
+    public List<Centre>sortByName(String byWhatOrder){
+        List<Centre> centres = new ArrayList<>();
+        if(byWhatOrder.equals("Ascending")){
+            centres = centreRepository.findAllByOrderByNameAsc();
+        }else{
+            centres = centreRepository.findAllByOrderByNameDesc();
+        }
+        return centres;
+
+    }
+
+    public List<Centre>sortByAdress(String byWhatOrder){
+        List<Centre> centres = new ArrayList<>();
+        if(byWhatOrder.equals("Ascending")){
+            centres = centreRepository.findAllByOrderByAdressAsc();
+        }else{
+            centres = centreRepository.findAllByOrderByAdressDesc();
+        }
+        return centres;
+
+    }
+
+    public List<Centre>sortByAvgGrade(String byWhatOrder){
+        List<Centre> centres = new ArrayList<>();
+        if(byWhatOrder.equals("Ascending")){
+            centres = centreRepository.findAllByOrderByAvgGradeAsc();
+        }else{
+            centres = centreRepository.findAllByOrderByAvgGradeDesc();
+        }
+        return centres;
 
     }
 
