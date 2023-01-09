@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
+
 import java.util.Optional;
 
 @Service
@@ -35,25 +36,24 @@ public class CentreService {
         centreRepository.deleteById(centreId);
     }
 
+
     @Transactional
-    public void updateCentre(Long centreId, String name,String address,String description) {
+    public Centre updateCentre(Long centreId, Centre updatedCentre) {
+        System.out.println("updateCentre method called with centreId: " + centreId + " and updatedCentre: " + updatedCentre);
         Centre centre = centreRepository.findById(centreId).orElseThrow(() -> new IllegalStateException("student with id does not exist"));
-
-        if(name != null && name.length() > 0 && !Objects.equals(centre.getName(), name)){
-            centre.setName(name);
+        if (updatedCentre.getName() != null && !Objects.equals(centre.getName(), updatedCentre.getName())) {
+            centre.setName(updatedCentre.getName());
         }
-
-        if(description != null && description.length() > 0 && !Objects.equals(centre.getDescription(), description)){
-            centre.setDescription(description);
+        if (updatedCentre.getDescription() != null && !Objects.equals(centre.getDescription(), updatedCentre.getDescription())) {
+            centre.setDescription(updatedCentre.getDescription());
         }
-
-        if(address != null && address.length() > 0 && !Objects.equals(centre.getAdress(), address)){
-            centre.setAdress(address);
+        if (updatedCentre.getAdress() != null && !Objects.equals(centre.getAdress(), updatedCentre.getAdress())) {
+            centre.setAdress(updatedCentre.getAdress());
         }
-
+        return centreRepository.save(centre);
     }
 
-
-
-
+    public Optional<Centre> searchCentres(String name, String adress){
+        return centreRepository.findCentreByNameOrAddress(name,adress);
+    }
 }

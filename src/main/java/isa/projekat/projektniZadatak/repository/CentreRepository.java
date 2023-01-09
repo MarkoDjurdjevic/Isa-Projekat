@@ -11,4 +11,7 @@ import java.util.Optional;
 public interface CentreRepository extends JpaRepository<Centre, Long> {
     @Query("SELECT c from Centre c WHERE c.adress=?1")
     Optional<Centre> findCentreByAdress(String adress);
+
+    @Query("SELECT c FROM Centre c WHERE c.name = ?1 OR c.adress = ?2")
+    Optional<Centre> findCentreByNameOrAddress(String name, String address);
 }

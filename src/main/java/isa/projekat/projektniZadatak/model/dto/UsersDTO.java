@@ -1,4 +1,4 @@
-package isa.projekat.projektniZadatak.model;
+package isa.projekat.projektniZadatak.model.dto;
 
 import isa.projekat.projektniZadatak.Enums.GenderEnum;
 import isa.projekat.projektniZadatak.Enums.UserCategoryEnum;
@@ -7,21 +7,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 
 @Getter
 @Setter
 @NoArgsConstructor
 
-@Entity
-@Table
-public class Users {
+public class UsersDTO {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(nullable=false,updatable=false)
     private Long id;
-
 
     private String email;
 
@@ -39,23 +35,21 @@ public class Users {
 
     private String phone;
 
-    private String jmbg;
+    private String JMBG;
 
     private String profession;
 
     private String information;
 
-    //private double points;
+    private double points;
 
     private UserCategoryEnum category;
 
-    @ManyToOne
-    private Centre centre;
+
+    private Long centreId;
 
     @Enumerated(EnumType.ORDINAL)
     private GenderEnum genderEnum;
 
-
-   private UserRoleEnum userRoleEnum;
-
+    private UserRoleEnum userRoleEnum;
 }
