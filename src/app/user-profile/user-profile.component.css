@@ -1,0 +1,81 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(#b993d6, #8ca6db);
+}
+
+.container {
+  min-height: 50rem;
+  min-width: 30rem;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+select {
+  margin-top: 1rem;
+  font-family: "Montserrat", sans-serif;
+  width: 80%;
+  height: 1.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid transparent;
+}
+
+select {
+  padding: 1rem;
+}
+
+.wr-1 {
+  padding-top: 12rem;
+}
+
+.wr-2 {
+  margin-top: 1.5rem;
+}
+
+.sm-pad {
+  padding-left: 2.5rem;
+}
+
+.email-label {
+  display: block;
+}
+
+.btn {
+  margin-top: 4rem;
+  margin-left: 3rem;
+  min-width: 10rem;
+  padding: 0.75rem 2.25rem;
+  border: none;
+  border-radius: 15px;
+  background-color: #f2709c;
+  color: #fff;
+  box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.3);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.btn-green {
+  background: linear-gradient(to right, #ec6f66, #f3a183);
+}
+
+/* PROFILE CONTAINER */
+.profile-container {
+  display: flex;
+  background: linear-gradient(#b993d6, #8ca6db);
+  min-width: 80rem;
+  padding: 2rem;
+}
+
+.profile-container > * {
+  min-width: 24%;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}

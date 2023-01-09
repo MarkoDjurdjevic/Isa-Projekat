@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <form *ngIf="!loggedIn" (ngSubmit)="submitForm(form)" #form="ngForm">
+      <!-- !user-->
+      <!--*ngIf="loggedIn"-->
+      <div class="container">
+        <div class="sm-pad wr-1">
+          <label class="email-label" for="email">Email: </label>
+          <input
+            type="text"
+            name="email"
+            placeholder="email"
+            #email="ngModel"
+            ngModel
+            required
+            email
+          />
+          <p *ngIf="!email.valid && email.touched">
+            You need to write a valid email
+          </p>
+        </div>
+        <div class="sm-pad wr-2">
+          <label for="password">Password: </label>
+          <input
+            type="text"
+            name="password"
+            placeholder="password"
+            #password="ngModel"
+            ngModel
+            required
+          />
+        </div>
+        <p *ngIf="!password.valid && password.touched">
+          Password cannot be empty
+        </p>
+        <div>
+          <button class="btn" type="submit" [disabled]="!form.valid">
+            LOGIN
+          </button>
+          <div *ngIf="!user && loginAttempted">Sorry, user not found.</div>
+        </div>
+      </div>
+    </form>
+
+    <form *ngIf="loggedIn" #f="ngForm" (ngSubmit)="updateUser(f)">
+      <!-- user-->>
+      <div class="profile-container">
+        <div>
+          <label for="id">ID:</label><br />
+          <input
+            type="number"
+            id="id"
+            name="id"
+            [(ngModel)]="user.id"
+            readonly
+          /><br />
+
+          <label for="email">Email:</label><br />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            [(ngModel)]="user.email"
+            disabled
+          /><br />
+
+          <label for="password">Password:</label><br />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            [(ngModel)]="user.password"
+            [disabled]="!editMode"
+          /><br />
+
+          <label for="name">Name:</label><br />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Name"
+            [(ngModel)]="user.name"
+            [disabled]="!editMode"
+          /><br />
+        </div>
+
+        <div>
+          <label for="lastname">Last Name:</label><br />
+          <input
+            type="text"
+            id="lastname"
+            name="lastname"
+            [(ngModel)]="user.lastname"
+            [disabled]="!editMode"
+          /><br />
+          <label for="adress">Address:</label><br />
+          <input
+            type="text"
+            id="adress"
+            name="adress"
+            [(ngModel)]="user.adress"
+            [disabled]="!editMode"
+          /><br />
+
+          <label for="city">City:</label><br />
+          <input
+            type="text"
+            id="city"
+            name="city"
+            [(ngModel)]="user.city"
+            [disabled]="!editMode"
+          /><br />
+
+          <label for="country">Country:</label><br />
+          <input
+            type="text"
+            id="country"
+            name="country"
+            [(ngModel)]="user.country"
+            [disabled]="!editMode"
+          /><br />
+        </div>
+        <div>
+          <label for="phone">Phone:</label><br />
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            [(ngModel)]="user.phone"
+            [disabled]="!editMode"
+          /><br />
+          <label for="jmbg">JMBG:</label><br />
+          <input
+            type="text"
+            id="jmbg"
+            name="jmbg"
+            [(ngModel)]="user.jmbg"
+            disabled
+          /><br />
+
+          <label for="profession">Profession:</label><br />
+          <input
+            type="text"
+            id="profession"
+            name="profession"
+            [(ngModel)]="user.profession"
+            [disabled]="!editMode"
+          /><br />
+
+          <label for="information">Information:</label><br />
+          <input
+            type="text"
+            id="information"
+            name="information"
+            [(ngModel)]="user.information"
+            [disabled]="!editMode"
+          /><br />
+        </div>
+        <div>
+          <label for="centre">Centre:</label><br />
+          <input
+            type="text"
+            id="centre"
+            name="centre"
+            [(ngModel)]="user.centre"
+          /><br />
+          <label for="genderEnum">Gender:</label><br />
+
+          <select
+            id="genderEnum"
+            name="genderEnum"
+            [(ngModel)]="user.genderEnum"
+          >
+            <option value="MALE">MALE</option>
+            <option value="FEMALE">FEMALE</option></select
+          ><br />
+
+          <label for="userRoleEnum">User Role:</label><br />
+          <select
+            id="userRoleEnum"
+            name="userRoleEnum"
+            [(ngModel)]="user.userRoleEnum"
+          >
+            <option value="UNREGISTERED_USER">UNREGISTERED_USER</option>
+            <option value="REGISTERED_USER">REGISTERED_USER</option>
+            <option value="SYSTEM_ADMINISTRATOR">SYSTEM_ADMINISTRATOR</option>
+            <option value="CENTRE_ADMINISTRATOR">
+              CENTRE_ADMINISTRATOR
+            </option></select
+          ><br /><br />
+          <label for="category">Category:</label><br />
+          <select id="category" name="category" [(ngModel)]="user.category">
+            <option value="REGULAR">REGULAR</option>
+            <option value="SILVER">SILVER</option>
+            <option value="GOLD">GOLD</option></select
+          ><br />
+        </div>
+      </div>
+      <div>
+        <button class="btn" type="button" (click)="onEdit()">Edit</button>
+        <button *ngIf="editMode" type="submit" class="btn btn-green">
+          Save changes
+        </button>
+      </div>
+    </form>
+  </body>
+</html>
