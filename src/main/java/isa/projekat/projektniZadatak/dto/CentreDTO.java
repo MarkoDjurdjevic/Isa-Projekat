@@ -1,7 +1,6 @@
-package isa.projekat.projektniZadatak.model.dto;
+package isa.projekat.projektniZadatak.dto;
 
 import isa.projekat.projektniZadatak.model.Centre;
-import isa.projekat.projektniZadatak.model.Users;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,9 +24,9 @@ public class CentreDTO {
         Centre centre = new Centre();
         centre.setId(centreDTO.getId());
         centre.setName(centreDTO.getName());
-        centre.setAdress(centreDTO.getAdress());
+//        centre.setAdress(centreDTO.getAdress());
         centre.setDescription(centreDTO.getDescription());
-        centre.setAvgGrade(centreDTO.getAvgGrade());
+//        centre.setAvgGrade(centreDTO.getAvgGrade());
         return centre;
     }
 }

@@ -21,7 +21,7 @@ public class CentreService {
     }
 
     public void addNewCentre(Centre centre){
-        Optional<Centre> centreOptional = centreRepository.findCentreByAdress(centre.getAdress());
+        Optional<Centre> centreOptional = centreRepository.findCentreByAdress(centre.getNumber());
         if(centreOptional.isPresent()){
             throw new IllegalStateException("Centre already exists on the following adress");
         }
@@ -47,13 +47,13 @@ public class CentreService {
         if (updatedCentre.getDescription() != null && !Objects.equals(centre.getDescription(), updatedCentre.getDescription())) {
             centre.setDescription(updatedCentre.getDescription());
         }
-        if (updatedCentre.getAdress() != null && !Objects.equals(centre.getAdress(), updatedCentre.getAdress())) {
-            centre.setAdress(updatedCentre.getAdress());
-        }
+//        if (updatedCentre.getAdress() != null && !Objects.equals(centre.getAdress(), updatedCentre.getAdress())) {
+//            centre.setAdress(updatedCentre.getAdress());
+//        }
         return centreRepository.save(centre);
     }
 
-    public Optional<Centre> searchCentres(String name, String adress){
-        return centreRepository.findCentreByNameOrAddress(name,adress);
+    public Optional<Centre> searchCentres(String name, int number ){
+        return centreRepository.findCentreByNameOrAddress(name,number);
     }
 }

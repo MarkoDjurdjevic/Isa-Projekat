@@ -1,14 +1,10 @@
-package isa.projekat.projektniZadatak.model.dto;
+package isa.projekat.projektniZadatak.dto;
 
 import isa.projekat.projektniZadatak.Enums.GenderEnum;
 import isa.projekat.projektniZadatak.model.Users;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MatchingStrategy;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;

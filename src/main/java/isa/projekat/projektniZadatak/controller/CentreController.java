@@ -54,9 +54,9 @@ public class CentreController {
 
 
     @GetMapping("/search")
-    public ResponseEntity<Optional<Centre>> searchCentres(@RequestParam String name, @RequestParam String adress){
+    public ResponseEntity<Optional<Centre>> searchCentres(@RequestParam String name, @RequestParam int number){
 
-        Optional<Centre> centre = centreService.searchCentres(name,adress);
+        Optional<Centre> centre = centreService.searchCentres(name,number);
         if(centre.isPresent()){
             return ResponseEntity.ok(centre);
         } else {

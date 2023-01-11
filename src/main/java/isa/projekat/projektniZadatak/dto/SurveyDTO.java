@@ -1,8 +1,7 @@
-package isa.projekat.projektniZadatak.model.dto;
+package isa.projekat.projektniZadatak.dto;
 
 
 import isa.projekat.projektniZadatak.model.Survey;
-import isa.projekat.projektniZadatak.model.Users;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

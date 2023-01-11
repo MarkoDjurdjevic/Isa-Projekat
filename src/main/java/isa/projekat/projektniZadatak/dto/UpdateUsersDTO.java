@@ -1,4 +1,4 @@
-package isa.projekat.projektniZadatak.model.dto;
+package isa.projekat.projektniZadatak.dto;
 
 
 import lombok.Getter;

@@ -3,8 +3,7 @@ package isa.projekat.projektniZadatak.service;
 
 
 import isa.projekat.projektniZadatak.model.Survey;
-import isa.projekat.projektniZadatak.model.Users;
-import isa.projekat.projektniZadatak.model.dto.SurveyDTO;
+import isa.projekat.projektniZadatak.dto.SurveyDTO;
 import isa.projekat.projektniZadatak.repository.SurveyRepository;
 
 import isa.projekat.projektniZadatak.repository.UserRepository;
