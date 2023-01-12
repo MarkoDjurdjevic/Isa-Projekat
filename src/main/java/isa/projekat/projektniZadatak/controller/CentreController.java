@@ -8,6 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +27,19 @@ public class CentreController {
     public CentreController(CentreService centreService) {
         this.centreService = centreService;
     }
+
+  @GetMapping("/appointments")
+  public ResponseEntity<List<Centre>> getAvailableCentres(@RequestParam("date") String date, @RequestParam("time") String time) {
+    System.out.println("This is the date IN BACKEND: ");
+    System.out.println(date);
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDate newDate = LocalDate.parse(date,formatter);
+    System.out.println("This is formmated date: ");
+    System.out.println(newDate);
+
+    List<Centre> availableCentres = centreService.getAvailableCentres(newDate, time);
+    return new ResponseEntity<>(availableCentres, HttpStatus.OK);
+  }
 
     @GetMapping("/all")
     public List<Centre> getCentres(){
