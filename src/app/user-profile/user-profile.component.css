@@ -46,7 +46,7 @@ select {
   display: block;
 }
 
-.btn {
+.btn-1 {
   margin-top: 4rem;
   margin-left: 3rem;
   min-width: 10rem;
@@ -78,4 +78,27 @@ select {
 
 input.ng-invalid.ng-touched {
   border: 1px solid red;
+}
+
+.form-popUp {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  background-color: #8ca6db;
+  min-height: 50vh;
+  min-width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form-popUp input {
+  width: 300px;
+}
+
+.popup-div {
+  margin-top: 0.5rem;
 }

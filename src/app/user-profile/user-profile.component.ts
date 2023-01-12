@@ -1,8 +1,11 @@
 import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { Users } from '../model/user';
 import { AuthService } from '../service/auth.service';
+import { FormDataService } from '../service/Formdata.service';
 import { UserService } from '../service/user.service';
 
 @Component({
@@ -13,7 +16,9 @@ import { UserService } from '../service/user.service';
 export class UserProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private formService: FormDataService,
+    private router: Router
   ) {}
   users: Users[];
   user: Users;
@@ -21,6 +26,8 @@ export class UserProfileComponent implements OnInit {
   loginAttempted = false;
   editMode = false;
   currentlyLoggedInUser: Users;
+  showPopup = false;
+  appointmentTime: NgbDate;
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe((users) => {
@@ -79,5 +86,34 @@ export class UserProfileComponent implements OnInit {
       }
     );
     this.editMode = false;
+  }
+
+  //PopUp prozor
+  onButtonClick() {
+    this.showPopup = !this.showPopup;
+  }
+
+  ShowCentreAppointments(f) {
+    console.log(f.value.appointmentTime);
+
+    let dateString =
+      this.appointmentTime.year +
+      '-' +
+      String(this.appointmentTime.month).padStart(2, '0') +
+      '-' +
+      String(this.appointmentTime.day).padStart(2, '0');
+
+    console.log(dateString);
+    f.value.appointmentTime = new Date(
+      f.value.appointmentTime.year,
+      f.value.appointmentTime.month - 1,
+      f.value.appointmentTime.day
+    );
+
+    console.log(`Updated date: `, f.value.appointmentTime);
+
+    //this.formService.updateDateAndTime(f.value.appointmentTime, f.value.time);
+    this.formService.updateDateAndTime(dateString, f.value.time);
+    this.router.navigate(['/centres-terms']);
   }
 }

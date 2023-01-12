@@ -11,6 +11,19 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <!--bootstrap cdn za neki lepsi prikaz -->
+    <link
+      href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <form *ngIf="!loggedIn" (ngSubmit)="submitForm(form)" #form="ngForm">
@@ -47,7 +60,7 @@
           Password cannot be empty
         </p>
         <div>
-          <button class="btn" type="submit" [disabled]="!form.valid">
+          <button class="btn-1" type="submit" [disabled]="!form.valid">
             LOGIN
           </button>
           <div *ngIf="!user && loginAttempted">Sorry, user not found.</div>
@@ -210,11 +223,55 @@
         </div>
       </div>
       <div>
-        <button class="btn" type="button" (click)="onEdit()">Edit</button>
-        <button *ngIf="editMode" type="submit" class="btn btn-green">
+        <button class="btn-1" type="button" (click)="onEdit()">Edit</button>
+        <button *ngIf="editMode" type="submit" class="btn-1 btn-green">
           Save changes
         </button>
       </div>
     </form>
+
+    <button *ngIf="loggedIn" class="btn-1" (click)="onButtonClick()">
+      Schedule an appointment...
+    </button>
+
+    <div class="form-group row form-popUp" *ngIf="loggedIn && showPopup">
+      <form
+        #fAppointment="ngForm"
+        (ngSubmit)="ShowCentreAppointments(fAppointment)"
+      >
+        <label class="col-form-label col-sm-4">Appointment Time: </label>
+        <div class="form-group">
+          <div class="input-group col-sm-12">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="yyyy-mm-dd"
+              name="appointmentTime"
+              [(ngModel)]="appointmentTime"
+              ngbDatepicker
+              #d="ngbDatepicker"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary calendar"
+                (click)="d.toggle()"
+                type="button"
+              >
+                <i class="fa-regular fa-calendar"></i>
+              </button>
+              <div>
+                <label for="time"></label>
+                <input type="text" name="time" ngModel />
+              </div>
+              <div class="border text-center" *ngIf="loggedIn && showPopup">
+                <button data-dismiss="modal" class="btn btn-info">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   </body>
 </html>

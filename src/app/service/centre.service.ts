@@ -19,6 +19,14 @@ export class CentreService {
     return this.http.get<Centre[]>('http://localhost:8082/centre/all');
   }
 
+  getAvailableCentres(date: String, time: string): Observable<Centre[]> {
+    return this.http.get<Centre[]>(
+      `http://localhost:8082/centre/appointments?date=${date}&time=${time}`
+
+      //`http://localhost:8082/centre/appointments`
+    );
+  }
+
   public registerNewCentre(centre: Centre): Observable<Centre> {
     return this.http.post<Centre>('http://localhost:8082/centre/add', centre);
   }

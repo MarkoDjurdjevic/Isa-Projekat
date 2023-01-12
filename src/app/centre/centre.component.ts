@@ -48,7 +48,8 @@ export class CentreComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.centreService.getCentres().subscribe((response: Centre[]) => {
       this.centres = response;
-      console.log(this.centres);
+      console.log(response);
+      console.log(`Centri: `, this.centres);
       this.loggedIn = this.authService.isLoggedIn;
       console.log(this.loggedIn);
     });
