@@ -21,13 +21,16 @@ public class Centre {
     private long id;
 
     private String name;
-
     private String adress;
     private String description;
 
     private double avgGrade;
 
+    @OneToMany(mappedBy = "centre")
+    private List<Users> administrators;
 
+    @OneToMany(mappedBy = "centreAppointment")
+    private List<Appointments> appointments;
 
     @Override
     public String toString() {
