@@ -9,11 +9,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { CentreComponent } from './centre/centre.component';
 import { CentreTermsComponent } from './centre-terms/centre-terms.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BloodFormularComponent } from './blood-formular/blood-formular.component';
 
 const appRoutes: Routes = [
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'centres', component: CentreComponent },
   { path: 'centres-terms', component: CentreTermsComponent },
+  { path: 'blood-formular', component: BloodFormularComponent },
 ];
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ const appRoutes: Routes = [
     UserProfileComponent,
     CentreComponent,
     CentreTermsComponent,
+    BloodFormularComponent,
   ],
   imports: [
     BrowserModule,

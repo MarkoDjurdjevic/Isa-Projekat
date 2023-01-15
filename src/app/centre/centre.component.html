@@ -27,6 +27,18 @@
       </button>
     </form>
     <div>
+      <label for="avgGrade">Filter by min avgGrade</label>
+      <input type="number" id="avgGrade" #avgGradeInput />
+      <button
+        class="btn btn-green"
+        type="submit"
+        (click)="filterCenters(+avgGradeInput.value)"
+      >
+        Submit
+      </button>
+      <button class="btn btn-red" (click)="resetFilter()">Reset</button>
+    </div>
+    <div>
       <ul class="centre-information temp-info">
         <li class="fixed-width">ID</li>
         <li class="fixed-width">NAME</li>
@@ -40,7 +52,10 @@
         </li>
       </ul>
     </div>
-    <div class="container" *ngFor="let centre of centres; let i = index">
+    <div
+      class="container"
+      *ngFor="let centre of filteredCenters; let i = index"
+    >
       <div *ngIf="centres.length === 0">
         <p>No centres were found</p>
       </div>
