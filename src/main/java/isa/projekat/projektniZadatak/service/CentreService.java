@@ -1,5 +1,6 @@
 package isa.projekat.projektniZadatak.service;
 
+import isa.projekat.projektniZadatak.model.Appointments;
 import isa.projekat.projektniZadatak.model.Centre;
 import isa.projekat.projektniZadatak.repository.CentreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -51,16 +53,27 @@ public class CentreService {
             centre.setDescription(updatedCentre.getDescription());
         }
         if (updatedCentre.getAdress() != null && !Objects.equals(centre.getAdress(), updatedCentre.getAdress())) {
-            centre.setAdress(updatedCentre.getAdress());
+          centre.setAdress(updatedCentre.getAdress());
         }
+
+        centre.setAppointments(updatedCentre.getAppointments());
+
+
         return centreRepository.save(centre);
     }
 
     public Optional<Centre> searchCentres(String name, String adress){
         return centreRepository.findCentreByNameOrAddress(name,adress);
     }
+//bez duration
+//    public List<Centre> getAvailableCentres(LocalDate date, String time){
+//      return centreRepository.findByAvailableAppointments(date,time);
+//    }
 
-    public List<Centre> getAvailableCentres(LocalDate date, String time){
-      return centreRepository.findByAvailableAppointments(date,time);
-    }
+  public List<Centre> getAvailableCentres(LocalDate date, String time,String duration){
+    return centreRepository.findByAvailableAppointments(date,time,duration);
+  }
+
+
+
 }

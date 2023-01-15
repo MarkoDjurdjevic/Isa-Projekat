@@ -39,6 +39,8 @@ public class Centre {
                 ", adress='" + adress + '\'' +
                 ", description='" + description + '\'' +
                 ", avgGrade=" + avgGrade +
+                "Administators = " + administrators +
+                "Appointments = " + appointments +
                 '}';
     }
 
