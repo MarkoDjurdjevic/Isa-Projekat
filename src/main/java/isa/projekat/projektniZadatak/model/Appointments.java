@@ -4,7 +4,7 @@ import isa.projekat.projektniZadatak.Enums.BloodType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
@@ -24,10 +24,15 @@ public class Appointments {
 
   private LocalDate date;
   private String time;
+  //private int duration = 60;
 
   //enum
   private BloodType bloodType;
 
+  @JsonIgnore
+  //@JoinColumn(name = "centre_id") //za biderekcionu
   @ManyToOne
   private Centre centreAppointment;
+
+  private long centreId;
 }

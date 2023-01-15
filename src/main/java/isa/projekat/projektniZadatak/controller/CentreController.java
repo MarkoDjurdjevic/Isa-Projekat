@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -28,18 +29,51 @@ public class CentreController {
         this.centreService = centreService;
     }
 
+//  @GetMapping("/appointments")
+//  public ResponseEntity<List<Centre>> getAvailableCentres(@RequestParam("date") String date, @RequestParam("time") String time) {
+//    System.out.println("This is the date IN BACKEND: ");
+//    System.out.println(date);
+//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//    LocalDate newDate = LocalDate.parse(date,formatter);
+//    System.out.println("This is formmated date: ");
+//    System.out.println(newDate);
+//
+//
+//
+//    List<Centre> availableCentres = centreService.getAvailableCentres(newDate, time);
+//    return new ResponseEntity<>(availableCentres, HttpStatus.OK);
+//  }
+
+
   @GetMapping("/appointments")
   public ResponseEntity<List<Centre>> getAvailableCentres(@RequestParam("date") String date, @RequestParam("time") String time) {
-    System.out.println("This is the date IN BACKEND: ");
-    System.out.println(date);
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    LocalDate newDate = LocalDate.parse(date,formatter);
-    System.out.println("This is formmated date: ");
-    System.out.println(newDate);
+      try {
+        System.out.println("This is the date IN BACKEND: ");
+        System.out.println(date);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate newDate = LocalDate.parse(date,formatter);
+        //LocalDate newDate = LocalDate.parse(date);
+        System.out.println("This is formmated date: ");
+        System.out.println(newDate);
 
-    List<Centre> availableCentres = centreService.getAvailableCentres(newDate, time);
-    return new ResponseEntity<>(availableCentres, HttpStatus.OK);
+        int duration = 60;
+        LocalTime startTime = LocalTime.parse(time);
+        LocalTime endTime = startTime.plusMinutes(duration);
+        String endTimeString = endTime.toString();
+
+        List<Centre> availableCentres = centreService.getAvailableCentres(newDate, time,endTimeString);
+
+        return new ResponseEntity<>(availableCentres, HttpStatus.OK);
+      } catch (Exception e) {
+        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+
   }
+
+
+
+
+
 
     @GetMapping("/all")
     public List<Centre> getCentres(){
