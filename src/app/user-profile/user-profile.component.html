@@ -197,31 +197,38 @@
             name="genderEnum"
             [(ngModel)]="user.genderEnum"
           >
-            <option value="MALE">MALE</option>
-            <option value="FEMALE">FEMALE</option></select
+            <option value="MALE" disabled>MALE</option>
+            <option value="FEMALE" disabled>FEMALE</option></select
           ><br />
 
           <label for="userRoleEnum">User Role:</label><br />
+
           <select
             id="userRoleEnum"
             name="userRoleEnum"
             [(ngModel)]="user.userRoleEnum"
           >
-            <option value="UNREGISTERED_USER">UNREGISTERED_USER</option>
-            <option value="REGISTERED_USER">REGISTERED_USER</option>
-            <option value="SYSTEM_ADMINISTRATOR">SYSTEM_ADMINISTRATOR</option>
-            <option value="CENTRE_ADMINISTRATOR">
+            <option value="UNREGISTERED_USER" disabled>
+              UNREGISTERED_USER
+            </option>
+            <option value="REGISTERED_USER" disabled>REGISTERED_USER</option>
+            <option value="SYSTEM_ADMINISTRATOR" disabled>
+              SYSTEM_ADMINISTRATOR
+            </option>
+            <option value="CENTRE_ADMINISTRATOR" disabled>
               CENTRE_ADMINISTRATOR
-            </option></select
+            </option>
+          </select>
           ><br /><br />
           <label for="category">Category:</label><br />
           <select id="category" name="category" [(ngModel)]="user.category">
-            <option value="REGULAR">REGULAR</option>
-            <option value="SILVER">SILVER</option>
-            <option value="GOLD">GOLD</option></select
+            <option value="REGULAR" disabled>REGULAR</option>
+            <option value="SILVER" disabled>SILVER</option>
+            <option value="GOLD" disabled>GOLD</option></select
           ><br />
         </div>
       </div>
+
       <div>
         <button class="btn-1" type="button" (click)="onEdit()">Edit</button>
         <button *ngIf="editMode" type="submit" class="btn-1 btn-green">

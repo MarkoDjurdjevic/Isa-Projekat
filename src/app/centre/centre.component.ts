@@ -30,6 +30,7 @@ export class CentreComponent implements OnInit, OnDestroy {
   addingCentre = false;
   deleteMode = false;
   loggedIn: boolean;
+  filteredCenters: Centre[];
 
   constructor(
     private centreService: CentreService,
@@ -48,6 +49,8 @@ export class CentreComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.centreService.getCentres().subscribe((response: Centre[]) => {
       this.centres = response;
+      this.filteredCenters = this.centres;
+      console.log(`filterovani centri: `, this.filteredCenters);
       console.log(response);
       console.log(`Centri: `, this.centres);
       this.loggedIn = this.authService.isLoggedIn;
@@ -135,5 +138,15 @@ export class CentreComponent implements OnInit, OnDestroy {
         }
       }
     );
+  }
+
+  filterCenters(minAvgGrade: number) {
+    this.filteredCenters = this.filteredCenters.filter(
+      (centre) => centre.avgGrade >= minAvgGrade
+    );
+  }
+
+  resetFilter() {
+    this.filteredCenters = [...this.centres];
   }
 }

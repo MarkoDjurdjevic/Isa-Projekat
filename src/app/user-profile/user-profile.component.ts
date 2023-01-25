@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { UserRoleEnum } from '../enums/userRoleEnum';
 import { Users } from '../model/user';
 import { AuthService } from '../service/auth.service';
 import { FormDataService } from '../service/Formdata.service';
@@ -43,10 +44,12 @@ export class UserProfileComponent implements OnInit {
 
     console.log(form);
     console.log(form.value);
+
     this.userService.login(form.value.email, form.value.password).subscribe(
       (user) => {
         if (user) {
           this.user = user;
+
           this.authService.login();
           this.loggedIn = this.authService.isLoggedIn;
           this.authService.currentlyLoggedInUser(user);

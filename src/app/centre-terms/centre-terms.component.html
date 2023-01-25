@@ -7,6 +7,49 @@
     <title>Document</title>
   </head>
   <body>
-    <button (click)="showData()">click me</button>
+    <div>
+      <ul class="centre-information temp-info">
+        <li class="fixed-width">ID</li>
+        <li class="fixed-width">NAME</li>
+        <li class="longer-width">ADDRESS</li>
+        <li class="fixed-width">AvgGRADE</li>
+        <li class="fixed-width"></li>
+      </ul>
+    </div>
+    <div class="container" *ngFor="let centre of centres; let i = index">
+      <div *ngIf="centres.length === 0">
+        <p>No centres were found</p>
+      </div>
+      <div class="ul-holder">
+        <ul class="centre-information">
+          <li class="fixed-width">{{ centre.id }}</li>
+          <li class="fixed-width">{{ centre.name }}</li>
+          <li class="longer-width">{{ centre.adress }}</li>
+          <li class="fixed-width">{{ centre.avgGrade }}</li>
+          <li class="fixed-width button-container">
+            <button
+              class="btn btn-blue"
+              type="button"
+              (click)="navigatetoFormular()"
+            >
+              Formular
+            </button>
+            <button
+              class="btn btn-blue"
+              type="button"
+              (click)="addAppointment(centre)"
+              [disabled]="!formularSigned || lastDonation"
+            >
+              Zakazi termin..
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <button class="btn btn-blue" (click)="sortCentres()">Sort Centres</button>
+    <p>
+      NOTE: you need to fill the formular and also to keep in mind that you must
+      not have donated blood in the last 6 months
+    </p>
   </body>
 </html>
