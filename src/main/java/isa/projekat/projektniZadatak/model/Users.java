@@ -3,19 +3,22 @@ package isa.projekat.projektniZadatak.model;
 import isa.projekat.projektniZadatak.Enums.GenderEnum;
 import isa.projekat.projektniZadatak.Enums.UserCategoryEnum;
 import isa.projekat.projektniZadatak.Enums.UserRoleEnum;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-
+@Builder
+@AllArgsConstructor
 @Entity
 @Table
-public class Users {
+public class Users implements UserDetails {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -55,7 +58,41 @@ public class Users {
     @Enumerated(EnumType.ORDINAL)
     private GenderEnum genderEnum;
 
-
+  @Enumerated(EnumType.ORDINAL) //dodao ovo sa securitijem
    private UserRoleEnum userRoleEnum;
 
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return List.of(new SimpleGrantedAuthority(userRoleEnum.name()));
+  }
+
+  @Override
+  public String getUsername() {
+    return email;
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return true;
+  }
+
+  @Override
+  public String getPassword(){
+    return password;
+  }
 }

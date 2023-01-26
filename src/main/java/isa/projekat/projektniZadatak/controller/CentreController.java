@@ -29,24 +29,11 @@ public class CentreController {
         this.centreService = centreService;
     }
 
-//  @GetMapping("/appointments")
-//  public ResponseEntity<List<Centre>> getAvailableCentres(@RequestParam("date") String date, @RequestParam("time") String time) {
-//    System.out.println("This is the date IN BACKEND: ");
-//    System.out.println(date);
-//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//    LocalDate newDate = LocalDate.parse(date,formatter);
-//    System.out.println("This is formmated date: ");
-//    System.out.println(newDate);
-//
-//
-//
-//    List<Centre> availableCentres = centreService.getAvailableCentres(newDate, time);
-//    return new ResponseEntity<>(availableCentres, HttpStatus.OK);
-//  }
 
 
   @GetMapping("/appointments")
-  public ResponseEntity<List<Centre>> getAvailableCentres(@RequestParam("date") String date, @RequestParam("time") String time) {
+  public ResponseEntity<List<Centre>> getAvailableCentres(@RequestParam("date") String date, @RequestParam("time") String time,
+  @RequestParam("duration") Integer duration) {
       try {
         System.out.println("This is the date IN BACKEND: ");
         System.out.println(date);
@@ -56,17 +43,38 @@ public class CentreController {
         System.out.println("This is formmated date: ");
         System.out.println(newDate);
 
-        int duration = 60;
+        //int duration = 60;
         LocalTime startTime = LocalTime.parse(time);
         LocalTime endTime = startTime.plusMinutes(duration);
         String endTimeString = endTime.toString();
-
+        System.out.println(endTimeString);
+        System.out.println(time);
         List<Centre> availableCentres = centreService.getAvailableCentres(newDate, time,endTimeString);
+
+        //List<Centre> availableCentres = centreService.getAvailableCentres(newDate, time,duration);
 
         return new ResponseEntity<>(availableCentres, HttpStatus.OK);
       } catch (Exception e) {
         return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
       }
+
+  }
+
+  @GetMapping("/appointments1")
+  public ResponseEntity<List<Centre>> getAvailableCentresRegUser(@RequestParam("date") String date, @RequestParam("time") String time ) {
+
+    try {
+      System.out.println("This is the date IN BACKEND: ");
+      System.out.println(date);
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+      LocalDate newDate = LocalDate.parse(date,formatter);
+
+      List<Centre> availableCentresRegUser = centreService.getAvailableCentresRegUser(newDate, time);
+
+      return new ResponseEntity<>(availableCentresRegUser, HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
   }
 
@@ -114,5 +122,11 @@ public class CentreController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<Centre> getCentreById(@PathVariable(value = "id") Long id) {
+    Centre centre = centreService.getCentreById(id);
+    return ResponseEntity.ok().body(centre);
+  }
 
 }
