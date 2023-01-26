@@ -21,6 +21,6 @@ export class BloodFormularComponent implements OnInit {
     const lastDonationValue = this.lastDonation.nativeElement.checked;
     this.appointmentService.lastDonationMethod(lastDonationValue);
     this.appointmentService.bloodFormularMethod();
-    this.router.navigate([`/centres-terms`]);
+    this.router.navigate([`/centres-terms-reg-user`]);
   }
 }

@@ -124,9 +124,12 @@ export class CentreComponent implements OnInit, OnDestroy {
     this.centreService.searchCentres(name, adress).subscribe(
       (centre) => {
         if (centre) {
-          this.centres = [centre];
+          console.log(`Nesto se desilo`);
+          //this.centres = [centre];
+          this.filteredCenters = [centre];
         } else {
-          this.centres = [];
+          //this.centres = [];
+          this.filteredCenters = [];
         }
       },
       (error: HttpErrorResponse) => {

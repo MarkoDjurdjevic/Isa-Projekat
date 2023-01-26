@@ -19,9 +19,25 @@ export class CentreService {
     return this.http.get<Centre[]>('http://localhost:8082/centre/all');
   }
 
-  getAvailableCentres(date: String, time: string): Observable<Centre[]> {
+  getCentreById(id: number): Observable<Centre> {
+    return this.http.get<Centre>(`http://localhost:8082/centre/${id}`);
+  }
+
+  getAvailableCentres(
+    date: String,
+    time: string,
+    duration: number
+  ): Observable<Centre[]> {
     return this.http.get<Centre[]>(
-      `http://localhost:8082/centre/appointments?date=${date}&time=${time}`
+      `http://localhost:8082/centre/appointments?date=${date}&time=${time}&duration=${duration}`
+
+      //`http://localhost:8082/centre/appointments`
+    );
+  }
+
+  getAvailableCentresRegUser(date: String, time: string): Observable<Centre[]> {
+    return this.http.get<Centre[]>(
+      `http://localhost:8082/centre/appointments1?date=${date}&time=${time}`
 
       //`http://localhost:8082/centre/appointments`
     );

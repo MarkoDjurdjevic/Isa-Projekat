@@ -9,11 +9,11 @@ import { CentreService } from '../service/centre.service';
 import { FormDataService } from '../service/Formdata.service';
 
 @Component({
-  selector: 'app-centre-terms',
-  templateUrl: './centre-terms.component.html',
-  styleUrls: ['./centre-terms.component.css'],
+  selector: 'app-centre-terms-reg-user',
+  templateUrl: './centre-terms-reg-user.component.html',
+  styleUrls: ['./centre-terms-reg-user.component.css'],
 })
-export class CentreTermsComponent implements OnInit {
+export class CentreTermsRegUserComponent implements OnInit {
   constructor(
     private centreService: CentreService,
     private authService: AuthService,
@@ -43,62 +43,35 @@ export class CentreTermsComponent implements OnInit {
     console.log(this.loggedIn);
     this.date = this.formService.dateInput;
     this.time = this.formService.timeInput;
-    this.duration = this.formService.duration;
-    console.log(
-      `Date:`,
-      this.date,
-      `TIME`,
-      this.time,
-      `DURATION: `,
-      this.duration
-    );
+    console.log(`Date:`, this.date, `TIME`, this.time);
 
     this.centreService
-      .getAvailableCentres(this.date, this.time, this.duration)
+      .getAvailableCentresRegUser(this.date, this.time)
       .subscribe((response: Centre[]) => {
         this.centres = response;
         console.log('OVO JE REZULTAT', this.centres);
       });
   }
 
-  // incrementId() {
-  //   this.id = this.id + 1;
-  // }
-
   addAppointment(centre: Centre) {
-    // this.incrementId();
-
-    this.newAppointment = {
-      // id: this.id,
-      date: this.date,
-      time: this.time,
-      duration: this.duration,
-      available: true,
-      bloodType: BloodType.APOS,
-      centreId: centre.id,
-    };
-
-    //centre.appointmentIds.push(this.newAppointment.id);
-    this.appointmentService.addAppointment(this.newAppointment).subscribe(
-      (response: Appointment) => {
-        console.log(`Successfully added appointment`);
-        console.log(response);
-      },
-      (error) => {
-        console.log(`Error adding appointment`);
-        console.log(error);
-      }
-    );
-
-    // this.centreService.updateCentre(centre.id, centre).subscribe(
-    //   (response: Centre) => {
-    //     console.log(`Successfully updated centre with new appointment`);
-    //     console.log(response);
-    //   },
-    //   (error) => {
-    //     console.log('Error updating centre with new appointment', error);
-    //   }
-    // );
+    this.centreService.getCentreById(centre.id).subscribe((centre) => {
+      this.appointmentService.getAppointments().subscribe((appointments) => {
+        for (let i = 0; i < appointments.length; i++) {
+          if (
+            appointments[i].time === this.time &&
+            appointments[i].centreId == centre.id
+          ) {
+            //this.time
+            appointments[i].available = false;
+            let updatedAppointment = { ...appointments[i], available: false }; //dodao
+            console.log(updatedAppointment);
+            this.appointmentService
+              .updateAppointment(updatedAppointment) //.updateAppointment(appointments[i])
+              .subscribe();
+          }
+        }
+      });
+    });
   }
 
   sortCentres() {

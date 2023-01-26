@@ -19,6 +19,26 @@ export class AppointmentService {
     console.log(`trebalo bi da sam uspesno napravio appointment`);
   }
 
+  getAppointmentById(id: number): Observable<Appointment> {
+    return this.http.get<Appointment>(
+      `'http://localhost:8082/appointments/${id}`
+    );
+  }
+
+  getAppointments(): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(
+      'http://localhost:8082/appointments/all'
+    );
+  }
+
+  public updateAppointment(appointment: Appointment): Observable<Appointment> {
+    console.log(`Updating Appointment  object`, appointment);
+    return this.http.put<Appointment>(
+      'http://localhost:8082/appointments/update/',
+      appointment
+    );
+  }
+
   lastDonationMethod(value: boolean) {
     this.lastDonation = value;
   }

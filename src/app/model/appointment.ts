@@ -7,4 +7,6 @@ export interface Appointment {
   time: String;
   bloodType: BloodType;
   centreId: number;
+  duration: number;
+  available: boolean;
 }

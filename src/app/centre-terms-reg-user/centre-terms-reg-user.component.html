@@ -27,7 +27,6 @@
           <li class="longer-width">{{ centre.adress }}</li>
           <li class="fixed-width">{{ centre.avgGrade }}</li>
           <li class="fixed-width button-container">
-            <!--
             <button
               class="btn btn-blue"
               type="button"
@@ -35,11 +34,12 @@
             >
               Formular
             </button>
-            -->
+
             <button
               class="btn btn-blue"
               type="button"
               (click)="addAppointment(centre)"
+              [disabled]="!formularSigned || lastDonation"
             >
               Zakazi termin..
             </button>

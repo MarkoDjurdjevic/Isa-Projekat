@@ -237,10 +237,23 @@
       </div>
     </form>
 
-    <button *ngIf="loggedIn" class="btn-1" (click)="onButtonClick()">
+    <button
+      *ngIf="loggedIn && user.userRoleEnum == 'CENTRE_ADMINISTRATOR'"
+      class="btn-1"
+      (click)="onButtonClick()"
+    >
+      Create an appointment...
+    </button>
+
+    <button
+      *ngIf="loggedIn && user.userRoleEnum == 'REGISTERED_USER'"
+      class="btn-1"
+      (click)="onButtonClickRegUser()"
+    >
       Schedule an appointment...
     </button>
 
+    <!--KREIRANJE TERMINA ZA ADMINISTRATORA CENTRA-->
     <div class="form-group row form-popUp" *ngIf="loggedIn && showPopup">
       <form
         #fAppointment="ngForm"
@@ -267,10 +280,59 @@
                 <i class="fa-regular fa-calendar"></i>
               </button>
               <div>
-                <label for="time"></label>
+                <label for="time">Time:</label>
                 <input type="text" name="time" ngModel />
               </div>
+              <div>
+                <label for="duration">Duration:</label>
+                <input type="number" name="duration" ngModel />
+              </div>
               <div class="border text-center" *ngIf="loggedIn && showPopup">
+                <button data-dismiss="modal" class="btn btn-info">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!--ZAKAZIVANJE TERMINA ZA REGISTROVANOG KORISNIKA-->
+    <div class="form-group row form-popUp" *ngIf="loggedIn && showPopupRegUser">
+      <form
+        #fAppointment="ngForm"
+        (ngSubmit)="ShowCentreAppointmentsRegUser(fAppointment)"
+      >
+        <label class="col-form-label col-sm-4">Appointment Time: </label>
+        <div class="form-group">
+          <div class="input-group col-sm-12">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="yyyy-mm-dd"
+              name="appointmentTime"
+              [(ngModel)]="appointmentTime"
+              ngbDatepicker
+              #d="ngbDatepicker"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary calendar"
+                (click)="d.toggle()"
+                type="button"
+              >
+                <i class="fa-regular fa-calendar"></i>
+              </button>
+              <div>
+                <label for="time">Time:</label>
+                <input type="text" name="time" ngModel />
+              </div>
+
+              <div
+                class="border text-center"
+                *ngIf="loggedIn && showPopupRegUser"
+              >
                 <button data-dismiss="modal" class="btn btn-info">
                   Submit
                 </button>

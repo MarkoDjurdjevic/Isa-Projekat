@@ -28,6 +28,7 @@ export class UserProfileComponent implements OnInit {
   editMode = false;
   currentlyLoggedInUser: Users;
   showPopup = false;
+  showPopupRegUser = false;
   appointmentTime: NgbDate;
 
   ngOnInit(): void {
@@ -96,6 +97,10 @@ export class UserProfileComponent implements OnInit {
     this.showPopup = !this.showPopup;
   }
 
+  onButtonClickRegUser() {
+    this.showPopupRegUser = !this.showPopupRegUser;
+  }
+
   ShowCentreAppointments(f) {
     console.log(f.value.appointmentTime);
 
@@ -116,7 +121,43 @@ export class UserProfileComponent implements OnInit {
     console.log(`Updated date: `, f.value.appointmentTime);
 
     //this.formService.updateDateAndTime(f.value.appointmentTime, f.value.time);
-    this.formService.updateDateAndTime(dateString, f.value.time);
+    //this.formService.updateDateAndTime(dateString, f.value.time); ovo sam sad izbacio
+    this.formService.updateDateAndTimeAndDuration(
+      dateString,
+      f.value.time,
+      f.value.duration
+    );
+    console.log(`DURATION: `, f.value.duration, `TIme:`, f.value.time);
     this.router.navigate(['/centres-terms']);
+  }
+
+  ShowCentreAppointmentsRegUser(f) {
+    console.log(f.value.appointmentTime);
+
+    let dateString =
+      this.appointmentTime.year +
+      '-' +
+      String(this.appointmentTime.month).padStart(2, '0') +
+      '-' +
+      String(this.appointmentTime.day).padStart(2, '0');
+
+    console.log(dateString);
+    f.value.appointmentTime = new Date(
+      f.value.appointmentTime.year,
+      f.value.appointmentTime.month - 1,
+      f.value.appointmentTime.day
+    );
+
+    console.log(`Updated date: `, f.value.appointmentTime);
+
+    //this.formService.updateDateAndTime(f.value.appointmentTime, f.value.time);
+    //this.formService.updateDateAndTime(dateString, f.value.time); ovo sam sad izbacio
+    this.formService.updateDateAndTime(dateString, f.value.time);
+    console.log(`DURATION: `, f.value.duration, `TIme:`, f.value.time);
+    this.router.navigate(['/centres-terms-reg-user']);
+  }
+
+  CreateAppointment() {
+    this.showPopup = !this.showPopup;
   }
 }
