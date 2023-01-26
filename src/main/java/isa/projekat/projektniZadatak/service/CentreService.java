@@ -70,8 +70,16 @@ public class CentreService {
 //      return centreRepository.findByAvailableAppointments(date,time);
 //    }
 
+  public List<Centre>getAvailableCentresRegUser (LocalDate date, String time){
+    return centreRepository.findByAvailableAppointmentsRegUser(date,time);
+  }
+
   public List<Centre> getAvailableCentres(LocalDate date, String time,String duration){
     return centreRepository.findByAvailableAppointments(date,time,duration);
+  }
+
+  public Centre getCentreById(Long id) {
+    return centreRepository.findById(id).orElseThrow(() -> new IllegalStateException("Centre not found with id " + id));
   }
 
 

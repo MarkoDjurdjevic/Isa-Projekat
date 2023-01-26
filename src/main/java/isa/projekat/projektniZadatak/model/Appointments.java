@@ -7,6 +7,7 @@ import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Getter
@@ -24,7 +25,10 @@ public class Appointments {
 
   private LocalDate date;
   private String time;
-  //private int duration = 60;
+
+  private int duration;
+  private boolean available;
+
 
   //enum
   private BloodType bloodType;
