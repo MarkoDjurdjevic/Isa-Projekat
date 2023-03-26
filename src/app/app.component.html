@@ -6,43 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+  <header>
+    <ul class="navigation-bar">
+      <li routerLink="/user-profile">Users</li>
+      <li routerLink="/centres">Centres</li>
+      <li routerLink="/centres-terms">Centres-Terms</li>
+      <li routerLink="/blood-formular">Blood Formular</li>
+    </ul>
+  </header>
   <body>
-    <div>
-      <h2>Update centre</h2><br><br>
-    <form>
-      <input
-        type="text"
-        id="name"
-        placeholder="name"
-     
-      />
-      <br /><br />
-     
-      <input
-        type="text"
-        id="adress"
-        placeholder="adress"
-       
-      />
-      <br /><br />
-     
-      <input
-        type="text"
-        id="description"
-        placeholder="description"
-     
-      />
-      <br /><br />
-      <input
-        type="text"
-        id="avgGrade"
-        placeholder="avgGrade"
-  
-      />
-      <br /><br />
-      <button>Update</button>
-
-    </form>
-    </div>
+    <router-outlet></router-outlet>
   </body>
 </html>
+
