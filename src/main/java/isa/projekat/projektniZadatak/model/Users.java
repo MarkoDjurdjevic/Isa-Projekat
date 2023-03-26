@@ -50,6 +50,7 @@ public class Users {
     private UserCategoryEnum category;
 
     @ManyToOne
+    @JoinColumn(name = "center_id")
     private Centre centre;
 
     @Enumerated(EnumType.ORDINAL)

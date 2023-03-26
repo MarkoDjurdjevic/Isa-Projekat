@@ -97,6 +97,7 @@ public class CentreController {
 //        centreService.updateCentre(centreId,name,adress,description);
 //    }
 
+    //ovde  se umesto reqest param koriti requestbody anotacija da bi se u http telu zahteva prosledio ceo objekat
     @PutMapping(path="/update/{centreId}")
     public ResponseEntity<Centre> updateCentre(@PathVariable("centreId") Long centreId, @RequestBody Centre centre){
         Centre updatedCentre = centreService.updateCentre(centreId, centre);

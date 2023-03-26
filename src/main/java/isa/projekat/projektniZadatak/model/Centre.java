@@ -26,9 +26,11 @@ public class Centre {
 
     private double avgGrade;
 
+    //spisak administratora centara
     @OneToMany(mappedBy = "centre")
     private List<Users> administrators;
 
+    //slobodni termini za rezervisanje
     @OneToMany(mappedBy = "centreAppointment")
     private List<Appointments> appointments;
 
