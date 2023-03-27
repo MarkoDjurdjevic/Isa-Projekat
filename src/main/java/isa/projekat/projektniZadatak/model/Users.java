@@ -53,6 +53,7 @@ public class Users implements UserDetails {
     private UserCategoryEnum category;
 
     @ManyToOne
+    @JoinColumn(name = "center_id")
     private Centre centre;
 
     @Enumerated(EnumType.ORDINAL)

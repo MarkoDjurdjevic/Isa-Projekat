@@ -41,25 +41,49 @@ public class CentreService {
         centreRepository.deleteById(centreId);
     }
 
+//
+//    @Transactional
+//    public Centre updateCentre(Long centreId, Centre updatedCentre) {
+//        System.out.println("updateCentre method called with centreId: " + centreId + " and updatedCentre: " + updatedCentre);
+//        Centre centre = centreRepository.findById(centreId).orElseThrow(() -> new IllegalStateException("student with id does not exist"));
+//        if (updatedCentre.getName() != null && !Objects.equals(centre.getName(), updatedCentre.getName())) {
+//            centre.setName(updatedCentre.getName());
+//        }
+//        if (updatedCentre.getDescription() != null && !Objects.equals(centre.getDescription(), updatedCentre.getDescription())) {
+//            centre.setDescription(updatedCentre.getDescription());
+//        }
+//        if (updatedCentre.getAdress() != null && !Objects.equals(centre.getAdress(), updatedCentre.getAdress())) {
+//          centre.setAdress(updatedCentre.getAdress());
+//        }
+//
+//        centre.setAppointments(updatedCentre.getAppointments());
+//
+//
+//        return centreRepository.save(centre);
+//    }
 
     @Transactional
-    public Centre updateCentre(Long centreId, Centre updatedCentre) {
-        System.out.println("updateCentre method called with centreId: " + centreId + " and updatedCentre: " + updatedCentre);
-        Centre centre = centreRepository.findById(centreId).orElseThrow(() -> new IllegalStateException("student with id does not exist"));
-        if (updatedCentre.getName() != null && !Objects.equals(centre.getName(), updatedCentre.getName())) {
-            centre.setName(updatedCentre.getName());
-        }
-        if (updatedCentre.getDescription() != null && !Objects.equals(centre.getDescription(), updatedCentre.getDescription())) {
-            centre.setDescription(updatedCentre.getDescription());
-        }
-        if (updatedCentre.getAdress() != null && !Objects.equals(centre.getAdress(), updatedCentre.getAdress())) {
-          centre.setAdress(updatedCentre.getAdress());
+    public Centre updateCentre(Long centreId, Centre updatedCentre){
+        //kada trazimo centar preko id moramo da njegov objekat smestimo u neku varijablu tj taj drugi objekat
+        //Optional se koristi kao kontejner i sadrzi vrednosti jednog objekta
+        //sluzi nam za proveru da li neki objekat postoji, a da ne izaziva greske
+        //proveravanje optionala/postjanje objekta se vrsi pomocu .isPresent()
+        Optional<Centre> centre = centreRepository.findById(centreId);
+        if(centre.isPresent()){
+            updatedCentre.setId(centreId);
+            updatedCentre.setName(updatedCentre.getName());
+            updatedCentre.setAdress(updatedCentre.getAdress());
+            updatedCentre.setAvgGrade(updatedCentre.getAvgGrade());
+            updatedCentre.setAppointments(updatedCentre.getAppointments());
+            updatedCentre.setAdministrators(updatedCentre.getAdministrators());
+
+
+            return centreRepository.save(updatedCentre);
+        }else {
+            System.out.println("Centre with that name doesn't exist.");
+            return null;
         }
 
-        centre.setAppointments(updatedCentre.getAppointments());
-
-
-        return centreRepository.save(centre);
     }
 
     public Optional<Centre> searchCentres(String name, String adress){
