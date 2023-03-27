@@ -11,6 +11,8 @@ import { CentreTermsComponent } from './centre-terms/centre-terms.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BloodFormularComponent } from './blood-formular/blood-formular.component';
 import { CentreTermsRegUserComponent } from './centre-terms-reg-user/centre-terms-reg-user.component';
+import { UpdateCentreComponent } from './update-centre/update-centre.component';
+import { TermsCreateComponent } from './terms-create/terms-create.component';
 
 const appRoutes: Routes = [
   { path: 'user-profile', component: UserProfileComponent },
@@ -18,6 +20,8 @@ const appRoutes: Routes = [
   { path: 'centres-terms', component: CentreTermsComponent },
   { path: 'blood-formular', component: BloodFormularComponent },
   { path: 'centres-terms-reg-user', component: CentreTermsRegUserComponent },
+  { path: 'update-centre', component: UpdateCentreComponent },
+  { path: 'terms-create', component: TermsCreateComponent },
 ];
 @NgModule({
   declarations: [
@@ -27,6 +31,8 @@ const appRoutes: Routes = [
     CentreTermsComponent,
     BloodFormularComponent,
     CentreTermsRegUserComponent,
+    UpdateCentreComponent,
+    TermsCreateComponent,
   ],
   imports: [
     BrowserModule,
