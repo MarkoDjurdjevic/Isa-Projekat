@@ -62,6 +62,15 @@ public class Users implements UserDetails {
   @Enumerated(EnumType.ORDINAL) //dodao ovo sa securitijem
    private UserRoleEnum userRoleEnum;
 
+  @OneToOne
+  @JoinColumn(name = "terms_id")
+  private Terms terms;
+
+  @ManyToOne
+  @JoinColumn(name = "report_id")
+  private Report report;
+
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return List.of(new SimpleGrantedAuthority(userRoleEnum.name()));

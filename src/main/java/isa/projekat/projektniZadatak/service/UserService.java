@@ -1,15 +1,18 @@
 package isa.projekat.projektniZadatak.service;
 
 import isa.projekat.projektniZadatak.Enums.UserRoleEnum;
+import isa.projekat.projektniZadatak.model.Terms;
 import isa.projekat.projektniZadatak.model.Users;
 import isa.projekat.projektniZadatak.model.dto.RegistrationDTO;
 import isa.projekat.projektniZadatak.model.dto.UpdateUsersDTO;
+import isa.projekat.projektniZadatak.model.dto.UsersDTO;
 import isa.projekat.projektniZadatak.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -24,7 +27,24 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void addNewUser(Users users){
+    public void addNewUser(UsersDTO usersDTO){
+        Users users = new Users();
+        users.setEmail(usersDTO.getEmail());
+        users.setPassword(usersDTO.getPassword());
+        users.setName(usersDTO.getName());
+        users.setLastname(usersDTO.getLastname());
+        users.setAdress(usersDTO.getAdress());
+        users.setCity(usersDTO.getCity());
+        users.setCountry(usersDTO.getCountry());
+        users.setPhone(usersDTO.getPhone());
+        users.setJmbg(usersDTO.getJMBG());
+        users.setProfession(usersDTO.getProfession());
+        users.setInformation(usersDTO.getInformation());
+        users.setCategory(usersDTO.getCategory());
+        users.setGenderEnum(usersDTO.getGenderEnum());
+        users.setUserRoleEnum(usersDTO.getUserRoleEnum());
+
+
         userRepository.save(users);
     }
 
@@ -64,7 +84,7 @@ public class UserService {
         if (updateUsersDTO.getCity() != null && updateUsersDTO.getCity().length() > 0 && !Objects.equals(users.getCity(), updateUsersDTO.getCity())) {
             users.setCity(updateUsersDTO.getCity());
 
-            return userRepository.save(users);
+            users.setCity(updateUsersDTO.getCity());
         }
 
 
@@ -105,5 +125,9 @@ public class UserService {
             return null;
         }
         return users.get(0);
+    }
+
+    public List<Users>getMedicalUsers(){
+        return  userRepository.findUserByUserRole(UserRoleEnum.CENTRE_ADMINISTRATOR);
     }
 }

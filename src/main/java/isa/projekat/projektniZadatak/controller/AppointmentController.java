@@ -2,6 +2,9 @@ package isa.projekat.projektniZadatak.controller;
 
 import isa.projekat.projektniZadatak.model.Appointments;
 import isa.projekat.projektniZadatak.model.Centre;
+import isa.projekat.projektniZadatak.model.dto.EquipmentDTO;
+import isa.projekat.projektniZadatak.model.dto.ReportAndEquipmentDTO;
+import isa.projekat.projektniZadatak.model.dto.ReportDTO;
 import isa.projekat.projektniZadatak.repository.AppointmentRepository;
 import isa.projekat.projektniZadatak.repository.CentreRepository;
 import isa.projekat.projektniZadatak.service.AppointmentService;
@@ -62,14 +65,24 @@ public class AppointmentController {
     Optional<Centre> centreOptional = centreRepository.findById(appointment.getCentreId());
     if(centreOptional.isPresent()){
       Centre centre = centreOptional.get();
-     // centre.getAppointments().add(appointment); //dodato
+      centre.getAppointments().add(appointment); //dodato
 
       appointment.setCentreAppointment(centre);
       appointmentService.addNewAppointment(appointment);
-      //centreRepository.save(centre); //dodato
+       centreRepository.save(centre); //dodato
     } else {
       System.out.println("Neka greska je u dodavnju appointmenta");
     }
   }
+
+  @PostMapping("/{appointmentId}/report")
+  public void addReportToAppointment(@PathVariable Long appointmentId, @RequestBody ReportAndEquipmentDTO reportAndEquipmentDTO) {
+    appointmentService.addReportToApointment(appointmentId, reportAndEquipmentDTO.getReport(), reportAndEquipmentDTO.getEquipment());
+  }
+
+//  @PostMapping("/{appointmentId}/equipment")
+//  public void addEquipmentToAppointment(@PathVariable Long appointmentId, @RequestBody EquipmentDTO equipmentDTO){
+//    appointmentService.addEquipmentToAppointment(appointmentId,equipmentDTO);
+//  }
 
 }

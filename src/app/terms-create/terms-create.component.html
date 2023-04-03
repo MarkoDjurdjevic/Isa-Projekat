@@ -9,17 +9,15 @@
   <body>
     <div>
       <h2>Create terms</h2><br><br>
-    <form>
-      <input type="text" placeholder="date"/><br><br>
-      <input type="text" placeholder="time"/><br><br>
-      <input type="text" placeholder="duration"/><br><br>
-      <select name="cars" id="cars">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </select><br><br>
-      <button>Create</button>
+    <form [formGroup]="createTermsform">
+      <input type="text" placeholder="date" formControlName="date"/><br><br>
+      <input type="text" placeholder="time" formControlName="time"/><br><br>
+      <input type="text" placeholder="duration" formControlName="duration"/><br><br>
+      <!-- <select formControlName="medicalUsers">
+          <option selected></option>
+          <option *ngFor="let m of medicalUsers" [value]="m.id">{{m.}}</option>
+      </select> -->
+      <button onclick="Create" type="submit">Create</button>
 
     </form>
     </div>

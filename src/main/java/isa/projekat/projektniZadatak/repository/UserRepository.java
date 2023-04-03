@@ -1,8 +1,10 @@
 package isa.projekat.projektniZadatak.repository;
 
+import isa.projekat.projektniZadatak.Enums.UserRoleEnum;
 import isa.projekat.projektniZadatak.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,4 +21,6 @@ public interface UserRepository extends JpaRepository<Users, Long> {
     List<Users> findUserByEmailAndPassword(String email, String password);
 
     Optional<Users> findByEmail(String email);
+    @Query("SELECT u FROM Users u WHERE u.userRoleEnum = :userRoleEnum")
+    List<Users> findUserByUserRole(@Param("userRoleEnum") UserRoleEnum userRoleEnum);
 }

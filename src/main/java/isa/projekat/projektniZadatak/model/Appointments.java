@@ -8,7 +8,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -39,4 +41,24 @@ public class Appointments {
   private Centre centreAppointment;
 
   private long centreId;
+
+  @OneToOne(mappedBy = "appointments")
+  @JsonIgnore
+  private Report report;
+
+  @OneToMany(mappedBy = "appointments", cascade = CascadeType.ALL)
+  private List<Equipment> equipment = new ArrayList<>();
+
+  public Appointments(long id, LocalDate date, String time, int duration, boolean available, BloodType bloodType, Centre centreAppointment, long centreId, Report report,List<Equipment>  equipment) {
+    this.id = id;
+    this.date = date;
+    this.time = time;
+    this.duration = duration;
+    this.available = available;
+    this.bloodType = bloodType;
+    this.centreAppointment = centreAppointment;
+    this.centreId = centreId;
+    this.report = report;
+    this.equipment = equipment;
+  }
 }

@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path="/terms")
+@CrossOrigin(origins= "http://localhost:4200/")
 public class TermsController {
     private  final TermsService termsService;
 

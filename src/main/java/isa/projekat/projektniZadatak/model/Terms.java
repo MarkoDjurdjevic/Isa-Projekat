@@ -22,10 +22,13 @@ public class Terms {
     private String date;
     private String time;
     private String duration;
-    @OneToMany(mappedBy = "medicalTerms")
-    private List<MedicalUsers> medicalUsers;
 
-    public Terms(Long id, String date, String time, String duration, List<MedicalUsers> medicalUsers) {
+    @OneToMany
+    @JoinColumn(name = "terms")
+    private List<Users> medicalUsers;
+
+
+    public Terms(Long id, String date, String time, String duration, List<Users> medicalUsers) {
         this.id = id;
         this.date = date;
         this.time = time;
@@ -65,11 +68,11 @@ public class Terms {
         this.duration = duration;
     }
 
-    public List<MedicalUsers> getMedicalUsers() {
+    public List<Users> getMedicalUsers() {
         return medicalUsers;
     }
 
-    public void setMedicalUsers(ArrayList<MedicalUsers> medicalUsers) {
+    public void setMedicalUsers(ArrayList<Users> medicalUsers) {
         this.medicalUsers = medicalUsers;
     }
 
