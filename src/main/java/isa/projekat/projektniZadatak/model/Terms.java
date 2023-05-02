@@ -1,5 +1,7 @@
 package isa.projekat.projektniZadatak.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import isa.projekat.projektniZadatak.model.dto.UsersDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,57 +25,16 @@ public class Terms {
     private String time;
     private String duration;
 
-    @OneToMany
-    @JoinColumn(name = "terms")
-    private List<Users> medicalUsers;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private Users users;
 
-
-    public Terms(Long id, String date, String time, String duration, List<Users> medicalUsers) {
+    public Terms(Long id, String date, String time, String duration, Users users) {
         this.id = id;
         this.date = date;
         this.time = time;
         this.duration = duration;
-        this.medicalUsers = medicalUsers;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
-    public List<Users> getMedicalUsers() {
-        return medicalUsers;
-    }
-
-    public void setMedicalUsers(ArrayList<Users> medicalUsers) {
-        this.medicalUsers = medicalUsers;
+        this.users = users;
     }
 
     @Override
@@ -83,9 +44,8 @@ public class Terms {
                 ", date='" + date + '\'' +
                 ", time='" + time + '\'' +
                 ", duration=" + duration +
-                "medicalUsers = " + medicalUsers +
+                ",users = " + users +
 
                 '}';
     }
-
 }

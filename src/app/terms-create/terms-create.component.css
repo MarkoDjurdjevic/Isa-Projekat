@@ -1,47 +1,68 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(171, 202, 230);
-  }
-  
-  div{
-    
-    background-color: rgb(232, 241, 248);
-    width: 500px;
-    height: 500px;
-    text-align: center;
-    padding: 100px;
-    border-radius: 15px;
-    box-shadow: 5px 5px #b3afaf;
-  
-  }
-  
-  input{
-    width: 250px;
-    height: 30px;
-    border: #5c5959;
-  }
-  
-  select{
-    width: 250px;
-    height: 30px;
-    border: #5c5959;
-    border-bottom: #5c5959;
-  }
-  
-  button{
-    width: 200px;
-    height: 40px;
-    background-color: rgb(171, 202, 230);
-    border:rgb(171, 202, 230); 
-    border-radius: 5px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
+table {
+  margin: auto; /* centriranje tabele */
+  width: 80%; /* širina tabele */
+  border-collapse: collapse; /* spajanje granica ćelija */
+  font-family: 'Roboto', sans-serif; /* odabir fonta */
+  font-size: 16px; /* veličina fonta */
+}
+
+th {
+  background-color: #333; /* pozadinska boja zaglavlja */
+  color: #fff; /* boja teksta zaglavlja */
+  padding: 12px 15px; /* razmak između zaglavlja */
+}
+
+td {
+  padding: 10px 15px; /* razmak između ćelija */
+  border: 1px solid #ddd; /* granica ćelija */
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2; /* boja pozadine parnih redova */
+}
+
+.form-terms {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+label {
+  display: inline-block;
+  width: 100px;
+  text-align: left;
+  margin-right: 10px;
+}
+
+input,
+select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  background-color: #4CAF50;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}

@@ -54,6 +54,8 @@ public class UsersDTO {
 
     private UserRoleEnum userRoleEnum;
 
+
+
     public static UsersDTO toDTO(Users user) {
         UsersDTO usersDTO = new UsersDTO();
         usersDTO.setEmail(user.getEmail());

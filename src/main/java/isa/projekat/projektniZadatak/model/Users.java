@@ -1,5 +1,6 @@
 package isa.projekat.projektniZadatak.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import isa.projekat.projektniZadatak.Enums.GenderEnum;
 import isa.projekat.projektniZadatak.Enums.UserCategoryEnum;
 import isa.projekat.projektniZadatak.Enums.UserRoleEnum;
@@ -9,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -48,13 +50,13 @@ public class Users implements UserDetails {
 
     private String information;
 
-    //private double points;
+//    private double points;
 
     private UserCategoryEnum category;
 
-    @ManyToOne
-    @JoinColumn(name = "center_id")
-    private Centre centre;
+//    @ManyToOne
+//    @JoinColumn(name = "center_id")
+//    private Centre centre;
 
     @Enumerated(EnumType.ORDINAL)
     private GenderEnum genderEnum;
@@ -62,13 +64,14 @@ public class Users implements UserDetails {
   @Enumerated(EnumType.ORDINAL) //dodao ovo sa securitijem
    private UserRoleEnum userRoleEnum;
 
-  @OneToOne
-  @JoinColumn(name = "terms_id")
-  private Terms terms;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private List<Terms> terms;
 
-  @ManyToOne
-  @JoinColumn(name = "report_id")
-  private Report report;
+//  @ManyToOne
+//  @JoinColumn(name = "report_id")
+//  private Report report;
 
 
   @Override
@@ -105,4 +108,26 @@ public class Users implements UserDetails {
   public String getPassword(){
     return password;
   }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", password=" + password + '\''+
+                ",lastname = " + lastname + '\''+
+                ",adress = " + adress +'\''+
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", phone=" + phone + '\''+
+                ",jmbg = " + jmbg + '\''+
+                ",profession = " + profession +'\''+
+                ", information=" + information + '\''+
+                ",category = " + category + '\''+
+                ",genderEnum = " + genderEnum +'\''+
+                ", userRoleEnum='" + userRoleEnum + '\'' +
+//                ", points=" + points + '\''+
+                '}';
+    }
 }

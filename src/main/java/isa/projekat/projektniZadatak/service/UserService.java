@@ -1,14 +1,13 @@
 package isa.projekat.projektniZadatak.service;
 
 import isa.projekat.projektniZadatak.Enums.UserRoleEnum;
-import isa.projekat.projektniZadatak.model.Terms;
 import isa.projekat.projektniZadatak.model.Users;
 import isa.projekat.projektniZadatak.model.dto.RegistrationDTO;
 import isa.projekat.projektniZadatak.model.dto.UpdateUsersDTO;
 import isa.projekat.projektniZadatak.model.dto.UsersDTO;
 import isa.projekat.projektniZadatak.repository.UserRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -127,7 +126,11 @@ public class UserService {
         return users.get(0);
     }
 
-    public List<Users>getMedicalUsers(){
-        return  userRepository.findUserByUserRole(UserRoleEnum.CENTRE_ADMINISTRATOR);
+    public List<Users> getCentreAdministartor(){
+
+        return userRepository.findUserByUserRole(UserRoleEnum.CENTRE_ADMINISTRATOR);
+
     }
+
+
 }

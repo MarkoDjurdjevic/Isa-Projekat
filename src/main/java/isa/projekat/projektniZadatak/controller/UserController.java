@@ -6,6 +6,7 @@ import isa.projekat.projektniZadatak.model.dto.UpdateUsersDTO;
 import isa.projekat.projektniZadatak.model.dto.UsersDTO;
 import isa.projekat.projektniZadatak.repository.UserRepository;
 import isa.projekat.projektniZadatak.service.UserService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -91,5 +92,11 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/allCentreAdministartors")
+    public ResponseEntity<List<Users>> getAllCentreAdministrators() {
+        List<Users> usersList = userService.getCentreAdministartor();
+        return ResponseEntity.status(HttpStatus.OK).body(usersList);
     }
 }

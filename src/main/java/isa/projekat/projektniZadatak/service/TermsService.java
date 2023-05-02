@@ -1,9 +1,14 @@
 package isa.projekat.projektniZadatak.service;
 
+import isa.projekat.projektniZadatak.Enums.UserRoleEnum;
 import isa.projekat.projektniZadatak.model.Terms;
 import isa.projekat.projektniZadatak.model.Users;
+import isa.projekat.projektniZadatak.model.dto.TermsDTO;
+import isa.projekat.projektniZadatak.model.dto.UsersDTO;
 import isa.projekat.projektniZadatak.repository.TermsRepository;
+import isa.projekat.projektniZadatak.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -17,7 +22,8 @@ public class TermsService {
     private final UserService userService;
 
     @Autowired
-    public TermsService(TermsRepository termsRepository,UserService userService) {
+    public TermsService(TermsRepository termsRepository,UserService userService,
+                        UserRepository userRepository) {
 
         this.termsRepository = termsRepository;
         this.userService = userService;
@@ -28,15 +34,23 @@ public class TermsService {
         return termsRepository.findAll();
     }
 
-    public void createTerms(Terms terms1){
-        
-        List<Users>medicalUsers= userService.getMedicalUsers();
+    public void createTerms(TermsDTO termsDTO){
+
         Terms terms = new Terms();
-        terms.setTime(terms1.getTime());
-        terms.setDate(terms1.getDate());
-        terms.setDuration(terms1.getDuration());
-        terms.setMedicalUsers((ArrayList<Users>) medicalUsers);
+        terms.setId(termsDTO.getId());
+        terms.setDate(termsDTO.getDate());
+        terms.setTime(termsDTO.getTime());
+        terms.setDuration(termsDTO.getDuration());
+        List<Users> users = userService.getCentreAdministartor();
+        for (Users centreAdmin : users) {
+//            if (centreAdmin.getId().equals(termsDTO.getUsers().getId()))
+//              if(termsDTO.getUsers().getId().equals(centreAdmin.getId())){
+                terms.setUsers(centreAdmin);
+                break;
+//            }
+        }
 
         termsRepository.save(terms);
+
     }
 }

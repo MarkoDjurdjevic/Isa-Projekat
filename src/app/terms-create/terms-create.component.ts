@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl} from '@angular/forms';
 import { Terms } from '../model/terms'; // importujemo Terms model
-import { HttpClient } from '@angular/common/http'; // importujemo HttpClient
+import { HttpClient,HttpErrorResponse,  HttpClientModule } from '@angular/common/http'; // importujemo HttpClient
 import { Users } from '../model/user';
+import { TermsService } from '../service/terms.service';
+import { Subscription } from 'rxjs';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { AuthService } from '../service/auth.service';
+import { UserService } from '../service/user.service';
+import { UsersDTO } from '../model/userDTO';
 
 @Component({
   selector: 'app-terms-create',
@@ -11,52 +17,54 @@ import { Users } from '../model/user';
   styleUrls: ['./terms-create.component.css']
 })
 export class TermsCreateComponent implements OnInit {
-  createTermsform: FormGroup;
-  usersList=[];
+  
+ user: Users[];
+ terms: Terms[];
+ term: Terms;
+ addingTerms = false;
+ subscribe:Subscription;
+ response : Response;
+ loggedIn: boolean;
+ selectedUser: number;
 
-
-  //pravimo objekte
-  terms:Terms={
-    id: 0,
-    date: '',
-    time: '',
-    duration: '',
-    //medicalUsers: []
-  };
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private termsService: TermsService,
+    private formBuilder:FormBuilder,
+    private authService: AuthService,
+    private userService: UserService
+    ) { }
 
   ngOnInit(): void {
-    this.buildForm();
-    //this.loadUsers();
-  }
 
-  buildForm(){
-    this.createTermsform = new FormGroup({
-      date: new FormControl(''),
-      time: new FormControl(''),
-      duration: new FormControl(''),
-      medicalUsers: new FormControl(''),
-      
+
+    this.userService.getCentreAdministrators().subscribe((response: Users[]) => {
+      this.user = response;
     });
-    console.log("Objekat je kreiran");
+    // this.userService.getUsers().subscribe((response: Users[]) => {
+    //   this.user = response;
+    // });
+    this.termsService.getAllTerms().subscribe((response: Terms[]) => {
+      this.terms = response;
+      this.loggedIn = this.authService.isLoggedIn;
+      console.log(this.loggedIn);
+    });
+   
+  }
+  openAddTermForm() {
+    this.addingTerms = true;
   }
 
-  // loadUsers(){
-  //   this.http.get<MedicalUsers>('http://localhost:8082/users/all').subscribe(
-  //     (response) => {
-  //       console.log(response);
-  //       this.usersList = response;
-  //       // prikazujemo samo imena korisnika
-  //       this.terms.medicalUsers = this.usersList.map(user => user.id);
-  //       console.log(this.terms.medicalUsers);
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     }
-  //   );
+  addTerms(form: NgForm){
+    const term = form.value;
+    this.termsService.addTerms(term).subscribe((response)=>{
+      console.log('Terms was succesfully added');
+      location.reload();
+    });
+      
+    }
+
+  }
+
   
 
-  //}
 
-}

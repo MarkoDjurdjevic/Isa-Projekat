@@ -8,6 +8,7 @@ import { UsersDTO } from '../model/userDTO';
 export class UserService {
   constructor(private http: HttpClient) {}
   loggedInUser: Users;
+  users: UsersDTO;
 
   getUsers(): Observable<Users[]> {
     return this.http.get<Users[]>('http://localhost:8082/users/all');
@@ -25,5 +26,9 @@ export class UserService {
       'http://localhost:8082/users/update/' + id,
       users
     );
+  }
+
+  getCentreAdministrators(): Observable<Users[]>{
+      return this.http.get<Users[]>('http://localhost:8082/users/allCentreAdministartors');
   }
 }

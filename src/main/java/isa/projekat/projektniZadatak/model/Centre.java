@@ -27,8 +27,8 @@ public class Centre {
     private double avgGrade;
 
     //spisak administratora centara
-    @OneToMany(mappedBy = "centre")
-    private List<Users> administrators;
+//    @OneToMany(mappedBy = "centre")
+//    private List<Users> administrators;
 
     //slobodni termini za rezervisanje
     @OneToMany(mappedBy = "centreAppointment")
@@ -41,7 +41,7 @@ public class Centre {
                 ", adress='" + adress + '\'' +
                 ", description='" + description + '\'' +
                 ", avgGrade=" + avgGrade +
-                "Administators = " + administrators +
+//                "Administators = " + administrators +
                 "Appointments = " + appointments +
                 '}';
     }

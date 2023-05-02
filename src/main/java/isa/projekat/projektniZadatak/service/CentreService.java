@@ -75,7 +75,7 @@ public class CentreService {
             updatedCentre.setAdress(updatedCentre.getAdress());
             updatedCentre.setAvgGrade(updatedCentre.getAvgGrade());
             updatedCentre.setAppointments(updatedCentre.getAppointments());
-            updatedCentre.setAdministrators(updatedCentre.getAdministrators());
+//            updatedCentre.setAdministrators(updatedCentre.getAdministrators());
 
 
             return centreRepository.save(updatedCentre);

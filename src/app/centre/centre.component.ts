@@ -96,6 +96,7 @@ export class CentreComponent implements OnInit, OnDestroy {
     );
     this.editMode = false;
     this.editCentreForm.reset();
+    this.editing = false;
   }
 
   onDelete(i: number) {

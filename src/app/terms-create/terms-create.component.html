@@ -5,21 +5,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div>
-      <h2>Create terms</h2><br><br>
-    <form [formGroup]="createTermsform">
-      <input type="text" placeholder="date" formControlName="date"/><br><br>
-      <input type="text" placeholder="time" formControlName="time"/><br><br>
-      <input type="text" placeholder="duration" formControlName="duration"/><br><br>
-      <!-- <select formControlName="medicalUsers">
-          <option selected></option>
-          <option *ngFor="let m of medicalUsers" [value]="m.id">{{m.}}</option>
-      </select> -->
-      <button onclick="Create" type="submit">Create</button>
-
-    </form>
+      <button type="submit" (click)="openAddTermForm()">Create terms</button>
+      <table>
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Medical user</th>
+         </tr>
+       </thead>
+       <tbody>
+        <tr *ngFor="let term of terms">
+          <td>{{ term.id }}</td>
+          <td>{{ term.date }}</td>
+          <td>{{ term.time }}</td>
+          <td>{{ term.duration }}</td>
+          <td *ngIf="term.users">{{ term.users.name }} {{ term.users.lastname }}</td>
+        </tr>
+      </tbody>
+      </table>
     </div>
+
+    <form
+      class="form-terms"
+      *ngIf="addingTerms"
+      #f="ngForm"
+      (ngSubmit)="addTerms(f)"
+    >
+      <div class="form-container">
+        <label for="id">Id:</label>
+        <input type="text" id="id" ngModel name="id" />
+        <br />
+        <label for="date">Date:</label>
+        <input type="text" id="date" ngModel name="date" />
+        <br />
+        <label for="time">Time:</label>
+        <input type="text" id="time" ngModel name="time" />
+        <br />
+        <label for="duration">Duration:</label>
+        <input type="text" id="duration" name="duration" ngModel />
+        <br />
+        <label for="medicalUser">Users:</label>
+        <select [(ngModel)]="selectedUser" name="selectedUser">
+          <option *ngFor="let u of user" [value]="user">{{ u.name }} {{ u.lastname }}</option>
+        </select>
+        <br />
+        <button class="btn btn-green" type="submit">Save</button>
+      </div>
+    </form>
   </body>
 </html>
