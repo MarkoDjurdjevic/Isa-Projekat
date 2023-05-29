@@ -13,8 +13,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class AppointmentDTO {
 
-    private long id;
-
     private LocalDate date;
     private String time;
 
@@ -25,8 +23,7 @@ public class AppointmentDTO {
     //enum
     private BloodType bloodType;
 
-    public AppointmentDTO(long id, LocalDate date, String time, int duration, boolean available, BloodType bloodType) {
-        this.id = id;
+    public AppointmentDTO( LocalDate date, String time, int duration, boolean available, BloodType bloodType) {
         this.date = date;
         this.time = time;
         this.duration = duration;

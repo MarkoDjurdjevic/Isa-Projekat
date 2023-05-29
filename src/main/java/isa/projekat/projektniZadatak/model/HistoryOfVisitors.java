@@ -18,21 +18,16 @@ public class HistoryOfVisitors {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(nullable=false,updatable=false)
     private Long id;
-//    @OneToMany
-//    @JoinColumn(name = "historyOfVisitors")
-//    private List<Report>reports;
-//    @OneToMany
-//    @JoinColumn(name = "historyOfVisitors")
-//    private List<Equipment>equipment;
 
-//    @ManyToOne
-//    @JoinColumn(name = "equipment_id")
-//    private Equipment equipment;
+    @OneToMany
+    @JoinColumn(name = "historyOfVisitors_id")
+    private List<Statement>statementList;
 
+    @OneToMany
+    @JoinColumn(name = "historyOfVisitors_id")
+    private List<Equipment>equipmentList;
 
-    public HistoryOfVisitors(Long id, List<Report> reports, List<Equipment> equipment) {
-        this.id = id;
-        //this.reports = reports;
-       // this.equipment = equipment;
-    }
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    private Users users;
 }

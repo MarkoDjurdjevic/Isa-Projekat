@@ -20,7 +20,7 @@ public class EquipmentController {
         this.equipmentService = equipmentService;
     }
 
-   // @PostMapping("/add")
+//    @PostMapping("/add")
 //    public void registerNewEquipment(@RequestBody EquipmentDTO equipment){
 //        equipmentService.createEquipment(equipment);
 //    }

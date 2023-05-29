@@ -103,3 +103,22 @@ ul {
   font-size: 85%;
   border: none;
 }
+
+.btn-blood {
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #886fe2;
+  cursor: pointer;
+  width: 200px;
+  margin: auto;
+  margin-left: 950px;
+  margin-top: 30px;
+}
+
+.btn-blood:hover {
+  background-color: #218838;
+}

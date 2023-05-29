@@ -99,4 +99,10 @@ public class UserController {
         List<Users> usersList = userService.getCentreAdministartor();
         return ResponseEntity.status(HttpStatus.OK).body(usersList);
     }
+
+//    @GetMapping("/allRegisterUsers")
+//    public  ResponseEntity<List<Users>>getAllRegisterUsers(){
+//        List<Users>usersList = userService.getAllUsersRegUsers();
+//        return ResponseEntity.status(HttpStatus.OK).body(usersList);
+//    }
 }

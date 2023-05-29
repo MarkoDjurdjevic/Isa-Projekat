@@ -14,6 +14,7 @@
   </head>
 
   <body>
+    <button class="btn btn-blood" (click)="goToBlood()">Blood</button>
     <form>
       <label for="name">Name:</label><br />
       <input type="text" id="name" #nameInput /><br />
@@ -37,6 +38,7 @@
         Submit
       </button>
       <button class="btn btn-red" (click)="resetFilter()">Reset</button>
+     
     </div>
     <div>
       <ul class="centre-information temp-info">

@@ -31,4 +31,8 @@ export class UserService {
   getCentreAdministrators(): Observable<Users[]>{
       return this.http.get<Users[]>('http://localhost:8082/users/allCentreAdministartors');
   }
+
+  getAllRegisterUsers():Observable<Users[]>{
+    return this.http.get<Users[]>('http://localhost:8082/users/allRegisterUsers');
+  }
 }

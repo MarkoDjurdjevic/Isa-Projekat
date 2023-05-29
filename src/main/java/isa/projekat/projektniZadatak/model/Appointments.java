@@ -23,7 +23,7 @@ public class Appointments {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(nullable = false, updatable = false)
-  private long id;
+  private Long id;
 
   private LocalDate date;
   private String time;
@@ -40,16 +40,27 @@ public class Appointments {
   @ManyToOne
   private Centre centreAppointment;
 
+
+  @OneToOne
+  @JoinColumn(name = "appointments_id")
+  @JsonIgnore
+  private Statement statement;
+
+
+  @OneToMany
+  @JoinColumn(name = "appointments_id")
+  @JsonIgnore
+  private List<Equipment> equipmentList;
+
   private long centreId;
 
-  @OneToOne(mappedBy = "appointments")
-  @JsonIgnore
-  private Report report;
+//  @OneToOne
+//  @JoinColumn(name ="appointments_id")
+//  @JsonIgnore
+//  private AppointmentAndPenal appointmentAndPenal;
 
-  @OneToMany(mappedBy = "appointments", cascade = CascadeType.ALL)
-  private List<Equipment> equipment = new ArrayList<>();
 
-  public Appointments(long id, LocalDate date, String time, int duration, boolean available, BloodType bloodType, Centre centreAppointment, long centreId, Report report,List<Equipment>  equipment) {
+  public Appointments(long id, LocalDate date, String time, int duration, boolean available, BloodType bloodType, Centre centreAppointment, long centreId,List<Equipment>  equipment ) {
     this.id = id;
     this.date = date;
     this.time = time;
@@ -58,7 +69,6 @@ public class Appointments {
     this.bloodType = bloodType;
     this.centreAppointment = centreAppointment;
     this.centreId = centreId;
-    this.report = report;
-    this.equipment = equipment;
+
   }
 }

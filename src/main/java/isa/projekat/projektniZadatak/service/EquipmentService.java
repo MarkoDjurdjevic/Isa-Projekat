@@ -3,6 +3,7 @@ package isa.projekat.projektniZadatak.service;
 import isa.projekat.projektniZadatak.model.Appointments;
 import isa.projekat.projektniZadatak.model.Equipment;
 import isa.projekat.projektniZadatak.model.dto.EquipmentDTO;
+import isa.projekat.projektniZadatak.repository.AppointmentRepository;
 import isa.projekat.projektniZadatak.repository.EquipmentRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,22 +15,27 @@ public class EquipmentService {
 
 
     private final EquipmentRepository equipmentRepository;
+    private final AppointmentRepository appointmentRepository;
 
-    public EquipmentService(EquipmentRepository equipmentRepository) {
+    public EquipmentService(EquipmentRepository equipmentRepository,
+                            AppointmentRepository appointmentRepository) {
         this.equipmentRepository = equipmentRepository;
+        this.appointmentRepository = appointmentRepository;
     }
 
-    public void createEquipment(EquipmentDTO equipmentDTO, Appointments appointments) {
-        Optional<Equipment>existingEquipment = equipmentRepository.findByName(equipmentDTO.getNameEquipment());
-     /*   if(existingEquipment.isPresent()){
-            System.out.println("Postoji vec oprema sa datim nazivom");
-        }else {*/
+    public void createEquipment(Long id , EquipmentDTO equipmentDTO) {
+
+        Optional<Appointments>appointmentsOptional = appointmentRepository.findById(id);
+        if(appointmentsOptional.isPresent()) {
+
             Equipment equipment = new Equipment();
             equipment.setNameEquipment(equipmentDTO.getNameEquipment());
             equipment.setQuantitiofEquipment(equipmentDTO.getQuantitiofEquipment());
-            equipment.setAppointments(appointments);
+            equipment.setAppointments(appointmentsOptional.get());
             equipmentRepository.save(equipment);
-       //}
+
+        }
+
 
     }
 

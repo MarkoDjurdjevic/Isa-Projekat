@@ -18,8 +18,6 @@ import javax.persistence.Enumerated;
 
 public class UsersDTO {
 
-    private Long id;
-
     private String email;
 
     private String password;

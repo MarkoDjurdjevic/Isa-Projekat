@@ -50,28 +50,29 @@ public class Users implements UserDetails {
 
     private String information;
 
-//    private double points;
 
     private UserCategoryEnum category;
-
-//    @ManyToOne
-//    @JoinColumn(name = "center_id")
-//    private Centre centre;
 
     @Enumerated(EnumType.ORDINAL)
     private GenderEnum genderEnum;
 
-  @Enumerated(EnumType.ORDINAL) //dodao ovo sa securitijem
-   private UserRoleEnum userRoleEnum;
+    @Enumerated(EnumType.ORDINAL) //dodao ovo sa securitijem
+    private UserRoleEnum userRoleEnum;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private List<Terms> terms;
 
-//  @ManyToOne
-//  @JoinColumn(name = "report_id")
-//  private Report report;
+    @OneToMany
+    @JoinColumn(name = "users_id")
+    private List<Statement> statements;
+
+    @OneToMany
+    @JoinColumn(name = "users_id")
+    private List<HistoryOfVisitors> historyOfVisitorsList;
+
+//    private int penal;
 
 
   @Override

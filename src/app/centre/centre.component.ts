@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { UserService } from '../service/user.service';
 import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-centre',
@@ -35,7 +36,9 @@ export class CentreComponent implements OnInit, OnDestroy {
   constructor(
     private centreService: CentreService,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
+    
   ) {
     this.editCentreForm = this.fb.group({
       id: [''],
@@ -152,5 +155,8 @@ export class CentreComponent implements OnInit, OnDestroy {
 
   resetFilter() {
     this.filteredCenters = [...this.centres];
+  }
+  goToBlood(){
+    this.router.navigate(['/blood']);
   }
 }

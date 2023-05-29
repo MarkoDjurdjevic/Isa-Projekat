@@ -1,0 +1,48 @@
+ <body>
+    <div>
+      <div>
+        <input type="text" placeholder="Search by blood type" [(ngModel)] = "filterText">
+      </div>
+      <button type="submit" (click)="openFormBlood()" >Create blood</button>
+      <table>
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Content</th>
+            <th scope="col">Blood Type</th>
+         </tr>
+       </thead>
+       <tbody>
+        <tr *ngFor="let blood of filteredBlood">
+          <td>{{ blood.id }}</td>
+          <td>{{ blood.amount }}</td>
+          <td>{{ blood.bloodType }}</td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+
+    <form
+      class="form-blood"
+      *ngIf="addingBlood"
+      #f="ngForm"
+      (ngSubmit)="addBlood(f)"
+    >
+      <div class="form-container">
+        <label for="id">Id:</label>
+        <input type="text" id="id" ngModel name="id" />
+        <br />
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" ngModel name="amount" />
+        <br />
+        <label for="bloodType">Blood Type:</label>
+        <select  name="bloodType" ngModel>
+        <!-- <select> -->
+          <option *ngFor="let bloodType of bloodTypes" [ngValue]="bloodType">{{ bloodType }}</option>
+        </select>
+        <br />
+        <br />
+        <button class="btn btn-green" type="submit">Save</button>
+      </div>
+    </form>
+ </body>

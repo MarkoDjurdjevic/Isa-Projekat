@@ -1,34 +1,68 @@
 package isa.projekat.projektniZadatak.service;
 
 import isa.projekat.projektniZadatak.model.Equipment;
-import isa.projekat.projektniZadatak.model.Report;
+import isa.projekat.projektniZadatak.model.HistoryOfVisitors;
+import isa.projekat.projektniZadatak.model.Statement;
+import isa.projekat.projektniZadatak.model.Users;
+import isa.projekat.projektniZadatak.repository.EquipmentRepository;
 import isa.projekat.projektniZadatak.repository.HistoryOfVisitorsRepository;
-import isa.projekat.projektniZadatak.repository.ReportRepository;
+import isa.projekat.projektniZadatak.repository.StatementRepository;
+import isa.projekat.projektniZadatak.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HistoryOfVisitorsService {
 
-    private final HistoryOfVisitorsRepository historyOfVisitorsRepository;
-    private final ReportService reportService;
-    private  final EquipmentService equipmentService;
-    private final ReportRepository reportRepository;
+    @Autowired
+    private  HistoryOfVisitorsRepository historyOfVisitorsRepository;
 
-    public HistoryOfVisitorsService(HistoryOfVisitorsRepository historyOfVisitorsRepository, ReportService reportService, EquipmentService equipmentService,
-                                    ReportRepository reportRepository) {
-        this.historyOfVisitorsRepository = historyOfVisitorsRepository;
-        this.reportService = reportService;
-        this.equipmentService = equipmentService;
-        this.reportRepository = reportRepository;
+    @Autowired
+    private StatementRepository statementRepository;
+
+    @Autowired
+    private EquipmentRepository equipmentRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private StatementService statementService;
+
+//    private void addStatementAndEquipmentToHistory(Long id){
+//
+//        Optional<Users>usersOptional = userRepository.findById(1L);
+//        List<Statement>statementList = statementRepository.findAll();
+//        List<Equipment>equipmentList = equipmentRepository.findAll();
+//
+//        if(usersOptional.isPresent()) {
+//            if (statementList.isEmpty() || equipmentList.isEmpty()) {
+//                ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
+//            } else {
+//                HistoryOfVisitors historyOfVisitors = new HistoryOfVisitors();
+//                historyOfVisitors.setEquipmentList(equipmentList);
+//                historyOfVisitors.setStatementList(statementList);
+//                historyOfVisitorsRepository.save(historyOfVisitors);
+//                ResponseEntity.status(HttpStatus.OK);
+//            }
+//        }
+
+//    }
+
+    public List<Statement> getAllStatements(){
+         List<Statement>statementList = statementService.getAllStatements();
+         return statementList;
     }
 
-    public List<Report> getAllReport(){
-       return reportRepository.findAll();
+    public List<Equipment>equipmentList(){
+        List<Equipment>equipment = equipmentRepository.findAll();
+        return  equipment;
     }
 
-    public List<Equipment>getALlEquipment(){
-        return equipmentService.getAllEquipment();
-    }
+
+
 }

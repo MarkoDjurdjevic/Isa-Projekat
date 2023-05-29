@@ -1,7 +1,9 @@
 package isa.projekat.projektniZadatak.service;
 
 import isa.projekat.projektniZadatak.model.Appointments;
+import isa.projekat.projektniZadatak.model.Blood;
 import isa.projekat.projektniZadatak.model.Centre;
+import isa.projekat.projektniZadatak.model.dto.CentreDTO;
 import isa.projekat.projektniZadatak.repository.CentreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -106,6 +108,15 @@ public class CentreService {
     return centreRepository.findById(id).orElseThrow(() -> new IllegalStateException("Centre not found with id " + id));
   }
 
+  public void rateForCentre(Long centreId, CentreDTO centreDTO) {
+
+        //ovde moram dodati to da je odrzan bar jedan pregled korisnika
+      Optional<Centre> centreOptional = centreRepository.findById(centreId);
+      if (centreOptional.isPresent()) {
+          centreOptional.get().setRate(centreDTO.getRate());
+          centreRepository.save(centreOptional.get());
+      }
+  }
 
 
 }

@@ -1,5 +1,6 @@
 package isa.projekat.projektniZadatak.repository;
 
+import isa.projekat.projektniZadatak.model.Blood;
 import isa.projekat.projektniZadatak.model.Centre;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -30,7 +31,6 @@ public interface CentreRepository extends JpaRepository<Centre, Long> {
 
   @Query("Select c FROM Centre c WHERE  EXISTS ( SELECT a FROM c.appointments a WHERE a.date = :date AND (a.time = :time and a.available = true) )")
   List<Centre> findByAvailableAppointmentsRegUser(@Param("date") LocalDate date, @Param("time") String time);
-
 
 
 

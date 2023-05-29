@@ -1,0 +1,30 @@
+<body>
+    <div>
+      <!-- <button type="submit" >Create blood</button> -->
+      <table>
+        <thead class="thead-dark">
+          <tr>
+            <!-- <th scope="col">Id</th> -->
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Blood Type</th>
+            <th scope="col">Centre </th>
+            <th scope="col">Available</th>
+         </tr>
+       </thead>
+       <tbody>
+        <tr *ngFor="let appointment of appointments">
+          <!-- <td>{{ appointment.id }}</td> -->
+          <td>{{ appointment.date }}</td>
+          <td>{{ appointment.time }}</td>
+          <td>{{ appointment.duration }}</td>
+          <td>{{ appointment.bloodType }}</td>
+          <td>{{ appointment.centreId }}</td>
+          <td>{{ appointment.available }}</td>
+          <td><button (click)="goToReport()">Report</button></td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+</body>

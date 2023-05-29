@@ -13,6 +13,10 @@ import { BloodFormularComponent } from './blood-formular/blood-formular.componen
 import { CentreTermsRegUserComponent } from './centre-terms-reg-user/centre-terms-reg-user.component';
 import { UpdateCentreComponent } from './update-centre/update-centre.component';
 import { TermsCreateComponent } from './terms-create/terms-create.component';
+import { BloodComponent } from './blood/blood.component';
+import { TermsAdminComponent } from './terms-admin/terms-admin.component';
+import { ReportComponent } from './report/report.component';
+import { StatementComponent } from './statement/statement.component';
 
 const appRoutes: Routes = [
   { path: 'user-profile', component: UserProfileComponent },
@@ -20,8 +24,12 @@ const appRoutes: Routes = [
   { path: 'centres-terms', component: CentreTermsComponent },
   { path: 'blood-formular', component: BloodFormularComponent },
   { path: 'centres-terms-reg-user', component: CentreTermsRegUserComponent },
-  { path: 'update-centre', component: UpdateCentreComponent },
   { path: 'terms-create', component: TermsCreateComponent },
+  { path: 'blood', component: BloodComponent },
+  { path: 'terms-admin', component: TermsAdminComponent },
+  { path: 'report', component: ReportComponent },
+  { path: 'statement', component: StatementComponent },
+  
 ];
 @NgModule({
   declarations: [
@@ -31,8 +39,11 @@ const appRoutes: Routes = [
     CentreTermsComponent,
     BloodFormularComponent,
     CentreTermsRegUserComponent,
-    UpdateCentreComponent,
     TermsCreateComponent,
+    BloodComponent,
+    TermsAdminComponent,
+    ReportComponent,
+    StatementComponent,
   ],
   imports: [
     BrowserModule,

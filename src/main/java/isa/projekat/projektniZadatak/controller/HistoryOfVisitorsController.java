@@ -1,12 +1,14 @@
 package isa.projekat.projektniZadatak.controller;
-
-import isa.projekat.projektniZadatak.model.Report;
-import isa.projekat.projektniZadatak.repository.ReportRepository;
+import isa.projekat.projektniZadatak.model.Equipment;
+import isa.projekat.projektniZadatak.model.Statement;
+import isa.projekat.projektniZadatak.model.dto.StatementDTO;
+import isa.projekat.projektniZadatak.service.EquipmentService;
 import isa.projekat.projektniZadatak.service.HistoryOfVisitorsService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import isa.projekat.projektniZadatak.service.StatementService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,21 +18,33 @@ import java.util.List;
 
 public class HistoryOfVisitorsController {
 
-    private final HistoryOfVisitorsService historyOfVisitorsService;
-    private final ReportRepository reportRepository;
+    @Autowired
+    private HistoryOfVisitorsService historyOfVisitorsService;
 
-    public HistoryOfVisitorsController(HistoryOfVisitorsService historyOfVisitorsService,
-                                       ReportRepository reportRepository) {
-        this.historyOfVisitorsService = historyOfVisitorsService;
-        this.reportRepository = reportRepository;
-    }
+    @Autowired
+    private StatementService statementService;
 
-    @GetMapping("/allReports")
-    public List<Report>getAllReport(){
-        return historyOfVisitorsService.getAllReport();
-    }
+    @Autowired
+    private EquipmentService equipmentService;
+
+
+    //ovo mogu uraditi po statusu ako pise da je pregledan i ako je to jednako prikazi na ovome samo binduj
+    //tj ako je dodato
+
     @GetMapping("/allEquipment")
-    public void getALlEquipment(){
-        historyOfVisitorsService.getALlEquipment();
+    public List<Equipment>equipmentList(){
+        return historyOfVisitorsService.equipmentList();
+
     }
+
+    @GetMapping("/allStatement")
+    public List<Statement>statementList(){
+        return historyOfVisitorsService.getAllStatements();
+
+    }
+
+
+
+
+
 }

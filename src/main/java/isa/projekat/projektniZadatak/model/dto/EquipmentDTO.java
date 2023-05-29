@@ -13,12 +13,10 @@ import javax.persistence.*;
 public class EquipmentDTO {
 
 
-    private Long id;
     private String nameEquipment;
     private String quantitiofEquipment;
 
-    public EquipmentDTO(Long id, String nameEquipment, String quantitiofEquipment) {
-        this.id = id;
+    public EquipmentDTO( String nameEquipment, String quantitiofEquipment) {
         this.nameEquipment = nameEquipment;
         this.quantitiofEquipment = quantitiofEquipment;
     }

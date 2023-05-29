@@ -1,7 +1,10 @@
 package isa.projekat.projektniZadatak.controller;
 
+import isa.projekat.projektniZadatak.model.Blood;
 import isa.projekat.projektniZadatak.model.Centre;
-import isa.projekat.projektniZadatak.model.Users;
+import isa.projekat.projektniZadatak.model.dto.BloodDTO;
+import isa.projekat.projektniZadatak.model.dto.CentreDTO;
+import isa.projekat.projektniZadatak.service.BloodService;
 import isa.projekat.projektniZadatak.service.CentreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,10 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,10 +24,12 @@ import java.util.Optional;
 
 public class CentreController {
     private final CentreService centreService;
+    private final BloodService bloodService;
 
     @Autowired
-    public CentreController(CentreService centreService) {
+    public CentreController(CentreService centreService, BloodService bloodService) {
         this.centreService = centreService;
+        this.bloodService = bloodService;
     }
 
 
@@ -129,5 +132,22 @@ public class CentreController {
     Centre centre = centreService.getCentreById(id);
     return ResponseEntity.ok().body(centre);
   }
+
+  @GetMapping("/blood/all")
+    public  List<Blood>getAllBlood(){
+        return bloodService.getAllBlood();
+  }
+
+  @PostMapping("/blood/add")
+    public void createBlood(@RequestBody BloodDTO bloodDTO){
+       bloodService.createBlood(bloodDTO);
+
+  }
+
+    @PostMapping("/{id}/rate")
+    public void rateCentre(@PathVariable Long id,@RequestBody CentreDTO centreDTO){
+        centreService.rateForCentre(id,centreDTO);
+
+    }
 
 }

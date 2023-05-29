@@ -21,6 +21,8 @@ public class CentreDTO {
 
     private double avgGrade;
 
+    private int rate;
+
     public Centre convertToCentre(CentreDTO centreDTO){
         Centre centre = new Centre();
         centre.setId(centreDTO.getId());

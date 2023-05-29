@@ -1,0 +1,70 @@
+<body>
+    <form
+      class="form-blood"
+      #f="ngForm"
+      (ngSubmit)="addReport(f)"
+    >
+      <div class="form-container">
+        <label for="bloodType">Blood Type:</label>
+        <select  name="bloodType" ngModel>
+        <!-- <select> -->
+          <option *ngFor="let bloodType of bloodTypes" [ngValue]="bloodType">{{bloodType }}</option>
+        </select>
+        <br />
+        <label for="napomenaDoktoruMedicine">Note to the doctor:</label>
+        <input type="text" id="napomenaDoktoruMedicine" ngModel name="napomenaDoktoruMedicine" />
+        <br />
+        <label for="bakarSulfat">CuSO4:</label>
+        <input type="text" id="bakarSulfat" ngModel name="bakarSulfat" />
+        <br />
+        <label for="nivo">Level of CuSO4:</label>
+        <input type="text" id="nivo" ngModel name="nivo" />
+        <br />
+        <label for="hemoglobinometar">Hemoglobinometer:</label>
+        <input type="text" id="hemoglobinometar" ngModel name="hemoglobinometar" />
+        <br />
+
+         <label for="vrednost">Value of hemoglobinometar:</label>
+        <input type="text" id="vrednost" ngModel name="vrednost" />
+        <br />
+        <label for="pluca">Lungs:</label>
+        <input type="text" id="pluca" ngModel name="pluca" />
+        <br />
+        <label for="srce">Heart:</label>
+        <input type="text" id="srce" ngModel name="srce" />
+        <br />
+        <label for="pritisak">Pressure:</label>
+        <input type="text" id="pritisak" ngModel name="pritisak" />
+        <br />
+
+          <label for="razlogOdbijanja">
+            Reason for rejection:</label>
+        <input type="text" id="razlogOdbijanja" ngModel name="razlogOdbijanja" />
+        <br />
+        <label for="pocetak">Start of blood donation :</label>
+        <input type="text" id="pocetak" ngModel name="pocetak" />
+        <br />
+        <label for="zavrsetak">Finish of blood donation:</label>
+        <input type="text" id="zavrsetak" ngModel name="zavrsetak" />
+        <br />
+        <label for="mestoPunkcije">Place of blood donation:</label>
+        <input type="text" id="mestoPunkcije" ngModel name="mestoPunkcije" />
+        <br />
+        <label for="zahtev">Place of blood donation:</label>
+        <input type="checkbox" [(ngModel)]="zahtev" />
+        {{zahtev  ? 'Decline' : 'Accept'}}
+        <br />
+
+        <label for="kolicinaKrvi">Level of blood:</label>
+        <input type="text" id="kolicinaKrvi" ngModel name="kolicinaKrvi" />
+        <br />
+        <label for="ostatak">Other:</label>
+        <input type="text" id="ostatak" ngModel name="ostatak" />
+        <br />
+        
+        <br />
+        <br />
+        <button class="btn btn-green" type="submit">Save</button>
+      </div>
+    </form>
+ </body>
