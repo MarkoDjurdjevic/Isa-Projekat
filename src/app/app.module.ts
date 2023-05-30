@@ -17,6 +17,7 @@ import { BloodComponent } from './blood/blood.component';
 import { TermsAdminComponent } from './terms-admin/terms-admin.component';
 import { ReportComponent } from './report/report.component';
 import { StatementComponent } from './statement/statement.component';
+import { EquipmentAppointmentComponent } from './equipment-appointment/equipment-appointment.component';
 
 const appRoutes: Routes = [
   { path: 'user-profile', component: UserProfileComponent },
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
   { path: 'terms-admin', component: TermsAdminComponent },
   { path: 'report', component: ReportComponent },
   { path: 'statement', component: StatementComponent },
+  { path: 'equipment-appointment', component: EquipmentAppointmentComponent },
   
 ];
 @NgModule({
@@ -44,6 +46,7 @@ const appRoutes: Routes = [
     TermsAdminComponent,
     ReportComponent,
     StatementComponent,
+    EquipmentAppointmentComponent,
   ],
   imports: [
     BrowserModule,

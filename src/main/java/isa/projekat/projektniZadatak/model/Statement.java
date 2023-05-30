@@ -55,14 +55,14 @@ public class Statement {
     @JoinColumn(name = "appointments_id")
     private Appointments appointments;
 
-    @ManyToOne
-    @JoinColumn(name = "users_id")
-    private Users administrator;
-
-
-    @ManyToOne
-    @JoinColumn(name = "statement_id")
-    private Report report;
+//    @ManyToOne
+//    @JoinColumn(name = "users_id")
+//    private Users administrator;
+//
+//
+//    @ManyToOne
+//    @JoinColumn(name = "statement_id")
+//    private Report report;
 
 
 }

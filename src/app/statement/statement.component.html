@@ -1,67 +1,65 @@
 <body>
-  <button type="submit" (click)="openFormStatement()" >Create blood</button>
-    <form
-      class="form-statement"
-      *ngIf="addingReport"
-      #f="ngForm"
-      (ngSubmit)="addReport(f)"
-    >
-      <div class="form-container">
-        <label for="bloodType">Blood Type:</label>
-        <select  name="bloodType" ngModel>
-        <!-- <select> -->
-          <option *ngFor="let bloodType of bloodTypes" [ngValue]="bloodType">{{bloodType }}</option>
-        </select>
-        <br />
-        <label for="napomena">Note to the doctor:</label>
-        <input type="text" id="napomena" ngModel name="napomena" />
-        <br />
-        <label for="bakarSulfat">CuSO4:</label>
-        <input type="text" id="bakarSulfat" ngModel name="bakarSulfat" />
-        <br />
-        <label for="hemoglobinometar">Hemoglobinometar:</label>
-        <input type="text" id="hemoglobinometar" ngModel name="hemoglobinometar" />
-        <br />
-        <label for="srce">Heart:</label>
-        <input type="text" id="srce" ngModel name="srce" />
-        <br />
+<form
+  class="form-statement"
+  #f="ngForm"
+  (ngSubmit)="addReport(f)"
+>
+  <div class="form-container">
+    <label for="bloodType">Blood Type:</label>
+    <select  name="bloodType" ngModel>
+    <!-- <select> -->
+      <option *ngFor="let bloodType of bloodTypes" [ngValue]="bloodType">{{bloodType }}</option>
+    </select>
+    <br />
+    <label for="napomena">Note to the doctor:</label>
+    <input type="text" id="napomena" ngModel name="napomena" />
+    <br />
+    <label for="bakarSulfat">CuSO4:</label>
+    <input type="text" id="bakarSulfat" ngModel name="bakarSulfat" />
+    <br />
+    <label for="hemoglobinometar">Hemoglobinometar:</label>
+    <input type="text" id="hemoglobinometar" ngModel name="hemoglobinometar" />
+    <br />
+    <label for="srce">Heart:</label>
+    <input type="text" id="srce" ngModel name="srce" />
+    <br />
 
-         <label for="pluca">Lungs</label>
-        <input type="text" id="pluca" ngModel name="pluca" />
-        <br />
-        <label for="krvniPritisak">Lungs:</label>
-        <input type="text" id="krvniPritisak" ngModel name="krvniPritisak" />
-        <br />
-        <label for="zahtev">Place of blood donation:</label>
-        <input type="checkbox" [(ngModel)]="zahtev" />
-        {{zahtev  ? 'Decline' : 'Accept'}}
-        <br />
-        <label for="napomenaPregleda">Heart:</label>
-        <input type="text" id="napomenaPregleda" ngModel name="napomenaPregleda" />
-        <br />
-        <label for="razlogOdbijanja">Pressure:</label>
-        <input type="text" id="razlogOdbijanja" ngModel name="razlogOdbijanja" />
-        <br />
+     <label for="pluca">Lungs:</label>
+    <input type="text" id="pluca" ngModel name="pluca" />
+    <br />
+    <label for="krvniPritisak">Blood pressure:</label>
+    <input type="text" id="krvniPritisak" ngModel name="krvniPritisak" />
+    <br />
+    <label for="zahtev">Approve:</label>
+    <input type="checkbox" [(ngModel)]="zahtev" />
+    {{zahtev  ? 'Decline' : 'Accept'}}
+    <br />
+    <label for="napomenaPregleda">Review note:</label>
+    <input type="text" id="napomenaPregleda" ngModel name="napomenaPregleda" />
+    <br />
+    <label for="razlogOdbijanja">Reason for rejection:</label>
+    <input type="text" id="razlogOdbijanja" ngModel name="razlogOdbijanja" />
+    <br />
 
-          <label for="mestoPunkcije">
-            Reason for rejection:</label>
-        <input type="text" id="mestoPunkcije" ngModel name="mestoPunkcije" />
-        <br />
-        <label for="kolicinaUzeteKrvi">Start of blood donation :</label>
-        <input type="text" id="kolicinaUzeteKrvi" ngModel name="kolicinaUzeteKrvi" />
-        <br />
-        <label for="pocetakKrvi">Finish of blood donation:</label>
-        <input type="text" id="pocetakKrvi" ngModel name="pocetakKrvi" />
-        <br />
-        <label for="krajKrvi">Place of blood donation:</label>
-        <input type="text" id="krajKrvi" ngModel name="krajKrvi" />
-        <br />
-        
-        
-        <br />
-        <br />
-        <button class="btn btn-green" type="submit">Save</button>
-      </div>
-    </form>
+      <label for="mestoPunkcije">
+        Puncture site:</label>
+    <input type="text" id="mestoPunkcije" ngModel name="mestoPunkcije" />
+    <br />
+    <label for="kolicinaUzeteKrvi">Amount of blood taken :</label>
+    <input type="text" id="kolicinaUzeteKrvi" ngModel name="kolicinaUzeteKrvi" />
+    <br />
+    <label for="pocetakKrvi">Start:</label>
+    <input type="text" id="pocetakKrvi" ngModel name="pocetakKrvi" />
+    <br />
+    <label for="krajKrvi">Finish:</label>
+    <input type="text" id="krajKrvi" ngModel name="krajKrvi" />
+    <br />
+    
+    
+    <br />
+    <br />
+    <button class="btn btn-green" type="submit">Save</button>
+  </div>
+</form>
  </body>
 

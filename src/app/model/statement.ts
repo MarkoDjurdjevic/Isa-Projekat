@@ -16,9 +16,6 @@ export interface Statement{
     kolicinaUzeteKrvi:string;
     pocetakKrvi:string;
     krajKrvi:string;
-    medicinskiRadnikId:number;
-
-
-
+    appointmentId: number;
 
 }

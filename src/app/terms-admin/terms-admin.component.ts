@@ -15,6 +15,7 @@ export class TermsAdminComponent implements OnInit {
   appointments:Appointment[];
   response : Response;
   appointment: Appointment;
+  appointmentId : number;
 
   constructor(private appointmentService: AppointmentService,
     private router:Router) { }
@@ -23,15 +24,30 @@ export class TermsAdminComponent implements OnInit {
     console.log("aaaaaaaa1");
     this.appointmentService.getAppointments().subscribe((response : Appointment[])=>{
       this.appointments = response;
+      console.log(this.appointments);
     });
 
 
   }
 
-  goToReport(){
+
+
+  async goToReport(id:number){
+    console.log("okk?")
+    this.appointmentService.getMeAppointmentID(id);
+    console.log(id);
     this.router.navigateByUrl('/statement');
   }
 
 
+  goToEquipment(id:number){
 
-}
+    console.log("okk?")
+    this.appointmentService.getMeAppointmentID(id);
+    console.log(id);
+    this.router.navigateByUrl('/equipment-appointment');
+  }
+
+  }
+
+

@@ -7,6 +7,7 @@ import { AppointmentService } from '../service/appointment.service';
 import { AuthService } from '../service/auth.service';
 import { CentreService } from '../service/centre.service';
 import { FormDataService } from '../service/Formdata.service';
+import { Statement } from '../model/statement';
 
 @Component({
   selector: 'app-centre-terms',
@@ -30,7 +31,8 @@ export class CentreTermsComponent implements OnInit {
   newAppointment: Appointment;
   formularSigned: boolean;
   lastDonation: boolean;
-  //id: number = 6;
+  id: number ;
+  statement : Statement;
 
   ngOnInit(): void {
     //provera da li je formular potpisan
@@ -69,7 +71,7 @@ export class CentreTermsComponent implements OnInit {
     // this.incrementId();
 
     this.newAppointment = {
-      // id: this.id,
+      id: this.id,
       date: this.date,
       time: this.time,
       duration: this.duration,

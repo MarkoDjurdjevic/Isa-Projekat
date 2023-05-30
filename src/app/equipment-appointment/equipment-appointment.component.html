@@ -1,0 +1,22 @@
+
+<body>
+    <form
+      class="form-statement"
+      #f="ngForm"
+      (ngSubmit)="addEquipment(f)"
+    >
+      <div class="form-container">
+        <label for="nameEquipment">Name of equipment:</label>
+        <input type="text" id="nameEquipment" ngModel name="nameEquipment" />
+        <br />
+        <label for="quantitiofEquipment">Amount:</label>
+        <input type="text" id="quantitiofEquipment" ngModel name="quantitiofEquipment" />
+        <br />
+        <br />
+        <br />
+        <button class="btn btn-green" type="submit">Save</button>
+      </div>
+    </form>
+     </body>
+    
+    

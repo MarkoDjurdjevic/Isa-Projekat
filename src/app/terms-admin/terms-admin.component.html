@@ -22,7 +22,10 @@
           <td>{{ appointment.bloodType }}</td>
           <td>{{ appointment.centreId }}</td>
           <td>{{ appointment.available }}</td>
-          <td><button (click)="goToReport()">Report</button></td>
+          <td><div class="button-container">
+            <button (click)="goToReport(appointment.id)">Statement</button>
+            <button (click)="goToEquipment(appointment.id)">Equipment</button>
+          </div> </td>
         </tr>
       </tbody>
       </table>

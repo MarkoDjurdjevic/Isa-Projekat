@@ -1,6 +1,6 @@
 export interface Equipment{
 
-    id:number;
+    // id:number;
     nameEquipment:string;
     quantitiofEquipment:string;
 
