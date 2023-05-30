@@ -1,19 +1,10 @@
 package isa.projekat.projektniZadatak.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import isa.projekat.projektniZadatak.Enums.BloodType;
-import isa.projekat.projektniZadatak.model.Appointments;
-import isa.projekat.projektniZadatak.model.Equipment;
 import isa.projekat.projektniZadatak.model.Statement;
-import isa.projekat.projektniZadatak.model.Users;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import java.util.List;
 
 @Getter
 @Setter

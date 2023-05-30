@@ -1,20 +1,15 @@
 package isa.projekat.projektniZadatak.service;
 
 import isa.projekat.projektniZadatak.model.Equipment;
-import isa.projekat.projektniZadatak.model.HistoryOfVisitors;
 import isa.projekat.projektniZadatak.model.Statement;
-import isa.projekat.projektniZadatak.model.Users;
 import isa.projekat.projektniZadatak.repository.EquipmentRepository;
 import isa.projekat.projektniZadatak.repository.HistoryOfVisitorsRepository;
 import isa.projekat.projektniZadatak.repository.StatementRepository;
-import isa.projekat.projektniZadatak.repository.UserRepository;
+import isa.projekat.projektniZadatak.repository.UserAppRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class HistoryOfVisitorsService {
@@ -28,7 +23,7 @@ public class HistoryOfVisitorsService {
     @Autowired
     private EquipmentRepository equipmentRepository;
     @Autowired
-    private UserRepository userRepository;
+    private UserAppRepository userRepository;
 
     @Autowired
     private StatementService statementService;

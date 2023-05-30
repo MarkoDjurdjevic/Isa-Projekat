@@ -20,7 +20,7 @@ public class Survey {
     @Column(nullable=false,updatable=false)
     private Long id;
     @ManyToOne
-    private Users users;
+    private UserApp users;
     private boolean one;
     private boolean two;
     private boolean three;
