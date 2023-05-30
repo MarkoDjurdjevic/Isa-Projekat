@@ -69,13 +69,13 @@ public class UserAppService implements UserDetailsService {
     }
 
     public ResponseEntity<?>  getMyInfo(){
-        UserApp loggedInUser = userAppRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        UserApp loggedInUser = userAppRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         return ResponseEntity.status(HttpStatus.OK).body(loggedInUser);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userAppRepository.findByUsername(username);
+        return userAppRepository.findByEmail(username);
     }
 }
 

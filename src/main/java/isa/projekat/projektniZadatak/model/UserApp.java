@@ -3,6 +3,7 @@ package isa.projekat.projektniZadatak.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import isa.projekat.projektniZadatak.Enums.GenderEnum;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -56,6 +57,23 @@ public class UserApp implements UserDetails {
     @ManyToOne(fetch = FetchType.EAGER)
     private Role role;
 
+    @Column
+    private String JMBG;
+
+    @Column
+    private String name;
+
+    @Column
+    private String lastname;
+
+    @Column
+    private String phoneNumber;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Gender gender;
+
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(new SimpleGrantedAuthority(this.role.getName()));
@@ -68,7 +86,7 @@ public class UserApp implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override

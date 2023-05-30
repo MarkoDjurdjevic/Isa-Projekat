@@ -13,6 +13,6 @@ import javax.persistence.Entity;
 public class RegisterUser extends UserApp{
 
     public RegisterUser(UserApp userApp) {
-        super(userApp.getId(), userApp.getUsername(), userApp.getEmail(), userApp.getPassword(), userApp.getPasswordSalt(), userApp.getAddress(), userApp.getActive(), userApp.getRole());
+        super(userApp.getId(), userApp.getUsername(), userApp.getEmail(), userApp.getPassword(), userApp.getPasswordSalt(), userApp.getAddress(), userApp.getActive(), userApp.getRole(), userApp.getJMBG(), userApp.getName(), userApp.getLastname(), userApp.getPhoneNumber(), userApp.getGender());
     }
 }
