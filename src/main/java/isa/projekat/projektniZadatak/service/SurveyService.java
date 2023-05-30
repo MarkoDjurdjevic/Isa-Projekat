@@ -3,11 +3,10 @@ package isa.projekat.projektniZadatak.service;
 
 
 import isa.projekat.projektniZadatak.model.Survey;
-import isa.projekat.projektniZadatak.model.Users;
 import isa.projekat.projektniZadatak.model.dto.SurveyDTO;
 import isa.projekat.projektniZadatak.repository.SurveyRepository;
 
-import isa.projekat.projektniZadatak.repository.UserRepository;
+import isa.projekat.projektniZadatak.repository.UserAppRepository;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +22,7 @@ public class SurveyService {
     private SurveyRepository surveyRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserAppRepository userRepository;
 
 
 

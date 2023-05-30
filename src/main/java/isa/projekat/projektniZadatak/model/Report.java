@@ -29,6 +29,6 @@ public class Report {
 
     @ManyToOne
     @JoinColumn(name = "users_id")
-    private Users users;
+    private UserApp users;
 
 }

@@ -1,13 +1,11 @@
 package isa.projekat.projektniZadatak.service;
 
-import isa.projekat.projektniZadatak.Enums.UserRoleEnum;
 import isa.projekat.projektniZadatak.model.Appointments;
 import isa.projekat.projektniZadatak.model.Statement;
-import isa.projekat.projektniZadatak.model.Users;
 import isa.projekat.projektniZadatak.model.dto.StatementDTO;
 import isa.projekat.projektniZadatak.repository.AppointmentRepository;
 import isa.projekat.projektniZadatak.repository.StatementRepository;
-import isa.projekat.projektniZadatak.repository.UserRepository;
+import isa.projekat.projektniZadatak.repository.UserAppRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +15,11 @@ import java.util.Optional;
 public class StatementService {
 
     private final StatementRepository statementRepository;
-    private final UserRepository userRepository;
+    private final UserAppRepository userRepository;
     private final AppointmentRepository appointmentRepository;
 
     public StatementService(StatementRepository statementRepository,
-                            UserRepository userRepository,
+                            UserAppRepository userRepository,
                             AppointmentRepository appointmentRepository) {
         this.statementRepository = statementRepository;
         this.userRepository = userRepository;

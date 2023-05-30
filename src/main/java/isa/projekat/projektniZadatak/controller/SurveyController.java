@@ -4,7 +4,6 @@ package isa.projekat.projektniZadatak.controller;
 import isa.projekat.projektniZadatak.model.Survey;
 import isa.projekat.projektniZadatak.model.dto.SurveyDTO;
 import isa.projekat.projektniZadatak.service.SurveyService;
-import isa.projekat.projektniZadatak.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

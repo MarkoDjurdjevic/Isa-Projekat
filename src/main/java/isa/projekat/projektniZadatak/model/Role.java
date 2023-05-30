@@ -1,29 +1,32 @@
 package isa.projekat.projektniZadatak.model;
 
+
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table
-public class Terms {
+@JsonIncludeProperties({"name"})
+public class Role implements GrantedAuthority {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, updatable = false)
     private Long id;
-    private String date;
-    private String time;
-    private String duration;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private UserApp users;
+    @Column
+    private String name;
 
+    @Override
+    public String getAuthority() {
+        return name;
+    }
 }

@@ -29,5 +29,5 @@ public class HistoryOfVisitors {
 
     @ManyToOne
     @JoinColumn(name = "users_id")
-    private Users users;
+    private UserApp users;
 }
