@@ -1,6 +1,8 @@
 package isa.projekat.projektniZadatak.service;
 
 
+import isa.projekat.projektniZadatak.auth.RegistrationRequestDto;
+import isa.projekat.projektniZadatak.model.RegisterUser;
 import isa.projekat.projektniZadatak.model.UserApp;
 import isa.projekat.projektniZadatak.repository.RoleRepository;
 import isa.projekat.projektniZadatak.repository.UserAppRepository;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserAppService implements UserDetailsService {
@@ -48,17 +51,23 @@ public class UserAppService implements UserDetailsService {
     //update nesto zeza
     ///i skroz naopacke radi
     // pogledati jos malo
-//    public void update(UserAppDto updateduserApp){
-//        UserApp loggedInUser = userAppRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-////        Role role = roleRepository.findByName(updateduserApp.getRoleName());
-//        loggedInUser.setUsername(updateduserApp.getUsername());
-//        loggedInUser.setPassword(passwordEncoder.encode((updateduserApp.getPassword() + loggedInUser.getPasswordSalt())));
-//        loggedInUser.setEmail(updateduserApp.getEmail());
-//        loggedInUser.setAddress(updateduserApp.getAddress());
-////            loggedInUser.setRole(role);
-//        loggedInUser.setActive(updateduserApp.getActive());
-//        userAppRepository.save(loggedInUser);
-//    }
+    public void update(RegistrationRequestDto registrationRequestDto){
+        UserApp loggedInUser = userAppRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+//        Optional<UserApp>userAppOptional = userAppRepository.findById(loggedInUser.getId());
+//        if(userAppOptional.isPresent()){
+            loggedInUser.setUsername(registrationRequestDto.getUsername());
+            loggedInUser.setEmail(registrationRequestDto.getEmail());
+            loggedInUser.setPassword(registrationRequestDto.getPassword());
+            loggedInUser.setPasswordSalt(registrationRequestDto.getPassword());
+            loggedInUser.setJMBG(registrationRequestDto.getJMBG());
+            loggedInUser.setName(registrationRequestDto.getName());
+            loggedInUser.setLastname(registrationRequestDto.getLastname());
+            loggedInUser.setPhoneNumber(registrationRequestDto.getPhoneNumber());
+
+            userAppRepository.save(loggedInUser);
+//        }
+
+    }
 
     public UserApp save(UserApp userApp){
         return userAppRepository.save(userApp);
@@ -77,5 +86,6 @@ public class UserAppService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userAppRepository.findByEmail(username);
     }
+
 }
 

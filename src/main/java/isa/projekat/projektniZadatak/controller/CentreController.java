@@ -1,19 +1,20 @@
 package isa.projekat.projektniZadatak.controller;
 
-import isa.projekat.projektniZadatak.model.Blood;
 import isa.projekat.projektniZadatak.model.Centre;
-import isa.projekat.projektniZadatak.model.dto.BloodDTO;
+import isa.projekat.projektniZadatak.model.CentreAdmin;
 import isa.projekat.projektniZadatak.model.dto.CentreDTO;
-import isa.projekat.projektniZadatak.service.BloodService;
+import isa.projekat.projektniZadatak.model.dto.RateForCentreDTO;
 import isa.projekat.projektniZadatak.service.CentreService;
+import isa.projekat.projektniZadatak.service.RateForCentreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,69 +25,17 @@ import java.util.Optional;
 
 public class CentreController {
     private final CentreService centreService;
-    private final BloodService bloodService;
 
     @Autowired
-    public CentreController(CentreService centreService, BloodService bloodService) {
+    public CentreController(CentreService centreService) {
         this.centreService = centreService;
-        this.bloodService = bloodService;
     }
 
+    @Autowired
+    public RateForCentreService rateForCentreService;
 
-
-  @GetMapping("/appointments")
-  public ResponseEntity<List<Centre>> getAvailableCentres(@RequestParam("date") String date, @RequestParam("time") String time,
-  @RequestParam("duration") Integer duration) {
-      try {
-        System.out.println("This is the date IN BACKEND: ");
-        System.out.println(date);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate newDate = LocalDate.parse(date,formatter);
-        //LocalDate newDate = LocalDate.parse(date);
-        System.out.println("This is formmated date: ");
-        System.out.println(newDate);
-
-        //int duration = 60;
-        LocalTime startTime = LocalTime.parse(time);
-        LocalTime endTime = startTime.plusMinutes(duration);
-        String endTimeString = endTime.toString();
-        System.out.println(endTimeString);
-        System.out.println(time);
-        List<Centre> availableCentres = centreService.getAvailableCentres(newDate, time,endTimeString);
-
-        //List<Centre> availableCentres = centreService.getAvailableCentres(newDate, time,duration);
-
-        return new ResponseEntity<>(availableCentres, HttpStatus.OK);
-      } catch (Exception e) {
-        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-      }
-
-  }
-
-  @GetMapping("/appointments1")
-  public ResponseEntity<List<Centre>> getAvailableCentresRegUser(@RequestParam("date") String date, @RequestParam("time") String time ) {
-
-    try {
-      System.out.println("This is the date IN BACKEND: ");
-      System.out.println(date);
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-      LocalDate newDate = LocalDate.parse(date,formatter);
-
-      List<Centre> availableCentresRegUser = centreService.getAvailableCentresRegUser(newDate, time);
-
-      return new ResponseEntity<>(availableCentresRegUser, HttpStatus.OK);
-    } catch (Exception e) {
-      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-  }
-
-
-
-
-
-
-    @GetMapping("/all")
+    @RolesAllowed("ROLE_ANONYMOUS")
+    @GetMapping("/public/all")
     public List<Centre> getCentres(){
         return centreService.getCentres();
     }
@@ -96,27 +45,15 @@ public class CentreController {
         centreService.addNewCentre(centre);
     }
 
+
+
     @DeleteMapping(path="/delete/{centreId}")
     public void deleteCentre(@PathVariable("centreId") Long centreId){
         centreService.deleteCentre(centreId);
     }
 
-//    @PutMapping(path="/update/{centreId}")
-//    public void updateCentre(@PathVariable("centreId") Long centreId,@RequestParam(required =false) String name,
-//                             @RequestParam(required =false) String adress,
-//                             @RequestParam(required =false) String description){
-//        centreService.updateCentre(centreId,name,adress,description);
-//    }
-
-    //ovde  se umesto reqest param koriti requestbody anotacija da bi se u http telu zahteva prosledio ceo objekat
-    @PutMapping(path="/update/{centreId}")
-    public ResponseEntity<Centre> updateCentre(@PathVariable("centreId") Long centreId, @RequestBody Centre centre){
-        Centre updatedCentre = centreService.updateCentre(centreId, centre);
-        return ResponseEntity.ok(updatedCentre);
-    }
-
-
     @GetMapping("/search")
+    @PreAuthorize("hasAnyAuthority('UNREGISTERED_USER','REGISTERED_USER','SYSTEM_ADMINISTRATOR','CENTRE_ADMINISTRATOR')")
     public ResponseEntity<Optional<Centre>> searchCentres(@RequestParam String name, @RequestParam String adress){
 
         Optional<Centre> centre = centreService.searchCentres(name,adress);
@@ -127,27 +64,109 @@ public class CentreController {
         }
     }
 
+    @Secured("ROLE_ANONYMOUS")
+    @GetMapping("/searchCentre/{name}")
+//    @PreAuthorize("hasAnyAuthority('UNREGISTERED_USER','REGISTERED_USER','SYSTEM_ADMINISTRATOR','CENTRE_ADMINISTRATOR')")
+    public void searchCentre(@RequestParam String name){
+        centreService.findCentreByName(name);
+        ResponseEntity.status(HttpStatus.OK);
+    }
+
+
+    @PutMapping("/update/{centreId}")
+    @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
+    public void updateCentre(@PathVariable("centreId") Long centreId,@RequestBody CentreDTO centreDTO){
+        centreService.updateCentre(centreId, centreDTO);
+        ResponseEntity.status(HttpStatus.OK);
+
+    }
+
+    @GetMapping("/{centreId}/getAllCentreAdmin")
+    @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
+    public List<CentreAdmin> getAllCentreAdmin(@PathVariable("centreId") Long centreId){
+        return centreService.getAllCentreAdmin(centreId);
+    }
+
+
+
+
+//
+//    @GetMapping("/appointments")
+//  public ResponseEntity<List<Centre>> getAvailableCentres(@RequestParam("date") String date, @RequestParam("time") String time,
+//  @RequestParam("duration") Integer duration) {
+//      try {
+//        System.out.println("This is the date IN BACKEND: ");
+//        System.out.println(date);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        LocalDate newDate = LocalDate.parse(date,formatter);
+//        //LocalDate newDate = LocalDate.parse(date);
+//        System.out.println("This is formmated date: ");
+//        System.out.println(newDate);
+//
+//        //int duration = 60;
+//        LocalTime startTime = LocalTime.parse(time);
+//        LocalTime endTime = startTime.plusMinutes(duration);
+//        String endTimeString = endTime.toString();
+//        System.out.println(endTimeString);
+//        System.out.println(time);
+//        List<Centre> availableCentres = centreService.getAvailableCentres(newDate, time,endTimeString);
+//
+//        //List<Centre> availableCentres = centreService.getAvailableCentres(newDate, time,duration);
+//
+//        return new ResponseEntity<>(availableCentres, HttpStatus.OK);
+//      } catch (Exception e) {
+//        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//      }
+//
+//  }
+//
+//  @GetMapping("/appointments1")
+//  public ResponseEntity<List<Centre>> getAvailableCentresRegUser(@RequestParam("date") String date, @RequestParam("time") String time ) {
+//
+//    try {
+//      System.out.println("This is the date IN BACKEND: ");
+//      System.out.println(date);
+//      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//      LocalDate newDate = LocalDate.parse(date,formatter);
+//
+//      List<Centre> availableCentresRegUser = centreService.getAvailableCentresRegUser(newDate, time);
+//
+//      return new ResponseEntity<>(availableCentresRegUser, HttpStatus.OK);
+//    } catch (Exception e) {
+//      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+//
+//  }
+
+
+    //ovde  se umesto reqest param koriti requestbody anotacija da bi se u http telu zahteva prosledio ceo objekat
+//    @PutMapping(path="/update/{centreId}")
+//    public ResponseEntity<Centre> updateCentre(@PathVariable("centreId") Long centreId, @RequestBody Centre centre){
+//        Centre updatedCentre = centreService.updateCentre(centreId, centre);
+//        return ResponseEntity.ok(updatedCentre);
+//    }
+
+
+
+
   @GetMapping("/{id}")
   public ResponseEntity<Centre> getCentreById(@PathVariable(value = "id") Long id) {
     Centre centre = centreService.getCentreById(id);
     return ResponseEntity.ok().body(centre);
   }
 
-  @GetMapping("/blood/all")
-    public  List<Blood>getAllBlood(){
-        return bloodService.getAllBlood();
-  }
-
-  @PostMapping("/blood/add")
-    public void createBlood(@RequestBody BloodDTO bloodDTO){
-       bloodService.createBlood(bloodDTO);
-
-  }
-
-    @PostMapping("/{id}/rate")
-    public void rateCentre(@PathVariable Long id,@RequestBody CentreDTO centreDTO){
-        centreService.rateForCentre(id,centreDTO);
-
+    @PostMapping("/rate")
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER')")
+    public void rateForCenter(@RequestBody RateForCentreDTO rateForCentreDTO) {
+        rateForCentreService.RateCentre(rateForCentreDTO);
     }
+
+
+
+//    @PostMapping("/{id}/rate")
+//    public void rateCentre(@PathVariable Long id,@RequestBody CentreDTO centreDTO){
+//        centreService.rateForCentre(id,centreDTO);
+//
+//    }
 
 }

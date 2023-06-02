@@ -78,14 +78,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
 
                 // svim korisnicima dopusti da pristupe sledecim putanjama:
-                .authorizeRequests().antMatchers("/auth/**").permitAll()		// /auth/**
+                .authorizeRequests().antMatchers("/auth/**").permitAll()        // /auth/**
                 .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/webjars/**").permitAll()
-                .antMatchers("/h2-console/**").permitAll()	// /h2-console/** ako se koristi H2 baza)
+                .antMatchers("/h2-console/**").permitAll()    // /h2-console/** ako se koristi H2 baza)
 //                .antMatchers(HttpMethod.GET ,"/user/**").permitAll()
-                .antMatchers(HttpMethod.POST ,"/auth/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
 
                 // ukoliko ne zelimo da koristimo @PreAuthorize anotacije nad metodama kontrolera, moze se iskoristiti hasRole() metoda da se ogranici
                 // koji tip korisnika moze da pristupi odgovarajucoj ruti. Npr. ukoliko zelimo da definisemo da ruti 'admin' moze da pristupi
@@ -104,6 +104,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // zbog jednostavnosti primera ne koristimo Anti-CSRF token (https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)
         http.csrf().disable();
     }
+
 
     // Definisanje konfiguracije koja utice na generalnu bezbednost aplikacije
     @Override

@@ -83,9 +83,9 @@ public class AuthenticationService {
                     .active(false)
                     .build();
             switch (role.getName()){
-                case "UNREGISTERED_USER":
+                case "SYSTEM_ADMINISTRATOR":
                     System.out.println("aaaaaaaaa");
-                    userAppService.save(new UnregisterUser(userToRegister));
+                    userAppService.save(new SystemAdmin(userToRegister));
                     System.out.println("aaaaaaaaabbababababaa");
                     break;
                 case "REGISTERED_USER":
@@ -93,6 +93,11 @@ public class AuthenticationService {
                     break;
                 case "CENTRE_ADMINISTRATOR":
                     userAppService.save(new CentreAdmin(userToRegister));
+                    break;
+                case "UNREGISTERED_USER":
+                    System.out.println("aaaaaaaaa");
+                    userAppService.save(new UnregisterUser(userToRegister));
+                    System.out.println("aaaaaaaaabbababababaa");
                     break;
                 default:
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -138,80 +143,80 @@ public class AuthenticationService {
         }
     }
 
-//    public ResponseEntity<?> refreshToken(UUID refreshToken){
-//        try{
-//            UserApp userToLogin = refreshTokenService.validateTokenAndGetUser(refreshToken);
-//            if(userToLogin == null){
-//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Token is not valid.");
-//            }
-//            UserDetails userDetails = userDetailsService.loadUserByUsername(userToLogin.getUsername());
-//            TokenBasedAuthentication authentication = new TokenBasedAuthentication(userDetails);
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//            UserApp user = (UserApp) authentication.getPrincipal();
-//            String jwt = tokenUtils.generateToken(user.getUsername(), user.getRole().getName());
-//            int expiresIn = tokenUtils.getExpiredIn();
-//            return ResponseEntity.ok(new UserTokenState(jwt, refreshToken.toString(), expiresIn));
-//        }catch (AuthenticationException e){
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body("An error occurred while creating new access token.");
-//        }
-//    }
-//
-//    public ResponseEntity<?> sendLoginTokenToEmail(String email){
-//        try{
-//            UserApp userApp = userAppRepository.findByEmail(email);
-//            if(userApp == null){
-//                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-//                        .body("User with does not exist with email: " + email);
-//            }
-//            if(!userApp.getActive()){
-//                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-//                        .body("Account with this email is not active.");
-//            }
-//            UUID loginToken = loginTokenService.generateLoginToken(userApp);
-//            //TODO send this token via email
-//            //String loginLink = "https://localhost:8081/auth/login?token="+loginToken;
-//            String frontendPageRedirection = "http://localhost:4200/login/" + loginToken;
-//            return ResponseEntity.status(HttpStatus.OK)
-//                    .body(frontendPageRedirection);
-//        }catch (AuthenticationException e){
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body("An error occurred while trying to send a token for login.");
-//        }
-//    }
-//
-//    public String sendVerificationEmail(UserApp userApp){
-//        UUID verificationToken = activationTokenService.generateActivationToken(userApp);
-//        //TODO send this token via email
-//        return "http://localhost:8081/auth/activate?token="+verificationToken;
-//    }
-//
-//    public ResponseEntity<?> activate(UUID token){
-//        try{
-//            return activationTokenService.activate(token);
-//        }catch (AuthenticationException e){
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body("An error occurred during activation of account.");
-//        }
-//    }
-//
-//    public ResponseEntity<?> loginViaToken(UUID token){
-//        try{
-//            UserApp userToLogin = loginTokenService.validateTokenAndGetUser(token);
-//            if(userToLogin == null){
-//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Token is not valid.");
-//            }
-//            UserDetails userDetails = userDetailsService.loadUserByUsername(userToLogin.getUsername());
-//            TokenBasedAuthentication authentication = new TokenBasedAuthentication(userDetails);
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//            UserApp user = (UserApp) authentication.getPrincipal();
-//            String jwt = tokenUtils.generateToken(user.getUsername(), user.getRole().getName());
-//            int expiresIn = tokenUtils.getExpiredIn();
-//            UUID refreshToken = refreshTokenService.generateRefreshToken(user);
-//            return ResponseEntity.ok(new UserTokenState(jwt, refreshToken.toString(), expiresIn));
-//        }catch (AuthenticationException e){
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body("An error occurred during login via token.");
-//        }
-//    }
+    public ResponseEntity<?> refreshToken(UUID refreshToken){
+        try{
+            UserApp userToLogin = refreshTokenService.validateTokenAndGetUser(refreshToken);
+            if(userToLogin == null){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Token is not valid.");
+            }
+            UserDetails userDetails = userDetailsService.loadUserByUsername(userToLogin.getUsername());
+            TokenBasedAuthentication authentication = new TokenBasedAuthentication(userDetails);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            UserApp user = (UserApp) authentication.getPrincipal();
+            String jwt = tokenUtils.generateToken(user.getUsername(), user.getRole().getName());
+            int expiresIn = tokenUtils.getExpiredIn();
+            return ResponseEntity.ok(new UserTokenState(jwt, refreshToken.toString(), expiresIn));
+        }catch (AuthenticationException e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while creating new access token.");
+        }
+    }
+
+    public ResponseEntity<?> sendLoginTokenToEmail(String email){
+        try{
+            UserApp userApp = userAppRepository.findByEmail(email);
+            if(userApp == null){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("User with does not exist with email: " + email);
+            }
+            if(!userApp.getActive()){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Account with this email is not active.");
+            }
+            UUID loginToken = loginTokenService.generateLoginToken(userApp);
+            //TODO send this token via email
+            //String loginLink = "https://localhost:8081/auth/login?token="+loginToken;
+            String frontendPageRedirection = "http://localhost:4200/login/" + loginToken;
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(frontendPageRedirection);
+        }catch (AuthenticationException e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while trying to send a token for login.");
+        }
+    }
+
+    public String sendVerificationEmail(UserApp userApp){
+        UUID verificationToken = activationTokenService.generateActivationToken(userApp);
+        //TODO send this token via email
+        return "http://localhost:8081/auth/activate?token="+verificationToken;
+    }
+
+    public ResponseEntity<?> activate(UUID token){
+        try{
+            return activationTokenService.activate(token);
+        }catch (AuthenticationException e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred during activation of account.");
+        }
+    }
+
+    public ResponseEntity<?> loginViaToken(UUID token){
+        try{
+            UserApp userToLogin = loginTokenService.validateTokenAndGetUser(token);
+            if(userToLogin == null){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Token is not valid.");
+            }
+            UserDetails userDetails = userDetailsService.loadUserByUsername(userToLogin.getUsername());
+            TokenBasedAuthentication authentication = new TokenBasedAuthentication(userDetails);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            UserApp user = (UserApp) authentication.getPrincipal();
+            String jwt = tokenUtils.generateToken(user.getUsername(), user.getRole().getName());
+            int expiresIn = tokenUtils.getExpiredIn();
+            UUID refreshToken = refreshTokenService.generateRefreshToken(user);
+            return ResponseEntity.ok(new UserTokenState(jwt, refreshToken.toString(), expiresIn));
+        }catch (AuthenticationException e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred during login via token.");
+        }
+    }
 }

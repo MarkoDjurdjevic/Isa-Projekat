@@ -1,9 +1,7 @@
 package isa.projekat.projektniZadatak.controller;
 
-import isa.projekat.projektniZadatak.model.Centre;
 import isa.projekat.projektniZadatak.model.Equipment;
 import isa.projekat.projektniZadatak.model.dto.EquipmentDTO;
-import isa.projekat.projektniZadatak.model.dto.UpdateUsersDTO;
 import isa.projekat.projektniZadatak.service.EquipmentService;
 import org.springframework.web.bind.annotation.*;
 

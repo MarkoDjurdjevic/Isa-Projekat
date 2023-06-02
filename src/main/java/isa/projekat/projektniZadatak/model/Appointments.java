@@ -1,15 +1,13 @@
 package isa.projekat.projektniZadatak.model;
 
-import isa.projekat.projektniZadatak.Enums.BloodType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -21,54 +19,44 @@ import java.util.List;
 public class Appointments {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(nullable = false, updatable = false)
+  @SequenceGenerator(name = "appointmentSeqGen", sequenceName = "appointmentSeqGen", initialValue = 1, allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "appointmentSeqGen")
+  @Column(name="id", unique=true, nullable=false)
   private Long id;
 
   private LocalDate date;
+
   private String time;
 
   private int duration;
-  private boolean available;
 
+  private boolean available = true;
 
-  //enum
+  private boolean present=true;
+
+  @ManyToOne(fetch = FetchType.EAGER)
   private BloodType bloodType;
 
-  @JsonIgnore
-  //@JoinColumn(name = "centre_id") //za biderekcionu
+  @OneToOne
+  @JsonIncludeProperties({"id", "name"})
+  private RegisterUser registerUser;
+
   @ManyToOne
-  private Centre centreAppointment;
+  private Centre centre;
 
 
   @OneToOne
-  @JoinColumn(name = "appointments_id")
-  @JsonIgnore
+  @JsonIncludeProperties({"id", "name"})
   private Statement statement;
 
 
-  @OneToMany
-  @JoinColumn(name = "appointments_id")
+
+  @OneToMany(mappedBy = "appointments")
   @JsonIgnore
   private List<Equipment> equipmentList;
 
-  private long centreId;
-
-//  @OneToOne
-//  @JoinColumn(name ="appointments_id")
-//  @JsonIgnore
-//  private AppointmentAndPenal appointmentAndPenal;
+//
+//  private long cntrId;
 
 
-  public Appointments(long id, LocalDate date, String time, int duration, boolean available, BloodType bloodType, Centre centreAppointment, long centreId,List<Equipment>  equipment ) {
-    this.id = id;
-    this.date = date;
-    this.time = time;
-    this.duration = duration;
-    this.available = available;
-    this.bloodType = bloodType;
-    this.centreAppointment = centreAppointment;
-    this.centreId = centreId;
-
-  }
 }

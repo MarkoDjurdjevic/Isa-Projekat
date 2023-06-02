@@ -2,6 +2,7 @@ package isa.projekat.projektniZadatak.controller;
 
 import isa.projekat.projektniZadatak.model.Appointments;
 import isa.projekat.projektniZadatak.model.Centre;
+import isa.projekat.projektniZadatak.model.dto.AppointmentDTO;
 import isa.projekat.projektniZadatak.model.dto.EquipmentDTO;
 import isa.projekat.projektniZadatak.model.dto.StatementDTO;
 import isa.projekat.projektniZadatak.repository.AppointmentRepository;
@@ -11,6 +12,7 @@ import isa.projekat.projektniZadatak.service.EquipmentService;
 import isa.projekat.projektniZadatak.service.StatementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -67,23 +69,24 @@ public class AppointmentController {
     return ResponseEntity.ok(updatedAppointment);
   }
 
-  @PostMapping("/add")
-  public void addAppointment(@RequestBody Appointments appointment){
-    Optional<Centre> centreOptional = centreRepository.findById(appointment.getCentreId());
-    if(centreOptional.isPresent()){
-      Centre centre = centreOptional.get();
-      centre.getAppointments().add(appointment); //dodato
-
-      appointment.setCentreAppointment(centre);
-      appointmentService.addNewAppointment(appointment);
-       centreRepository.save(centre); //dodato
-    } else {
-      System.out.println("Neka greska je u dodavnju appointmenta");
-    }
-  }
+//  @PostMapping("/add")
+//  public void addAppointment(@RequestBody Appointments appointment){
+//    Optional<Centre> centreOptional = centreRepository.findById(appointment.getCntrId());
+//    if(centreOptional.isPresent()){
+//      Centre centre = centreOptional.get();
+//      centre.getAppointments().add(appointment); //dodato
+//
+//      appointment.setCentre(centre);
+//      appointmentService.addNewAppointment(appointment);
+//       centreRepository.save(centre); //dodato
+//    } else {
+//      System.out.println("Neka greska je u dodavnju appointmenta");
+//    }
+//  }
 
 
   @PostMapping("/{id}/add")
+  @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
   public void addStatements(@PathVariable Long id,  @RequestBody StatementDTO statementDTO){
     statementService.createStatement(id,statementDTO);
   }
@@ -93,9 +96,18 @@ public class AppointmentController {
         equipmentService.createEquipment(id,equipment);
     }
 
-//  @PostMapping("/{id}/available")
-//  public void registerNewEquipment(@PathVariable Long id,@RequestBody Appointments equipment){
-//    appointmentService.addPenal(id);
-//  }
+  @PutMapping("/{id}/updateAvailability")
+  @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
+  public void updateAppointment(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO) {
+      appointmentService.updateAvailability(id,appointmentDTO);
+  }
+
+  //postavljam na false prisutnost i penal dodajem za 1
+  @PutMapping("/{id}/updatePresent")
+  @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
+  public void updatePresent(@PathVariable Long id) {
+    appointmentService.updatePresent(id);
+  }
+
 
 }

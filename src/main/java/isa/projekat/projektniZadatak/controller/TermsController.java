@@ -7,6 +7,7 @@ import isa.projekat.projektniZadatak.service.TermsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,14 +27,34 @@ public class TermsController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<Terms>createTerms(@RequestBody TermsDTO terms){
+    @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
+    public void createTerms(@RequestBody TermsDTO terms){
         termsService.createTerms(terms);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR','REGISTERED_USER')")
     public List<Terms>getAllTerms(){
         return termsService.getAllTerms();
+    }
+
+    //svi slobodni termini
+    @GetMapping("/allTermsList")
+    @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR','REGISTERED_USER')")
+    public List<Terms>getTermsListForRegisterUser(){
+        return termsService.termsList();
+    }
+
+    @PutMapping("/{id}/reserve")
+    @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
+    public void reserveTerms(@PathVariable Long id){
+        termsService.updateTerms(id);
+    }
+
+    @PutMapping("/{id}/reservePr")
+    @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
+    public void provaeraTerms(@PathVariable Long id){
+        termsService.proveraTerms(id);
     }
 
 }

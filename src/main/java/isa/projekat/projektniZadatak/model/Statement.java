@@ -1,7 +1,7 @@
 package isa.projekat.projektniZadatak.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import isa.projekat.projektniZadatak.Enums.BloodType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,10 +15,12 @@ import javax.persistence.*;
 public class Statement {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, updatable = false)
+    @SequenceGenerator(name = "statementSeqGen", sequenceName = "statementSeqGen", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "statementSeqGen")
+    @Column(name="id", unique=true, nullable=false)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.EAGER)
     private BloodType bloodType;
 
     private String napomena;
@@ -47,22 +49,15 @@ public class Statement {
 
     private String krajKrvi;
 
-//    @ManyToOne
-//    @JoinColumn(name = "historyOfVisitors_id")
-//    private HistoryOfVisitors historyOfVisitors;
 
-    @OneToOne
-    @JoinColumn(name = "appointments_id")
+    @OneToOne(mappedBy = "statement", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("statement")
     private Appointments appointments;
 
-//    @ManyToOne
-//    @JoinColumn(name = "users_id")
-//    private Users administrator;
-//
-//
-//    @ManyToOne
-//    @JoinColumn(name = "statement_id")
-//    private Report report;
+    @OneToOne(mappedBy = "statement", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("statement")
+    private HistoryOfRegisterUser historyOfRegisterUser;
+
 
 
 }

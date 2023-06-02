@@ -6,18 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
 public class TermsDTO {
-
-    private Long id;
 
     private String duration;
     private String date ;
     private String time;
-    private Long userId;
+    private boolean reserve;
+    private Long systemAdminId;
 
 
 }

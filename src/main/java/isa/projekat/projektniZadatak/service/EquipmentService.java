@@ -1,10 +1,13 @@
 package isa.projekat.projektniZadatak.service;
 
-import isa.projekat.projektniZadatak.model.Appointments;
-import isa.projekat.projektniZadatak.model.Equipment;
+import isa.projekat.projektniZadatak.model.*;
 import isa.projekat.projektniZadatak.model.dto.EquipmentDTO;
 import isa.projekat.projektniZadatak.repository.AppointmentRepository;
 import isa.projekat.projektniZadatak.repository.EquipmentRepository;
+import isa.projekat.projektniZadatak.repository.RegiserUserRepository;
+import isa.projekat.projektniZadatak.repository.UserAppRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +20,12 @@ public class EquipmentService {
     private final EquipmentRepository equipmentRepository;
     private final AppointmentRepository appointmentRepository;
 
+    @Autowired
+    private UserAppRepository userRepository;
+
+    @Autowired
+    private RegiserUserRepository regiserUserRepository;
+
     public EquipmentService(EquipmentRepository equipmentRepository,
                             AppointmentRepository appointmentRepository) {
         this.equipmentRepository = equipmentRepository;
@@ -25,15 +34,26 @@ public class EquipmentService {
 
     public void createEquipment(Long id , EquipmentDTO equipmentDTO) {
 
-        Optional<Appointments>appointmentsOptional = appointmentRepository.findById(id);
-        if(appointmentsOptional.isPresent()) {
+        UserApp loggedInUser = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        if (loggedInUser.getRole().getName().equals("CENTRE_ADMINISTRATOR")) {
+            Optional<RegisterUser> registerUserOptional = regiserUserRepository.findById(id);
+            RegisterUser registerUser = registerUserOptional.get();
+            Appointments appointments = registerUser.getAppointments();
+            HistoryOfRegisterUser historyOfRegisterUser = registerUser.getHistoryOfRegisterUser();
+            if (!appointments.equals(null)) {
 
-            Equipment equipment = new Equipment();
-            equipment.setNameEquipment(equipmentDTO.getNameEquipment());
-            equipment.setQuantitiofEquipment(equipmentDTO.getQuantitiofEquipment());
-            equipment.setAppointments(appointmentsOptional.get());
-            equipmentRepository.save(equipment);
+                Equipment equipment = new Equipment();
+                equipment.setNameEquipment(equipmentDTO.getNameEquipment());
+                equipment.setQuantitiofEquipment(equipmentDTO.getQuantitiofEquipment());
+                equipment.setAppointments(appointments);
+                equipment.setHistoryOfRegisterUser(historyOfRegisterUser);
+                equipmentRepository.save(equipment);
 
+
+
+
+
+            }
         }
 
 

@@ -1,5 +1,7 @@
 package isa.projekat.projektniZadatak.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,12 +24,12 @@ public class Equipment {
     private String quantitiofEquipment;
 
     @ManyToOne
-    @JoinColumn(name = "appointments_id")
+    @JsonIncludeProperties({"id"})
     private Appointments appointments;
 
     @ManyToOne
-    @JoinColumn(name = "equipment_id")
-    private Report report;
+    @JsonIncludeProperties({"id"})
+    private HistoryOfRegisterUser historyOfRegisterUser;
 
 
 

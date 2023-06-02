@@ -1,6 +1,6 @@
 package isa.projekat.projektniZadatak.model.dto;
 
-import isa.projekat.projektniZadatak.Enums.BloodType;
+import isa.projekat.projektniZadatak.model.BloodType;
 import isa.projekat.projektniZadatak.model.Statement;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class StatementDTO {
 
-    private BloodType bloodType;
+    private String bloodTypeName;
 
     private String napomena;
 
@@ -39,23 +39,5 @@ public class StatementDTO {
 
     private String krajKrvi;
 
-    private StatementDTO statementDTO(Statement statement){
-        StatementDTO statementDTO = new StatementDTO();
-        statementDTO.setBloodType(statement.getBloodType());
-        statementDTO.setNapomena(statement.getNapomena());
-        statementDTO.setBakarSulfat(statement.getBakarSulfat());
-        statementDTO.setHemoglobinometar(statement.getHemoglobinometar());
-        statementDTO.setSrce(statement.getSrce());
-        statementDTO.setPluca(statement.getPluca());
-        statementDTO.setKrvniPritisak(statement.getKrvniPritisak());
-        statementDTO.setZahtev(statement.isZahtev());
-        statementDTO.setNapomenaPregleda(statement.getNapomenaPregleda());
-        statementDTO.setRazlogOdbijanja(statement.getRazlogOdbijanja());
-        statementDTO.setMestoPunkcije(statement.getMestoPunkcije());
-        statementDTO.setKolicinaUzeteKrvi(statement.getKolicinaUzeteKrvi());
-        statementDTO.setPocetakKrvi(statement.getPocetakKrvi());
-        statementDTO.setKrajKrvi(statement.getKrajKrvi());
-        return statementDTO;
-    }
 
 }
