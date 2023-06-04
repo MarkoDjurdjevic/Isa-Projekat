@@ -7,6 +7,8 @@ import {
 import { catchError, map, Observable, of } from 'rxjs';
 import { Centre } from '../model/centre';
 import { Subject } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
+import { CentreAdmin } from '../model/centreAdmin';
 
 @Injectable({
   providedIn: 'root',
@@ -53,31 +55,48 @@ export class CentreService {
     );
   }
 
-  public updateCentre(id: number, centre: Centre): Observable<Centre> {
-    console.log(`Updating centre with id ${id} and centre object`, centre);
+  public updateCentre(registrationRequest: any): Observable<any> {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.put<Centre>(
-      'http://localhost:8082/centre/update/' + id,
-      centre
+      'http://localhost:8082/centre/update/',
+      registrationRequest,
+      {
+        headers,
+      }
     );
   }
 
-  //slight errors here
-  public searchCentres(
-    name: string,
-    adress: string
-  ): Observable<Centre | null> {
-    let params = new HttpParams().set('name', name).set('adress', adress);
-
-    return this.http
-      .get<Centre>('http://localhost:8082/centre/search', { params })
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          if (error.status === 404) {
-            return of<Centre>(null);
-          } else {
-            throw error;
-          }
-        })
-      );
+  public getAllCentreAdmin(): Observable<CentreAdmin[]> {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<CentreAdmin[]>('http://localhost:8082/centre/getAllCentreAdmin', {
+      headers,
+    });
   }
+
+  public getAllCentre(): Observable<Centre[]>{
+    return this.http.get<Centre[]>('http://localhost:8082/centre/getAllCentreAdmin');
+  }
+
+
+  // //slight errors here
+  // public searchCentres(
+  // //   name: string,
+  // //   adress: string
+  // // ): Observable<Centre | null> {
+  // //   let params = new HttpParams().set('name', name).set('adress', adress);
+
+  //   // return this.http
+  //   //   .get<Centre>('http://localhost:8082/centre/search', { params })
+  //   //   .pipe(
+  //   //     catchError((error: HttpErrorResponse) => {
+  //   //       if (error.status === 404) {
+  //   //         // return of<Centre>(null);
+  //   //       } else {
+  //   //         throw error;
+  //   //       }
+  //   //     })
+  //   //   );
+  // }
 }

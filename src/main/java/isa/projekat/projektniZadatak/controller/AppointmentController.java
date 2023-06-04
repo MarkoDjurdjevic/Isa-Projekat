@@ -87,11 +87,12 @@ public class AppointmentController {
 
   @PostMapping("/{id}/add")
   @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
-  public void addStatements(@PathVariable Long id,  @RequestBody StatementDTO statementDTO){
+  public void addStatements(@PathVariable("id") Long id,  @RequestBody StatementDTO statementDTO){
     statementService.createStatement(id,statementDTO);
   }
 
   @PostMapping("/{id}/addEquipment")
+  @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
     public void registerNewEquipment(@PathVariable Long id,@RequestBody EquipmentDTO equipment){
         equipmentService.createEquipment(id,equipment);
     }
@@ -107,6 +108,12 @@ public class AppointmentController {
   @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
   public void updatePresent(@PathVariable Long id) {
     appointmentService.updatePresent(id);
+  }
+
+  @GetMapping("/{id}/getAppointmentRegisterUser")
+  @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
+  public void getAppointmentRegisterUser(@PathVariable("id") Long id) {
+    appointmentService.getAppointmentsForUser(id);
   }
 
 

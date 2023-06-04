@@ -11,13 +11,4 @@ export class StatementService {
   constructor(private http: HttpClient) { }
 
 
-  // getAppointmentById(id: number): Observable<Appointment> {
-  //   return this.http.get<Appointment>(
-  //     `'http://localhost:8082/appointments/${id}`
-  //   );
-  // }
-
-  // public addStatements(statement: Statement): Observable<Statement>{
-  //   return this.http.post<Statement>( `http://localhost:8082/appointments/${id}/add`,statement);
-  // }
 }

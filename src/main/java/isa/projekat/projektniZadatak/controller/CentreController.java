@@ -35,7 +35,7 @@ public class CentreController {
     public RateForCentreService rateForCentreService;
 
     @RolesAllowed("ROLE_ANONYMOUS")
-    @GetMapping("/public/all")
+    @GetMapping("/all")
     public List<Centre> getCentres(){
         return centreService.getCentres();
     }
@@ -73,18 +73,18 @@ public class CentreController {
     }
 
 
-    @PutMapping("/update/{centreId}")
+    @PutMapping("/update")
     @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
-    public void updateCentre(@PathVariable("centreId") Long centreId,@RequestBody CentreDTO centreDTO){
-        centreService.updateCentre(centreId, centreDTO);
+    public void updateCentre(@RequestBody CentreDTO centreDTO){
+        centreService.updateCentre(centreDTO);
         ResponseEntity.status(HttpStatus.OK);
 
     }
 
-    @GetMapping("/{centreId}/getAllCentreAdmin")
+    @GetMapping("/getAllCentreAdmin")
     @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
-    public List<CentreAdmin> getAllCentreAdmin(@PathVariable("centreId") Long centreId){
-        return centreService.getAllCentreAdmin(centreId);
+    public List<CentreAdmin> getAllCentreAdmin(){
+        return centreService.getAllCentreAdmin();
     }
 
 

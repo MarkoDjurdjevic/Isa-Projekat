@@ -30,13 +30,17 @@ public class Centre {
     private double avgGrade;
 
 
-//    private int rate;
+    private int rate;
 
 //    @OneToMany
 //    @JsonIgnore
 //    @JoinColumn(name = "centre")
 //    @JsonIgnoreProperties("centre")
 //    private List<Appointments> appointments;
+
+    @OneToMany(mappedBy = "centre")
+    @JsonIgnore
+    private List<RegisterUser>registerUsers;
 
 
     @OneToMany(mappedBy = "centre", fetch = FetchType.EAGER)

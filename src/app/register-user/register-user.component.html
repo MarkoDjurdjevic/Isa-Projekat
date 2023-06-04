@@ -1,0 +1,123 @@
+<html>
+<body>
+<div class="div1">
+    <button type="button" (click)="showAddStatementForm()">Add statement</button>
+     <button id="button2" (click)="showAddEquipmentForm()">Create equipment</button></div>
+<p>id:{{id}}</p>
+
+<div *ngIf="appointment">
+  <h2>Appointment Details</h2>
+  <p>ID: {{ appointment.id }}</p>
+  <p>Date: {{ appointment.date }}</p>
+  <p>Time: {{ appointment.time }}</p>
+  <p>Duration: {{ appointment.duration }}</p>
+  <p>Available: {{ appointment.available ? 'Yes' : 'No' }}</p>
+  <!-- <p>Present: {{ appointment.present ? 'Yes' : 'No' }}</p> -->
+  <p>Blood Type: {{ appointment.bloodType }}</p>
+  <!-- <p>Registered User: {{ appointment.registerUser.name }}</p> -->
+  <p>Centre: {{ appointment.centreId }}</p>
+  <!-- <p>Statement: {{ appointment.statement.name }}</p> -->
+  
+  <!-- <h3>Equipment List:</h3>
+  <ul>
+    <li *ngFor="let equipment of appointment.equipmentList">
+      {{ equipment.name }}
+    </li>
+  </ul> -->
+</div>
+
+<div *ngIf="showAddStatementPopup">
+    <p>aaaaaaaaaaa</p>
+    <div class="popup-overlay"></div>
+    <div class="popup-container">
+        <form>
+            <div>
+                <select name="bloodTypeName" ngModel required #bloodTypeName="ngModel">
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB-">AB-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                  </select>
+            </div> 
+            <div>
+              <label for="bakarSulfat">Bakar Sulfat:</label>
+              <input type="text" id="bakarSulfat" [(ngModel)]="statement.bakarSulfat" name="bakarSulfat" required>
+            </div>
+            <div>
+              <label for="hemoglobinometar">Hemoglobinometar:</label>
+              <input type="text" id="hemoglobinometar" [(ngModel)]="statement.hemoglobinometar" name="hemoglobinometar" required>
+            </div>
+            <div>
+              <label for="srce">Srce:</label>
+              <input type="text" id="srce" [(ngModel)]="statement.srce" name="srce" required>
+            </div>
+            <div>
+              <label for="pluca">Pluca:</label>
+              <input type="text" id="pluca" [(ngModel)]="statement.pluca" name="pluca" required>
+            </div>
+            <div>
+              <label for="krvniPritisak">Krvni Pritisak:</label>
+              <input type="text" id="krvniPritisak" [(ngModel)]="statement.krvniPritisak" name="krvniPritisak" required>
+            </div>
+            <div>
+              <label for="zahtev">Zahtev:</label>
+              <input type="checkbox" id="zahtev" [(ngModel)]="statement.zahtev" name="zahtev">
+            </div>
+            <div>
+                <label for="napomena">Napomena Pregleda:</label>
+                <input type="text" id="napomena" [(ngModel)]="statement.napomena" name="napomena">
+              </div>
+            <div>
+              <label for="napomenaPregleda">Napomena Pregleda:</label>
+              <input type="text" id="napomenaPregleda" [(ngModel)]="statement.napomenaPregleda" name="napomenaPregleda">
+            </div>
+            <div>
+              <label for="razlogOdbijanja">Razlog Odbijanja:</label>
+              <input type="text" id="razlogOdbijanja" [(ngModel)]="statement.razlogOdbijanja" name="razlogOdbijanja">
+            </div>
+            <div>
+              <label for="mestoPunkcije">Mesto Punkcije:</label>
+              <input type="text" id="mestoPunkcije" [(ngModel)]="statement.mestoPunkcije" name="mestoPunkcije">
+            </div>
+            <div>
+              <label for="kolicinaUzeteKrvi">Kolicina Uzete Krvi:</label>
+              <input type="text" id="kolicinaUzeteKrvi" [(ngModel)]="statement.kolicinaUzeteKrvi" name="kolicinaUzeteKrvi">
+            </div>
+            <div>
+              <label for="pocetakKrvi">Pocetak Krvi:</label>
+              <input type="text" id="pocetakKrvi" [(ngModel)]="statement.pocetakKrvi" name="pocetakKrvi">
+            </div>
+            <div>
+              <label for="krajKrvi">Kraj Krvi:</label>
+              <input type="text" id="krajKrvi" [(ngModel)]="statement.krajKrvi" name="krajKrvi">
+            </div>
+           
+            <button type="submit" (click)="onSubmit()">Create Statement</button>
+          </form> 
+        </div>
+   </div> 
+
+
+   <div *ngIf="showAddEquipmentPopup">
+    <p>aaaaaaaaaaa</p>
+    <div class="popup-overlay-equipment"></div>
+    <div class="popup-container-equipment">
+        <form>
+            <div>
+              <label for="nameEquipment">Name of equipment:</label>
+              <input type="text" id="nameEquipment" [(ngModel)]="equipment.nameEquipment" name="nameEquipment" required>
+            </div>
+            <div>
+              <label for="quantitiofEquipment">Ammount:</label>
+              <input type="text" id="quantitiofEquipment" [(ngModel)]="equipment.quantitiofEquipment" name="quantitiofEquipment" required>
+            </div> 
+            <button type="submit" (click)="onSubmit()">Create Equipment</button>
+          </form> 
+        </div>
+   </div> 
+  </body>
+  </html>

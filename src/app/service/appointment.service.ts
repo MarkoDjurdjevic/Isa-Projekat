@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Appointment } from '../model/appointment';
@@ -42,13 +42,6 @@ export class AppointmentService {
     );
   }
 
-  public addStatements(id:number,statement: Statement): Observable<Statement>{
-    statement.appointmentId = id;
-    console.log(id, "aaaaaaaaaaaaaaaaaa");
-      return this.http.post<Statement>( `http://localhost:8082/appointments/${id}/add`,statement);
-    }
-
- 
 
     getMeAppointmentID(id: number){
        this.getAppointmentById(id).subscribe((response: Appointment)=>{
@@ -71,5 +64,25 @@ export class AppointmentService {
 
   bloodFormularMethod() {
     this.bloodFormular = true;
+  }
+
+  addStatements(id:number,statement: any): Observable<any[]> {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any[]>(
+      `http://localhost:8082/appointments/${id}/add`,
+      statement,
+      {
+        headers,
+      }
+    );
+  }
+
+  public getAppointmentRegisterUser(id: number): Observable<Appointment> {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Appointment>(`http://localhost:8082/appointments/${id}/getAppointmentRegisterUser`, {
+      headers,
+    });
   }
 }

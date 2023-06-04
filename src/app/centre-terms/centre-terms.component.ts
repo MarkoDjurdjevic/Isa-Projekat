@@ -67,46 +67,46 @@ export class CentreTermsComponent implements OnInit {
   //   this.id = this.id + 1;
   // }
 
-  addAppointment(centre: Centre) {
-    // this.incrementId();
+  // addAppointment(centre: Centre) {
+  //   // this.incrementId();
 
-    this.newAppointment = {
-      id: this.id,
-      date: this.date,
-      time: this.time,
-      duration: this.duration,
-      available: true,
-      bloodType: BloodType.APOS,
-      centreId: centre.id,
-    };
+  //   this.newAppointment = {
+  //     id: this.id,
+  //     date: this.date,
+  //     time: this.time,
+  //     duration: this.duration,
+  //     available: true,
+  //     bloodType: BloodType.APOS,
+  //     // centreId: centre.id,
+  //   };
 
-    //centre.appointmentIds.push(this.newAppointment.id);
-    this.appointmentService.addAppointment(this.newAppointment).subscribe(
-      (response: Appointment) => {
-        console.log(`Successfully added appointment`);
-        console.log(response);
-      },
-      (error) => {
-        console.log(`Error adding appointment`);
-        console.log(error);
-      }
-    );
+  //   //centre.appointmentIds.push(this.newAppointment.id);
+  //   this.appointmentService.addAppointment(this.newAppointment).subscribe(
+  //     (response: Appointment) => {
+  //       console.log(`Successfully added appointment`);
+  //       console.log(response);
+  //     },
+  //     (error) => {
+  //       console.log(`Error adding appointment`);
+  //       console.log(error);
+  //     }
+  //   );
 
-    // this.centreService.updateCentre(centre.id, centre).subscribe(
-    //   (response: Centre) => {
-    //     console.log(`Successfully updated centre with new appointment`);
-    //     console.log(response);
-    //   },
-    //   (error) => {
-    //     console.log('Error updating centre with new appointment', error);
-    //   }
-    // );
-  }
+  //   // this.centreService.updateCentre(centre.id, centre).subscribe(
+  //   //   (response: Centre) => {
+  //   //     console.log(`Successfully updated centre with new appointment`);
+  //   //     console.log(response);
+  //   //   },
+  //   //   (error) => {
+  //   //     console.log('Error updating centre with new appointment', error);
+  //   //   }
+  //   // );
+  // }
 
-  sortCentres() {
-    this.centres.sort((a, b) => b.avgGrade - a.avgGrade);
-  }
-  navigatetoFormular() {
-    this.router.navigate(['/blood-formular']);
-  }
+  // sortCentres() {
+  //   this.centres.sort((a, b) => b.avgGrade - a.avgGrade);
+  // }
+  // navigatetoFormular() {
+  //   this.router.navigate(['/blood-formular']);
+  // }
 }

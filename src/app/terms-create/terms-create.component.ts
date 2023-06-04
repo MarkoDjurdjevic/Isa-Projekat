@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormControl} from '@angular/forms';
 import { Terms } from '../model/terms'; // importujemo Terms model
 import { HttpClient,HttpErrorResponse,  HttpClientModule } from '@angular/common/http'; // importujemo HttpClient
-import { Users } from '../model/user';
+import { User } from '../model/user';
 import { TermsService } from '../service/terms.service';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
@@ -18,7 +18,7 @@ import { UsersDTO } from '../model/userDTO';
 })
 export class TermsCreateComponent implements OnInit {
   
- user: Users[];
+ user: User[];
  terms: Terms[];
  term: Terms;
  addingTerms = false;
@@ -37,7 +37,7 @@ export class TermsCreateComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.userService.getCentreAdministrators().subscribe((response: Users[]) => {
+    this.userService.getCentreAdministrators().subscribe((response: User[]) => {
       this.user = response;
     });
     // this.userService.getUsers().subscribe((response: Users[]) => {
@@ -54,14 +54,14 @@ export class TermsCreateComponent implements OnInit {
     this.addingTerms = true;
   }
 
-  addTerms(form: NgForm){
-    const term = form.value;
-    this.termsService.addTerms(term).subscribe((response)=>{
-      console.log('Terms was succesfully added');
-      location.reload();
-    });
+  // addTerms(form: NgForm){
+  //   const term = form.value;
+  //   this.termsService.addTerms(term).subscribe((response)=>{
+  //     console.log('Terms was succesfully added');
+  //     location.reload();
+  //   });
       
-    }
+  //   }
 
   }
 

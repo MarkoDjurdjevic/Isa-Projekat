@@ -30,7 +30,7 @@ public class AuthenticationController {
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@Valid @RequestBody RegistrationRequestDto request) {
         try{
-            System.out.println("govno jeno");
+
             return authenticationService.registerUser(request);
         }
         catch (Exception e){

@@ -22,7 +22,7 @@
       </div>
       <div class="ul-holder">
         <ul class="centre-information">
-          <li class="fixed-width">{{ centre.id }}</li>
+          <!-- <li class="fixed-width">{{ centre.id }}</li> -->
           <li class="fixed-width">{{ centre.name }}</li>
           <li class="longer-width">{{ centre.adress }}</li>
           <li class="fixed-width">{{ centre.avgGrade }}</li>
@@ -39,7 +39,7 @@
             <button
               class="btn btn-blue"
               type="button"
-              (click)="addAppointment(centre)"
+            
             >
               Zakazi termin..
             </button>
@@ -47,7 +47,7 @@
         </ul>
       </div>
     </div>
-    <button class="btn btn-blue" (click)="sortCentres()">Sort Centres</button>
+    <button class="btn btn-blue" >Sort Centres</button>
     <p>
       NOTE: you need to fill the formular and also to keep in mind that you must
       not have donated blood in the last 6 months

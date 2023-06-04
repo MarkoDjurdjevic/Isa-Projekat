@@ -1,0 +1,138 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main class="main-container">
+      <div class="registration-form">
+        <h1>Registartion</h1>
+        <form (ngSubmit)="submitForm(form)" #form="ngForm">
+          
+            <input
+            type="text"
+            placeholder="Enter your email"
+            name="email"
+            required
+            [(ngModel)]="email"
+          />
+
+          <input
+          type="text"
+          placeholder="Enter your name"
+          name="name"
+          required
+          ngModel
+          #name="ngModel"
+        />
+
+          <input
+            type="text"
+            placeholder="Enter your Last Name"
+            #lastname="ngModel"
+            name="lastname"
+            required
+            ngModel
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            required
+            [(ngModel)]="password"
+          />
+
+          <!-- <input
+            type="password"
+            placeholder="Confirm your Password"
+            name="confirmPassword"
+            minlength="8"
+            required
+            ngModel
+            #confirmPassword="ngModel"
+          /> -->
+          <input
+          type="username"
+          placeholder="username"
+          name="username"
+          required
+          ngModel
+          #username="ngModel"
+          />
+
+          <input
+          type="text"
+          placeholder="address"
+          name="address"
+          required
+          ngModel
+          #address="ngModel"
+        />
+
+
+          <input
+            type="text"
+            placeholder="phone"
+            name="phoneNumber"
+            required
+            ngModel
+            #phoneNumber="ngModel"
+          />
+
+          <input
+          type="text"
+          placeholder="JMBG"
+          name="jmbg"
+          required
+          ngModel
+        />
+
+          <select name="roleName" ngModel required #roleName="ngModel">
+            <option value="REGISTERED_USER">REGISTER USER</option>
+            <option value="SYSTEM_ADMINISTRATOR">SYSTEM ADMINISTRATOR</option>
+            <option value="CENTRE_ADMINISTRATOR">
+              CENTRE ADMINISTRATOR
+            </option>
+          </select>
+
+          <select name="roleName" ngModel required #roleName="ngModel">
+            <option value="REGISTERED_USER">REGISTER USER</option>
+            <option value="SYSTEM_ADMINISTRATOR">SYSTEM ADMINISTRATOR</option>
+            <option value="CENTRE_ADMINISTRATOR">
+              CENTRE ADMINISTRATOR
+            </option>
+          </select>
+
+          <select name="genderName" ngModel required #genderName="ngModel">
+            <option value="MALE">MALE</option>
+            <option value="FEMALE">FEMALE</option>
+          </select>
+
+          <button class="main-button" type="submit">Register</button>
+          <!-- <div class="bottom-div">
+            <p>
+              Already have an account?
+              <button
+                class="secondary-button"
+                routerLink="/login-pass"
+                type="submit"
+              >
+                Sign in with pass
+              </button>
+            </p>
+            <button
+              class="secondary-button"
+              routerLink="/login-email"
+              type="submit"
+            >
+              Sign in with email
+            </button>
+          </div> -->
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

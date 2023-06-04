@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { UserRoleEnum } from '../enums/userRoleEnum';
-import { Users } from '../model/user';
+import { User } from '../model/user';
 import { AuthService } from '../service/auth.service';
 import { FormDataService } from '../service/Formdata.service';
 import { UserService } from '../service/user.service';
@@ -21,12 +21,12 @@ export class UserProfileComponent implements OnInit {
     private formService: FormDataService,
     private router: Router
   ) {}
-  users: Users[];
-  user: Users;
+  users: User[];
+  user: User;
   loggedIn: boolean;
   loginAttempted = false;
   editMode = false;
-  currentlyLoggedInUser: Users;
+  currentlyLoggedInUser: User;
   showPopup = false;
   showPopupRegUser = false;
   appointmentTime: NgbDate;
@@ -51,7 +51,7 @@ export class UserProfileComponent implements OnInit {
         if (user) {
           this.user = user;
 
-          this.authService.login();
+          // this.authService.login();
           this.loggedIn = this.authService.isLoggedIn;
           this.authService.currentlyLoggedInUser(user);
           console.log(`You have succesfully logged in!`);
@@ -74,22 +74,22 @@ export class UserProfileComponent implements OnInit {
     this.editMode = true;
   }
   updateUser(f) {
-    console.log(f.value);
-    const copy = Object.assign({}, f.value);
-    console.log(copy);
-    delete copy.id;
-    console.log(f.value);
-    console.log(copy);
+    // console.log(f.value);
+    // const copy = Object.assign({}, f.value);
+    // console.log(copy);
+    // delete copy.id;
+    // console.log(f.value);
+    // console.log(copy);
 
-    this.userService.updateUser(f.value.id, copy).subscribe(
-      (response: Users) => {
-        console.log(`Response from updateCentre:`, response);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-    this.editMode = false;
+    // this.userService.updateUser(f.value.id, copy).subscribe(
+    //   (response: User) => {
+    //     console.log(`Response from updateCentre:`, response);
+    //   },
+    //   (error) => {
+    //     console.error(error);
+    //   }
+    // );
+    // this.editMode = false;
   }
 
   //PopUp prozor

@@ -2,6 +2,7 @@ package isa.projekat.projektniZadatak.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class RegisterUser extends UserApp{
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIncludeProperties({"id", "name"})
+    private Centre centre;
 
     @OneToOne(mappedBy = "registerUser", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("registerUser")

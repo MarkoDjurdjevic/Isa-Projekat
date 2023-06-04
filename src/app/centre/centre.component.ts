@@ -86,31 +86,31 @@ export class CentreComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    const updatedCentre = this.editCentreForm.value;
-    console.log(updatedCentre);
-    this.centres[this.editedItemIndex] = updatedCentre;
-    this.centreService.updateCentre(updatedCentre.id, updatedCentre).subscribe(
-      (response: Centre) => {
-        console.log(`Response from updateCentre:`, response);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-    this.editMode = false;
-    this.editCentreForm.reset();
-    this.editing = false;
+    // const updatedCentre = this.editCentreForm.value;
+    // console.log(updatedCentre);
+    // this.centres[this.editedItemIndex] = updatedCentre;
+    // this.centreService.updateCentre(updatedCentre.id, updatedCentre).subscribe(
+    //   (response: Centre) => {
+    //     console.log(`Response from updateCentre:`, response);
+    //   },
+    //   (error) => {
+    //     console.error(error);
+    //   }
+    // );
+    // this.editMode = false;
+    // this.editCentreForm.reset();
+    // this.editing = false;
   }
 
-  onDelete(i: number) {
-    this.deleteMode = true;
-    const deleteCentre = this.centres[i];
-    console.log(deleteCentre);
-    this.centreService.deleteCentre(deleteCentre.id).subscribe((res) => {
-      console.log('Centre was succesfully deleted');
-      location.reload();
-    });
-  }
+  // onDelete(i: number) {
+  //   this.deleteMode = true;
+  //   const deleteCentre = this.centres[i];
+  //   console.log(deleteCentre);
+  //   this.centreService.deleteCentre(deleteCentre.id).subscribe((res) => {
+  //     console.log('Centre was succesfully deleted');
+  //     location.reload();
+  //   });
+  // }
 
   openAddCentreForm() {
     this.addingCentre = true;
@@ -125,26 +125,26 @@ export class CentreComponent implements OnInit, OnDestroy {
   }
 
   search(name: string, adress: string) {
-    this.centreService.searchCentres(name, adress).subscribe(
-      (centre) => {
-        if (centre) {
-          console.log(`Nesto se desilo`);
-          //this.centres = [centre];
-          this.filteredCenters = [centre];
-        } else {
-          //this.centres = [];
-          this.filteredCenters = [];
-        }
-      },
-      (error: HttpErrorResponse) => {
-        if (error.status === 404) {
-          console.log(`No centre was found with the given name and address.`);
-          this.centres = [];
-        } else {
-          console.log(`An error occurred: ${error.message}`);
-        }
-      }
-    );
+    // this.centreService.searchCentres(name, adress).subscribe(
+    //   (centre) => {
+    //     if (centre) {
+    //       console.log(`Nesto se desilo`);
+    //       //this.centres = [centre];
+    //       this.filteredCenters = [centre];
+    //     } else {
+    //       //this.centres = [];
+    //       this.filteredCenters = [];
+    //     }
+    //   },
+    //   (error: HttpErrorResponse) => {
+    //     if (error.status === 404) {
+    //       console.log(`No centre was found with the given name and address.`);
+    //       this.centres = [];
+    //     } else {
+    //       console.log(`An error occurred: ${error.message}`);
+    //     }
+    //   }
+    // );
   }
 
   filterCenters(minAvgGrade: number) {

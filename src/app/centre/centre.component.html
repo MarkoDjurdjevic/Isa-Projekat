@@ -63,7 +63,7 @@
       </div>
       <div class="ul-holder">
         <ul class="centre-information">
-          <li class="fixed-width">{{ centre.id }}</li>
+          <!-- <li class="fixed-width">{{ centre.id }}</li> -->
           <li class="fixed-width">{{ centre.name }}</li>
           <li class="longer-width">{{ centre.adress }}</li>
           <li class="longer-width">{{ centre.description }}</li>
@@ -72,9 +72,9 @@
             <button class="btn btn-blue" type="button" (click)="onEdit(i)">
               Edit
             </button>
-            <button class="btn btn-red" type="button" (click)="onDelete(i)">
+             <button class="btn btn-red" type="button">
               X
-            </button>
+            </button> 
           </li>
         </ul>
       </div>
@@ -87,7 +87,7 @@
       (ngSubmit)="onSubmit()"
     >
       <label for="id">ID:</label>
-      <input type="text" id="id" formControlName="id" [(ngModel)]="centre.id" />
+      <!-- <input type="text" id="id" formControlName="id" [(ngModel)]="centre.id" /> -->
       <br />
       <label for="name">Name:</label>
       <input

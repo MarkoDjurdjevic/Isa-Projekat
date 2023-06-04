@@ -53,26 +53,26 @@ export class CentreTermsRegUserComponent implements OnInit {
       });
   }
 
-  addAppointment(centre: Centre) {
-    this.centreService.getCentreById(centre.id).subscribe((centre) => {
-      this.appointmentService.getAppointments().subscribe((appointments) => {
-        for (let i = 0; i < appointments.length; i++) {
-          if (
-            appointments[i].time === this.time &&
-            appointments[i].centreId == centre.id
-          ) {
-            //this.time
-            appointments[i].available = false;
-            let updatedAppointment = { ...appointments[i], available: false }; //dodao
-            console.log(updatedAppointment);
-            this.appointmentService
-              .updateAppointment(updatedAppointment) //.updateAppointment(appointments[i])
-              .subscribe();
-          }
-        }
-      });
-    });
-  }
+  // addAppointment(centre: Centre) {
+  //   this.centreService.getCentreById(centre.id).subscribe((centre) => {
+  //     this.appointmentService.getAppointments().subscribe((appointments) => {
+  //       for (let i = 0; i < appointments.length; i++) {
+  //         if (
+  //           appointments[i].time === this.time &&
+  //           appointments[i].centreId == centre.id
+  //         ) {
+  //           //this.time
+  //           appointments[i].available = false;
+  //           let updatedAppointment = { ...appointments[i], available: false }; //dodao
+  //           console.log(updatedAppointment);
+  //           this.appointmentService
+  //             .updateAppointment(updatedAppointment) //.updateAppointment(appointments[i])
+  //             .subscribe();
+  //         }
+  //       }
+  //     });
+  //   });
+  // }
 
   sortCentres() {
     this.centres.sort((a, b) => b.avgGrade - a.avgGrade);

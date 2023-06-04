@@ -18,8 +18,22 @@ import { TermsAdminComponent } from './terms-admin/terms-admin.component';
 import { ReportComponent } from './report/report.component';
 import { StatementComponent } from './statement/statement.component';
 import { EquipmentAppointmentComponent } from './equipment-appointment/equipment-appointment.component';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { ListRegisterUserComponent } from './list-register-user/list-register-user.component';
+import { AuthGuard } from './service/auth.guard';
+import { GuestGuard } from './service/guest.guard';
+import { RegisterUserComponent } from './register-user/register-user.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AdminListComponent } from './admin-list/admin-list.component';
 
 const appRoutes: Routes = [
+  {
+    path: 'registration-page',
+    component: RegistrationPageComponent,
+    
+  },
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'centres', component: CentreComponent },
   { path: 'centres-terms', component: CentreTermsComponent },
@@ -31,6 +45,20 @@ const appRoutes: Routes = [
   { path: 'report', component: ReportComponent },
   { path: 'statement', component: StatementComponent },
   { path: 'equipment-appointment', component: EquipmentAppointmentComponent },
+  { path: 'login-page', component: LoginPageComponent},
+  { path: 'list-register-user', 
+  component: ListRegisterUserComponent,
+  canActivate: [AuthGuard],
+  data: { allowedRoles: ['CENTRE_ADMINISTRATOR'] }},
+  { path: 'register-user/:id', 
+  component: RegisterUserComponent,
+  canActivate: [AuthGuard],
+  data: { allowedRoles: ['CENTRE_ADMINISTRATOR'] }},
+  { path: 'admin-list', 
+  component: AdminListComponent,
+  canActivate: [AuthGuard],
+  data: { allowedRoles: ['CENTRE_ADMINISTRATOR'] }},
+  
   
 ];
 @NgModule({
@@ -47,6 +75,12 @@ const appRoutes: Routes = [
     ReportComponent,
     StatementComponent,
     EquipmentAppointmentComponent,
+    RegistrationPageComponent,
+    LoginPageComponent,
+    ListRegisterUserComponent,
+    RegisterUserComponent,
+    AdminListComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -55,6 +89,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     NgbModule,
     RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

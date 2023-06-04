@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <!--bootstrap cdn za neki lepsi prikaz -->
+    bootstrap cdn za neki lepsi prikaz
     <link
       href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"
       rel="stylesheet"
@@ -26,9 +26,9 @@
     />
   </head>
   <body>
-    <form *ngIf="!loggedIn" (ngSubmit)="submitForm(form)" #form="ngForm">
+    <form *ngIf="!loggedIn" (ngSubmit)="submitForm(form)" #form="ngForm"> -->
       <!-- !user-->
-      <!--*ngIf="loggedIn"-->
+      <!--*ngIf="loggedIn"
       <div class="container">
         <div class="sm-pad wr-1">
           <label class="email-label" for="email">Email: </label>
@@ -69,8 +69,8 @@
     </form>
 
     <form *ngIf="loggedIn" #f="ngForm" (ngSubmit)="updateUser(f)">
-      <!-- user-->>
-      <div class="profile-container">
+      user-->>
+      <!-- <div class="profile-container">
         <div>
           <label for="id">ID:</label><br />
           <input
@@ -97,9 +97,9 @@
             name="password"
             [(ngModel)]="user.password"
             [disabled]="!editMode"
-          /><br />
+          /><br /> -->
 
-          <label for="name">Name:</label><br />
+          <!-- <label for="name">Name:</label><br />
           <input
             type="text"
             id="name"
@@ -144,8 +144,8 @@
             name="country"
             [(ngModel)]="user.country"
             [disabled]="!editMode"
-          /><br />
-        </div>
+          /><br /> -->
+        <!-- </div>
         <div>
           <label for="phone">Phone:</label><br />
           <input
@@ -196,8 +196,8 @@
             id="genderEnum"
             name="genderEnum"
             [(ngModel)]="user.genderEnum"
-          >
-            <option value="MALE" disabled>MALE</option>
+          > -->
+            <!-- <option value="MALE" disabled>MALE</option>
             <option value="FEMALE" disabled>FEMALE</option></select
           ><br />
 
@@ -243,18 +243,18 @@
       (click)="onButtonClick()"
     >
       Create an appointment...
-    </button>
+    </button> -->
 
-    <button
+    <!-- <button
       *ngIf="loggedIn && user.userRoleEnum == 'REGISTERED_USER'"
       class="btn-1"
       (click)="onButtonClickRegUser()"
     >
       Schedule an appointment...
-    </button>
+    </button> -->
 
     <!--KREIRANJE TERMINA ZA ADMINISTRATORA CENTRA-->
-    <div class="form-group row form-popUp" *ngIf="loggedIn && showPopup">
+    <!-- <div class="form-group row form-popUp" *ngIf="loggedIn && showPopup">
       <form
         #fAppointment="ngForm"
         (ngSubmit)="ShowCentreAppointments(fAppointment)"
@@ -296,10 +296,10 @@
           </div>
         </div>
       </form>
-    </div>
+    </div> -->
 
     <!--ZAKAZIVANJE TERMINA ZA REGISTROVANOG KORISNIKA-->
-    <div class="form-group row form-popUp" *ngIf="loggedIn && showPopupRegUser">
+    <!-- <div class="form-group row form-popUp" *ngIf="loggedIn && showPopupRegUser">
       <form
         #fAppointment="ngForm"
         (ngSubmit)="ShowCentreAppointmentsRegUser(fAppointment)"
@@ -343,4 +343,4 @@
       </form>
     </div>
   </body>
-</html>
+</html> -->

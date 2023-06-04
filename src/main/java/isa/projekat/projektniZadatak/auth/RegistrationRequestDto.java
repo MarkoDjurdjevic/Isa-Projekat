@@ -24,13 +24,13 @@ public class RegistrationRequestDto {
     private String password;
     @NotBlank
     private String roleName;
-    @NotBlank
+
     private String address;
     @NotBlank
     private String name;
     @NotBlank
     private String lastname;
-    @NotBlank
+
     private String JMBG;
     @NotBlank
     private String phoneNumber;

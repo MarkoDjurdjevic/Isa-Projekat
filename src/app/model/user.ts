@@ -1,23 +1,37 @@
-import { GenderEnum } from '../enums/genderEnum';
-import { UserCategoryEnum } from '../enums/userCategoryEnum';
-import { UserRoleEnum } from '../enums/userRoleEnum';
-import { Centre } from './centre';
+import { Centre } from "./centre";
 
-export interface Users {
-  id: number;
-  email: string;
-  password: string;
-  name: string;
-  lastname: string;
-  adress: string;
-  city: string;
-  country: string;
-  phone: string;
-  jmbg: string;
-  profession: string;
-  information: string;
-  category: UserCategoryEnum;
-  centre: Centre;
-  genderEnum: GenderEnum;
-  userRoleEnum: UserRoleEnum;
+export class User {
+  id: number = 0;
+  email: string = '';
+  password:string='';
+  username:string='';
+  active:boolean=true;
+  role:any='';
+  address:string = '';
+  jmbg:string = '';
+  gender:any='';
+  name:string = '';
+  lastname:string = '';
+  phoneNumber:string = '';
+
+
+
+
+
+  public constructor(obj?: any) {
+    if (obj) {
+      this.email = obj.email;
+      this.password = obj.password;
+      this.id = obj.id;
+      this.username = obj.username;
+      this.active = true;
+      this.role = obj.role;
+      this.address = obj.address;
+      this.jmbg = obj.jmbg;
+      this.gender = obj.gender;
+      this.name= obj.name;
+      this.lastname = obj.lastname;
+      this.phoneNumber = obj.phoneNumber;
+    }
+  }
 }

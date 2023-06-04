@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Terms } from '../model/terms';
@@ -17,12 +17,24 @@ export class TermsService{
 
     // }
 
-    public addTerms(terms:Terms):Observable<Terms>{
-        return this.http.post<Terms>(`http://localhost:8082/terms/add`,terms);
+    // public addTerms(terms:Terms):Observable<Terms>{
+    //     return this.http.post<Terms>(`http://localhost:8082/terms/add`,terms);
 
-    }
+    // }
 
     public getAllTerms():Observable<Terms[]>{
         return this.http.get<Terms[]>('http://localhost:8082/terms/all');
     }
+
+    public addTerms(registrationRequest: any): Observable<any> {
+        const token = localStorage.getItem('access_token');
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+        return this.http.post<Terms>(
+          'http://localhost:8082/terms/add',
+          registrationRequest,
+          {
+            headers,
+          }
+        );
+      }
 }

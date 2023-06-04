@@ -22,7 +22,6 @@
       </div>
       <div class="ul-holder">
         <ul class="centre-information">
-          <li class="fixed-width">{{ centre.id }}</li>
           <li class="fixed-width">{{ centre.name }}</li>
           <li class="longer-width">{{ centre.adress }}</li>
           <li class="fixed-width">{{ centre.avgGrade }}</li>
@@ -35,14 +34,14 @@
               Formular
             </button>
 
-            <button
+            <!-- <button
               class="btn btn-blue"
               type="button"
               (click)="addAppointment(centre)"
               [disabled]="!formularSigned || lastDonation"
             >
               Zakazi termin..
-            </button>
+            </button> -->
           </li>
         </ul>
       </div>

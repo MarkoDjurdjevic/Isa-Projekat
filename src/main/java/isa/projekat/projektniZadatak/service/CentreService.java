@@ -50,7 +50,7 @@ public class CentreService {
         return centreRepository.findCentreByNameOrAddress(name,adress);
     }
 
-    public void updateCentre(Long centreId,CentreDTO centreDTO) {
+    public void updateCentre(CentreDTO centreDTO) {
         //kada trazimo centar preko id moramo da njegov objekat smestimo u neku varijablu tj taj drugi objekat
         //Optional se koristi kao kontejner i sadrzi vrednosti jednog objekta
         //sluzi nam za proveru da li neki objekat postoji, a da ne izaziva greske
@@ -59,12 +59,14 @@ public class CentreService {
         UserApp loggedInUser = userAppRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         if (loggedInUser.getRole().getName().equals("CENTRE_ADMINISTRATOR")) {
 
-            Optional<Centre> centre = centreRepository.findById(centreId);
+            Optional <CentreAdmin> centreAdmin = centreAdminRepository.findById(loggedInUser.getId());
+            CentreAdmin centreAdmin1 = centreAdmin.get();
+            Optional<Centre> centre = centreRepository.findById(centreAdmin1.getCentre().getId());
             if (centre.isPresent()) {
                 centre.get().setName(centreDTO.getName());
                 centre.get().setAdress(centreDTO.getAdress());
                 centre.get().setDescription(centreDTO.getDescription());
-                centre.get().setAvgGrade(centreDTO.getAvgGrade());
+//                centre.get().setAvgGrade(centreDTO.getAvgGrade());
                 centreRepository.save(centre.get());
             }
 
@@ -72,17 +74,20 @@ public class CentreService {
     }
 
 
-    public List<CentreAdmin> getAllCentreAdmin(Long centreId){
+    public List<CentreAdmin> getAllCentreAdmin(){
 
         List<CentreAdmin>centreAdmins = centreAdminRepository.findAll();
         List<CentreAdmin>centreAdminsList = new ArrayList<>();
         UserApp loggedInUser = userAppRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         if (loggedInUser.getRole().getName().equals("CENTRE_ADMINISTRATOR")) {
-            Optional<Centre>centreOptional = centreRepository.findById(centreId);
-            if(centreOptional.isPresent()){
+            Optional <CentreAdmin> centreAdmin = centreAdminRepository.findById(loggedInUser.getId());
+            CentreAdmin centreAdmin1 = centreAdmin.get();
+            Optional<Centre> centre = centreRepository.findById(centreAdmin1.getCentre().getId());
+            Centre centre1 = centre.get();
+            if(centre.isPresent()){
                 for (CentreAdmin admin:centreAdmins
                      ) {
-                    if(admin.getCentre().getId() == centreId){
+                    if(admin.getCentre().getId() == centre1.getId()){
                         centreAdminsList.add(admin);
                     }
                 }

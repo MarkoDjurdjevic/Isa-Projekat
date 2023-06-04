@@ -1,4 +1,7 @@
  import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+ import { AuthService } from './service/auth.service';
+ import { Router } from '@angular/router';
+
 import {
   HttpClient,
   HttpClientModule,
@@ -15,10 +18,16 @@ import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit, OnDestroy {
-  title = 'isa-angular-projekat';
 
-  ngOnInit() {}
+export class AppComponent {
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnDestroy(): void {}
+  isLoggedIn(): boolean {
+    return this.authService.isUserLoggedIn();
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login-email']);
+  }
 }

@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,6 +68,24 @@ public class AppointmentService {
     Appointments app = appointmentRepository.findById(appointment.getId()).orElseThrow(() -> new IllegalStateException("student with id does not exist"));
     app.setAvailable(false);
     return appointmentRepository.save(app);
+  }
+
+  public List<Appointments> getAppointmentsForUser(Long userId) {
+    UserApp loggedInUser = userAppRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+    if (loggedInUser.getRole().getName().equals("CENTRE_ADMINISTRATOR")) {
+      Optional<RegisterUser> registerUserOptional = regiserUserRepository.findById(userId);
+      if (registerUserOptional.isPresent()) {
+        List<Appointments> appointmentsOptional = appointmentRepository.findAll();
+        List<Appointments> userAppointments = new ArrayList<>();
+        for (Appointments appointment : appointmentsOptional) {
+          if (appointment.getRegisterUser().equals(registerUserOptional)) {
+            userAppointments.add(appointment);
+          }
+        }
+        return userAppointments;
+      }
+    }
+    return Collections.emptyList();
   }
 
 

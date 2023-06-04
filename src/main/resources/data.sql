@@ -17,8 +17,8 @@ INSERT INTO blood_type(id, name) VALUES (8, 'O-');
 
 
 --centre
-INSERT INTO centre(id, name, adress, description, avg_grade) VALUES (nextval('centre_seq_gen'), 'center1', 'address1', 'descr', 5.0);
-INSERT INTO centre(id, name, adress, description, avg_grade) VALUES (nextval('centre_seq_gen'), 'center2', 'address2', 'desc2', 4.5);
+INSERT INTO centre(id, name, adress, description, avg_grade,rate) VALUES (nextval('centre_seq_gen'), 'center1', 'address1', 'descr', 5.0, 5);
+INSERT INTO centre(id, name, adress, description, avg_grade,rate) VALUES (nextval('centre_seq_gen'), 'center2', 'address2', 'desc2', 4.5, 4);
 
 
 
@@ -35,7 +35,7 @@ INSERT INTO user_app(id,email,username, password, active, role_id, password_salt
 INSERT INTO unregister_user(id) values (3);
 --register user
 INSERT INTO user_app(id,email,username, password, active, role_id, password_salt,name,lastname,address, jmbg, phone_number, gender_id) VALUES (nextval('user_app_seq'), 'register2@email.com', 'register2','$2a$10$SFp508WvAPKDbemvKcYdd.wLahgUcoBDOPjBRXgNMzDBe3ot/ElwG', true, 2, '', 'register', 'lastname','address','12345678','123456',1);
-INSERT INTO register_user(id, penal) values (4,2);
+INSERT INTO register_user(id, penal, centre_id) values (4,2,1);
 
 --centre administartor
 INSERT INTO user_app(id, email, username, password, active, role_id, password_salt, name, lastname, address, jmbg, phone_number, gender_id) VALUES (nextval('user_app_seq'), 'centreAdmin@email.com', 'centreAdmin', '$2a$10$SFp508WvAPKDbemvKcYdd.wLahgUcoBDOPjBRXgNMzDBe3ot/ElwG', true, 4, '', 'centreA', 'lastname', 'address', '12345678', '123456', 2);
@@ -48,9 +48,9 @@ INSERT INTO centre_admin(id, centre_id) values (7,2);
 --INSERT INTO project_manager(id) values (6);
 
 INSERT INTO user_app(id,email,username, password, active, role_id, password_salt,name,lastname,address, jmbg, phone_number, gender_id) VALUES (nextval('user_app_seq'), 'register1@email.com', 'register3','$2a$10$SFp508WvAPKDbemvKcYdd.wLahgUcoBDOPjBRXgNMzDBe3ot/ElwG', true, 2, '', 'register2', 'lastname2','address','12345678','123456',1);
-INSERT INTO register_user(id, penal) values (8, 2);
+INSERT INTO register_user(id, penal, centre_id) values (8, 2, 1);
 INSERT INTO user_app(id,email,username, password, active, role_id, password_salt,name,lastname,address, jmbg, phone_number, gender_id) VALUES (nextval('user_app_seq'), 'register3@email.com', 'register1','$2a$10$SFp508WvAPKDbemvKcYdd.wLahgUcoBDOPjBRXgNMzDBe3ot/ElwG', true, 2, '', 'register1', 'lastname1','address','12345678','123456',1);
-INSERT INTO register_user(id,penal) values (9, 2);
+INSERT INTO register_user(id,penal, centre_id) values (9, 2, 1);
 
 --appointment
 INSERT INTO appointments(id, date, time,duration, available, blood_type_id,centre_id,register_user_id,present,statement_id) VALUES (nextval('appointment_seq_gen'), '2023-04-12', '12:30h', 12, false, 1, 1,8,false,null);

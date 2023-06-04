@@ -1,0 +1,206 @@
+<button (click)="showUpdateCentreForm()">Update centre</button>
+<button (click)="showAllAdministrator()">All Centre Administrators</button>
+<button (click)="showTermsFormm()">Create terms</button>
+<button (click)="showUpdateUserForm()">Update user</button>
+<h1>List of Registered Users</h1>
+<div *ngIf="showUpdateCentre">
+  <p>aaaaaaaaaaa</p>
+  <div class="popup-overlay"></div>
+  <div class="popup-container">
+    <h2>Update centre</h2>
+      <form (ngSubmit)="submitForm(form)" #form="ngForm">
+        <input
+        type="text"
+        placeholder="Name"
+        name="name"
+        required
+        ngModel
+        #name="ngModel"
+      />
+
+      <input
+      type="text"
+      placeholder="adress"
+      adress="adress"
+      required
+      ngModel
+      #adress="ngModel"
+    />
+
+      <input
+        type="text"
+        placeholder="Enter your Last Name"
+        #lastname="ngModel"
+        name="description"
+        required
+        ngModel
+      />
+          <button>Update Centre</button>
+        </form> 
+      </div>
+ </div> 
+
+ <div *ngIf="showTermsForm">
+  <p>aaaaaaaaaaa</p>
+  <div class="popup-overlay"></div>
+  <div class="popup-container">
+    <h2>Create terms</h2>
+      <form (ngSubmit)="submitFormTerm(form)" #form="ngForm">
+        <input
+        type="text"
+        placeholder="duration"
+        name="duration"
+        required
+        ngModel
+        #duration="ngModel"
+      />
+
+      <!-- <input type="checkbox" [(ngModel)]="reserve" name="reserve" id="reserve">
+     <label for="reserve">Reserve</label> -->
+
+      <input
+      type="text"
+      placeholder="date"
+      name="date"
+      required
+      ngModel
+      #date="ngModel"
+    />
+
+      <input
+        type="text"
+        placeholder="time"
+        #time="ngModel"
+        name="time"
+        required
+        ngModel
+      />
+
+      <input
+        type="text"
+        placeholder="systemAdminId"
+        #systemAdminId="ngModel"
+        name="systemAdminId"
+        required
+        ngModel
+      />
+          <button>Create Terms</button>
+        </form> 
+      </div>
+ </div> 
+
+<div *ngIf="showUpdateUser">
+  <div class="popup-overlay"></div>
+  <div class="popup-container">
+    <h2>Update centre</h2>
+      <form (ngSubmit)="submitFormUpdate(form)" #form="ngForm">
+        <input
+        type="text"
+        placeholder="email"
+        name="email"
+        required
+        ngModel
+        #email="ngModel"
+          />
+
+          <input
+          type="text"
+          placeholder="Enter your name"
+          name="name"
+          required
+          ngModel
+          #name="ngModel"
+        />
+
+          <input
+            type="text"
+            placeholder="Enter your Last Name"
+            #lastname="ngModel"
+            name="lastname"
+            required
+            ngModel
+          />
+
+          <input
+          type="text"
+          placeholder="password"
+          #password="ngModel"
+          name="password"
+          required
+          ngModel
+          />
+
+          <!-- <input
+            type="password"
+            placeholder="Confirm your Password"
+            name="confirmPassword"
+            minlength="8"
+            required
+            ngModel
+            #confirmPassword="ngModel"
+          /> -->
+          <input
+          type="username"
+          placeholder="username"
+          name="username"
+          required
+          ngModel
+          #username="ngModel"
+          />
+
+          <input
+          type="text"
+          placeholder="address"
+          name="address"
+          required
+          ngModel
+          #address="ngModel"
+        />
+
+
+          <input
+            type="text"
+            placeholder="phone"
+            name="phoneNumber"
+            required
+            ngModel
+            #phoneNumber="ngModel"
+          />
+
+          <input
+          type="text"
+          placeholder="JMBG"
+          name="jmbg"
+          required
+          ngModel
+        />
+          <button>Update Centre</button>
+        </form> 
+      </div>
+ </div> 
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Lastname</th>
+      <th></th>
+      <th></th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of registeredUsers">
+      <td>{{ user.id }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.lastname }}</td>
+      <td><a [routerLink]="['/register-user', user.id]">Appointment</a></td>
+      <td><button>History of patient</button></td>
+    </tr>
+  </tbody>
+</table>
