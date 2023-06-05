@@ -9,10 +9,10 @@ import java.util.Optional;
 
 @Repository
 public interface CentreRepository extends JpaRepository<Centre, Long> {
-    @Query("SELECT c from Centre c WHERE c.adress=?1")
+    @Query("SELECT c from Centre c WHERE c.address=?1")
     Optional<Centre> findCentreByAdress(String adress);
 
-    @Query("SELECT c FROM Centre c WHERE c.name = ?1 OR c.adress = ?2")
+    @Query("SELECT c FROM Centre c WHERE c.name = ?1 OR c.address = ?2")
     Optional<Centre> findCentreByNameOrAddress(String name, String address);
 
 

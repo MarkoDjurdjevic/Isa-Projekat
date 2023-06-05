@@ -8,14 +8,45 @@
   </head>
   <header>
     <ul class="navigation-bar">
-      <li routerLink="/registration-page">Registration</li>
-      <li routerLink="/login-page">Log In</li>
+      <li *ngIf="!isLoggedIn()" routerLink="/registration-page">
+        Registration page
+      </li>
+      <li *ngIf="!isLoggedIn()" routerLink="/login-page">Login</li>
+      <li *ngIf="!isLoggedIn()" routerLink="/all-centre-page">AllCentre</li>
+      <li *ngIf="isLoggedIn()" (click)="logout()">Logout</li>
+    </ul>
+  </header>
+      <!-- <button routerLink="/registration-page">Registration</button>
+      <button routerLink="/login-page">Log In</button>  -->
       <!-- <li routerLink="/centres-terms">Centres-Terms</li>
       <li routerLink="/blood-formular">Blood Formular</li>
       <li routerLink="/terms-create">Terms Create</li>
-      <li routerLink="/terms-admin">Appointment</li> -->
-    </ul>
-  </header>
+      <li routerLink="/terms-admin">Appointment</li>
+   <table> 
+    <thead>
+      <tr>
+       
+        <th>Name</th>
+        <th>Address</th>
+        <th>Description</th>
+        <th>AvgGrade</th>
+        <th>Rate</th>
+        <th></th>
+        <th></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let centre of centres">
+        <td>{{ centre.name }}</td>
+        <td>{{ centre.adress }}</td>
+        <td>{{ centre.description }}</td>
+        <td>{{ centre.avgGrade }}</td>
+        <td>{{ centre.rate }}</td>
+      </tr>
+    </tbody>
+  </table> -->
+
   <body>
     <router-outlet></router-outlet>
   </body>

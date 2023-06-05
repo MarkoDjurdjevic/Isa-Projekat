@@ -78,6 +78,27 @@ export class AppointmentService {
     );
   }
 
+  registerNewEquipment(id:number,equipment: any): Observable<any[]> {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any[]>(
+      `http://localhost:8082/appointments/${id}/addEquipment`,
+      equipment,
+      {
+        headers,
+      }
+    );
+  }
+
+  public updateAvailability(id: number, appointment: Appointment): Observable<any> {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<any>(`http://localhost:8082/appointments/${id}/updateAvailability`, appointment
+    ,{
+      headers,
+    });
+  }
+
   public getAppointmentRegisterUser(id: number): Observable<Appointment> {
     const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

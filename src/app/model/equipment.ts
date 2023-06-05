@@ -1,7 +1,13 @@
-export interface Equipment{
+export class Equipment {
+    nameEquipment: string='';
+    quantitiofEquipment: string = '';
+   
+    constructor(obj?: any) {
+      if (obj) {
 
-    // id:number;
-    nameEquipment:string;
-    quantitiofEquipment:string;
-
-}
+        this.nameEquipment = obj.nameEquipment;
+        this.quantitiofEquipment = obj.quantitiofEquipment;
+       
+      }
+    }
+  }

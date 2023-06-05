@@ -2,6 +2,7 @@ package isa.projekat.projektniZadatak.controller;
 
 import isa.projekat.projektniZadatak.model.Appointments;
 import isa.projekat.projektniZadatak.model.Centre;
+import isa.projekat.projektniZadatak.model.Statement;
 import isa.projekat.projektniZadatak.model.dto.AppointmentDTO;
 import isa.projekat.projektniZadatak.model.dto.EquipmentDTO;
 import isa.projekat.projektniZadatak.model.dto.StatementDTO;
@@ -11,6 +12,7 @@ import isa.projekat.projektniZadatak.service.AppointmentService;
 import isa.projekat.projektniZadatak.service.EquipmentService;
 import isa.projekat.projektniZadatak.service.StatementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -87,8 +89,8 @@ public class AppointmentController {
 
   @PostMapping("/{id}/add")
   @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
-  public void addStatements(@PathVariable("id") Long id,  @RequestBody StatementDTO statementDTO){
-    statementService.createStatement(id,statementDTO);
+  public Statement addStatements(@PathVariable("id") Long id, @RequestBody StatementDTO statementDTO){
+    return statementService.createStatement(id,statementDTO);
   }
 
   @PostMapping("/{id}/addEquipment")
@@ -99,7 +101,7 @@ public class AppointmentController {
 
   @PutMapping("/{id}/updateAvailability")
   @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
-  public void updateAppointment(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO) {
+  public void updateAvailability(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO) {
       appointmentService.updateAvailability(id,appointmentDTO);
   }
 
@@ -112,8 +114,9 @@ public class AppointmentController {
 
   @GetMapping("/{id}/getAppointmentRegisterUser")
   @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
-  public void getAppointmentRegisterUser(@PathVariable("id") Long id) {
-    appointmentService.getAppointmentsForUser(id);
+  public Appointments getAppointmentRegisterUser(@PathVariable("id") Long id) {
+    return appointmentService.getAppointmentsForUser(id);
+
   }
 
 

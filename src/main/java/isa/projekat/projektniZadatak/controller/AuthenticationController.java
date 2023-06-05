@@ -4,7 +4,9 @@ package isa.projekat.projektniZadatak.controller;
 import isa.projekat.projektniZadatak.auth.LoginRequestDto;
 import isa.projekat.projektniZadatak.auth.RefreshTokenRequestDto;
 import isa.projekat.projektniZadatak.auth.RegistrationRequestDto;
+import isa.projekat.projektniZadatak.model.Centre;
 import isa.projekat.projektniZadatak.service.AuthenticationService;
+import isa.projekat.projektniZadatak.service.CentreService;
 import isa.projekat.projektniZadatak.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -26,6 +29,15 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationService authenticationService;
+
+    @Autowired
+    private CentreService centreService;
+
+    @GetMapping("/all")
+    public List<Centre> getCentres(){
+        return centreService.getCentres();
+    }
+
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@Valid @RequestBody RegistrationRequestDto request) {

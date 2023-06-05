@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RegiserUserRepository extends JpaRepository<RegisterUser, Long> {
+public interface RegisterUserRepository extends JpaRepository<RegisterUser, Long> {
 
     RegisterUser findRegisterUserByNameAndLastname(String name, String lastname);
 }

@@ -73,7 +73,7 @@ export class ListRegisterUserComponent implements OnInit {
   submitForm(form: NgForm) {
     const registrationRequest = {
       name: form.value.name,
-      adress: form.value.adress,
+      address: form.value.address,
       description: form.value.description,
       // avgGrade: form.value.avgGrade,
       // rate: form.value.rate 
@@ -115,7 +115,7 @@ export class ListRegisterUserComponent implements OnInit {
 
   submitFormUpdate(form: NgForm) {
     const registrationRequest = {
-      email: form.value.email,
+      // email: form.value.email,
       name: form.value.name,
       lastname: form.value.lastname,
       password: form.value.password,

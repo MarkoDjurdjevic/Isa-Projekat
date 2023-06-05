@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../model/user';
+import { Centre } from '../model/centre';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -87,6 +88,10 @@ export class AuthService {
     console.log(this.getRole());
     console.log(`uspesno izlogovan`);
     this.router.navigate(['/login-email']);
+  }
+
+  public getCentres(): Observable<Centre[]>{
+    return this.http.get<Centre[]>('http://localhost:8082/auth/all');
   }
 
 

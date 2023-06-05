@@ -38,17 +38,20 @@ public class StatementService {
     }
 
 
-    public void createStatement(Long id,StatementDTO statementDTO){
+    public Statement createStatement(Long id,StatementDTO statementDTO){
 
         UserApp loggedInUser = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         if (loggedInUser.getRole().getName().equals("CENTRE_ADMINISTRATOR")) {
-            Optional<RegisterUser> registerUserOptional = regiserUserRepository.findById(id);
-            RegisterUser registerUser = registerUserOptional.get();
-            Appointments appointments = registerUser.getAppointments();
+//            Optional<RegisterUser> registerUserOptional = regiserUserRepository.findById(id);
+//            RegisterUser registerUser = registerUserOptional.get();
+//            Appointments appointments = registerUser.getAppointments();
+            Optional<Appointments>appointmentsOptional = appointmentRepository.findById(id);
+            Appointments appointments = appointmentsOptional.get();
+            RegisterUser registerUser = appointments.getRegisterUser();
             HistoryOfRegisterUser historyOfRegisterUser = new HistoryOfRegisterUser();
             BloodType bloodTypeOptional = bloodTypeRepository.findByName(statementDTO.getBloodTypeName());
             System.out.println("aaaaaaaaa" + id);
-            if (!appointments.equals(null)) {
+            if (appointmentsOptional.isPresent()) {
 
                 Statement statement = new Statement();
                 statement.setBloodType(bloodTypeOptional);
@@ -76,10 +79,13 @@ public class StatementService {
                 historyOfRegisterUser.setRegisterUser(registerUser);
                 historyOfRegisterUserRepository.save(historyOfRegisterUser);
 
+                return statement;
+
             }
 
         }
 
+        return null;
     }
 
     public void updateStatement(Long id,StatementDTO statementDTO){

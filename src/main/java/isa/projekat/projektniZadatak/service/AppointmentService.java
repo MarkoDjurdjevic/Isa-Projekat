@@ -4,18 +4,11 @@ import isa.projekat.projektniZadatak.model.Appointments;
 import isa.projekat.projektniZadatak.model.RegisterUser;
 import isa.projekat.projektniZadatak.model.UserApp;
 import isa.projekat.projektniZadatak.model.dto.AppointmentDTO;
-import isa.projekat.projektniZadatak.model.dto.EquipmentDTO;
-import isa.projekat.projektniZadatak.model.dto.StatementDTO;
-import isa.projekat.projektniZadatak.repository.AppointmentRepository;
-import isa.projekat.projektniZadatak.repository.EquipmentRepository;
-import isa.projekat.projektniZadatak.repository.RegiserUserRepository;
-import isa.projekat.projektniZadatak.repository.UserAppRepository;
+import isa.projekat.projektniZadatak.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,18 +24,22 @@ public class AppointmentService {
 
   @Autowired
   private UserAppRepository userAppRepository;
-  private final RegiserUserRepository regiserUserRepository;
+
+  @Autowired
+  private RegisterUserRepository registerUserRepository;
+  private final HistoryOfRegisterUserRepository historyOfRegisterUserRepository;
 
 
   @Autowired
   public AppointmentService(AppointmentRepository appointmentRepository, StatementService statementService, EquipmentService equipmentService,
                             EquipmentRepository equipmentRepository,
-                            RegiserUserRepository regiserUserRepository){
+                            HistoryOfRegisterUserRepository historyOfRegisterUserRepository,
+                            RegisterUserRepository registerUserRepository){
     this.appointmentRepository = appointmentRepository;
     this.statementService = statementService;
     this.equipmentService = equipmentService;
     this.equipmentRepository = equipmentRepository;
-    this.regiserUserRepository = regiserUserRepository;
+    this.historyOfRegisterUserRepository = historyOfRegisterUserRepository;
   }
 
   public void addNewAppointment(Appointments appointments){
@@ -70,53 +67,74 @@ public class AppointmentService {
     return appointmentRepository.save(app);
   }
 
-  public List<Appointments> getAppointmentsForUser(Long userId) {
+//  public Appointments getAppointmentsForUser(Long userId) {
+//    UserApp loggedInUser = userAppRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+//    if (loggedInUser.getRole().getName().equals("CENTRE_ADMINISTRATOR")) {
+//      try {
+//        Optional<RegisterUser> registerUserOptional = regiserUserRepository.findById(userId);
+//        if (registerUserOptional.isPresent()) {
+//          RegisterUser registerUser = registerUserOptional.get();
+//          Appointments appointments = registerUser.getAppointments();
+//          return appointments;
+//        }
+//      }catch (Exception e){
+//        System.out.println("ne znam nesto nece");
+//      }
+//    }
+//    return null;
+//  }
+
+  public Appointments getAppointmentsForUser(Long userId){
     UserApp loggedInUser = userAppRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
     if (loggedInUser.getRole().getName().equals("CENTRE_ADMINISTRATOR")) {
-      Optional<RegisterUser> registerUserOptional = regiserUserRepository.findById(userId);
-      if (registerUserOptional.isPresent()) {
-        List<Appointments> appointmentsOptional = appointmentRepository.findAll();
-        List<Appointments> userAppointments = new ArrayList<>();
-        for (Appointments appointment : appointmentsOptional) {
-          if (appointment.getRegisterUser().equals(registerUserOptional)) {
-            userAppointments.add(appointment);
-          }
-        }
-        return userAppointments;
-      }
+
+    Optional<RegisterUser>registerUserOptional = registerUserRepository.findById(userId);
+    if(registerUserOptional.isPresent()){
+      RegisterUser registerUser = registerUserOptional.get();
+      Optional<Appointments> appointments = appointmentRepository.findById(registerUser.getAppointments().getId());
+      Appointments appointments1 = appointments.get();
+      return appointments1;
+    }else{
+      System.out.println("can not bring appointment");
     }
-    return Collections.emptyList();
+
+    }
+    return null;
   }
 
 
 
   //da kada na frontu pritisnem dugme za available
   // i ovo premestiti i staviti u register usera
-  public void updateAvailability(Long appointmentId, AppointmentDTO appointmentDTO){
+  public void updateAvailability(Long appointmentId,AppointmentDTO appointmentDTO){
     UserApp loggedInUser = userAppRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
     if (loggedInUser.getRole().getName().equals("CENTRE_ADMINISTRATOR")) {
-      Optional<RegisterUser>registerUserOptional = regiserUserRepository.findById(appointmentId);
+      Optional<RegisterUser>registerUserOptional = registerUserRepository.findById(appointmentId);
       if(registerUserOptional.isPresent()){
         RegisterUser registerUser = registerUserOptional.get();
         Appointments appointments = registerUser.getAppointments();
-        if (appointments != null){
-          appointments.setAvailable(appointmentDTO.isAvailable());
+//        if (appointments != null){
+//          appointments.setAvailable(true);
+//          appointments.setPresent(true);
 //          appointmentRepository.save(appointments);
-          if(!appointments.isAvailable()){
+          if(appointments.isAvailable()){
+            appointments.setAvailable(!appointmentDTO.isAvailable());
             appointments.setPresent(false);
             int penal = registerUser.getPenal();
             penal = penal+1;
             registerUser.setPenal(penal);
             appointmentRepository.save(appointments);
-            regiserUserRepository.save(registerUser);
-          }else{
-            appointments.setPresent(true);
-            appointmentRepository.save(appointments);
+            registerUserRepository.save(registerUser);
           }
+//          else{
+//            appointments.setAvailable(is);
+//            appointments.setPresent(true);
+//            appointmentRepository.save(appointments);
+//          }
         }
       }
 
-    }
+
   }
 
   //ovde postavljam da mi nije korisnik dosao na pregled
@@ -130,12 +148,12 @@ public class AppointmentService {
         Appointments appointment = appointmentOptional.get();
         appointment.setPresent(false);
         appointmentRepository.save(appointment);
-        Optional<RegisterUser>registerUserOptional = regiserUserRepository.findById(appointment.getRegisterUser().getId());
+        Optional<RegisterUser>registerUserOptional = registerUserRepository.findById(appointment.getRegisterUser().getId());
         RegisterUser registerUser = registerUserOptional.get();
         int penal = registerUser.getPenal();
         penal = penal+1;
         registerUser.setPenal(penal);
-        regiserUserRepository.save(registerUser);
+        registerUserRepository.save(registerUser);
 
       }
 

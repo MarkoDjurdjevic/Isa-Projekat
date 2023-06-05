@@ -20,7 +20,26 @@ import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 })
 
 export class AppComponent {
+
+  centres: Centre[];
+  centre:Centre;
+
   constructor(private authService: AuthService, private router: Router) {}
+
+   ngOnInit(): void {
+    this.loadCentre();
+  }
+
+  loadCentre(){
+    this.authService.getCentres().subscribe(
+      users => {
+        this.centres = users;
+      },
+      error => {
+        console.log('Error occurred while fetching registered users:', error);
+      }
+    );
+  }
 
   isLoggedIn(): boolean {
     return this.authService.isUserLoggedIn();
@@ -28,6 +47,6 @@ export class AppComponent {
 
   logout(): void {
     this.authService.logout();
-    this.router.navigate(['/login-email']);
+    this.router.navigate(['/login-page']);
   }
 }

@@ -34,11 +34,6 @@ public class CentreController {
     @Autowired
     public RateForCentreService rateForCentreService;
 
-    @RolesAllowed("ROLE_ANONYMOUS")
-    @GetMapping("/all")
-    public List<Centre> getCentres(){
-        return centreService.getCentres();
-    }
 
     @PostMapping("/add")
     public void registerNewCentre(@RequestBody Centre centre){

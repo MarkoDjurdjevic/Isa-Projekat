@@ -27,6 +27,9 @@ import { RegisterUserComponent } from './register-user/register-user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AdminListComponent } from './admin-list/admin-list.component';
+import { AvailabilityPageComponent } from './availability-page/availability-page.component';
+import { RegisterUserPageComponent } from './register-user-page/register-user-page.component';
+import { AllCentrePageComponent } from './all-centre-page/all-centre-page.component';
 
 const appRoutes: Routes = [
   {
@@ -43,8 +46,15 @@ const appRoutes: Routes = [
   { path: 'blood', component: BloodComponent },
   { path: 'terms-admin', component: TermsAdminComponent },
   { path: 'report', component: ReportComponent },
-  { path: 'statement', component: StatementComponent },
-  { path: 'equipment-appointment', component: EquipmentAppointmentComponent },
+  { path: 'statement/:id',
+   component: StatementComponent,
+   canActivate: [AuthGuard],
+   data: { allowedRoles: ['CENTRE_ADMINISTRATOR'] }
+ },
+  { path: 'equipment-appointment/:id', component: EquipmentAppointmentComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['CENTRE_ADMINISTRATOR'] }
+ },
   { path: 'login-page', component: LoginPageComponent},
   { path: 'list-register-user', 
   component: ListRegisterUserComponent,
@@ -58,6 +68,15 @@ const appRoutes: Routes = [
   component: AdminListComponent,
   canActivate: [AuthGuard],
   data: { allowedRoles: ['CENTRE_ADMINISTRATOR'] }},
+  { path: 'availability-page/:id', component: AvailabilityPageComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['CENTRE_ADMINISTRATOR'] }
+ },
+ { path: 'register-user-page', component: RegisterUserPageComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['REGISTERED_USER'] }
+ },
+ { path: 'all-centre-page', component: AllCentrePageComponent},
   
   
 ];
@@ -80,6 +99,9 @@ const appRoutes: Routes = [
     ListRegisterUserComponent,
     RegisterUserComponent,
     AdminListComponent,
+    AvailabilityPageComponent,
+    RegisterUserPageComponent,
+    AllCentrePageComponent,
     
   ],
   imports: [

@@ -27,12 +27,11 @@ public class RegisterUserService {
         List<RegisterUser>newRegisterUser = new ArrayList<>();
         for (RegisterUser registerUser:registerUsers
              ) {
-            if(registerUser.getAppointments().getId().equals(null)){
-                return null;
-            }else{
+            if(!registerUser.getAppointments().getId().equals(null)){
                 newRegisterUser.add(registerUser);
+            }else{
+                registerUsers.add(registerUser);
             }
-
         }
 
         return newRegisterUser;

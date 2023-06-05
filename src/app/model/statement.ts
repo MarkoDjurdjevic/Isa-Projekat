@@ -15,7 +15,8 @@ export class Statement {
     kolicinaUzeteKrvi: string = '';
     pocetakKrvi: string = '';
     krajKrvi: string = '';
-    appointments: Appointment | null = null;
+    appointmentId: number;
+    // appointments: Appointment | null = null;
     // historyOfRegisterUser: HistoryOfRegisterUser | null = null;
   
     constructor(obj?: any) {
@@ -35,7 +36,8 @@ export class Statement {
         this.kolicinaUzeteKrvi = obj.kolicinaUzeteKrvi;
         this.pocetakKrvi = obj.pocetakKrvi;
         this.krajKrvi = obj.krajKrvi;
-        this.appointments = obj.appointments;
+        this.appointmentId = obj.appointmentId;
+        // this.appointments = obj.appointments;
         // this.historyOfRegisterUser = obj.historyOfRegisterUser;
       }
     }

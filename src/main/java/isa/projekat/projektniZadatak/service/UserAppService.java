@@ -56,7 +56,7 @@ public class UserAppService implements UserDetailsService {
 //        Optional<UserApp>userAppOptional = userAppRepository.findById(loggedInUser.getId());
 //        if(userAppOptional.isPresent()){
             loggedInUser.setUsername(registrationRequestDto.getUsername());
-            loggedInUser.setEmail(registrationRequestDto.getEmail());
+//            loggedInUser.setEmail(registrationRequestDto.getEmail());
             loggedInUser.setPassword(registrationRequestDto.getPassword());
             loggedInUser.setPasswordSalt(registrationRequestDto.getPassword());
             loggedInUser.setJMBG(registrationRequestDto.getJMBG());

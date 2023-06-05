@@ -46,15 +46,15 @@ public class TermsController {
     }
 
     @PutMapping("/{id}/reserve")
-    @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
-    public void reserveTerms(@PathVariable Long id){
-        termsService.updateTerms(id);
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER')")
+    public Terms reserveTerms(@PathVariable Long id){
+        return termsService.updateTerms(id);
     }
 
-    @PutMapping("/{id}/reservePr")
-    @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
-    public void provaeraTerms(@PathVariable Long id){
-        termsService.proveraTerms(id);
-    }
+//    @PutMapping("/{id}/reservePr")
+//    @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
+//    public void proveraTerms(@PathVariable Long id){
+//        termsService.proveraTerms(id);
+//    }
 
 }

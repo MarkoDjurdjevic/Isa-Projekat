@@ -14,7 +14,7 @@ public class CentreDTO {
 
     private String name;
 
-    private String adress;
+    private String address;
 
     private String description;
 
@@ -22,13 +22,4 @@ public class CentreDTO {
 
     private int rate;
 
-    public Centre convertToCentre(CentreDTO centreDTO){
-        Centre centre = new Centre();
-        centre.setId(centreDTO.getId());
-        centre.setName(centreDTO.getName());
-        centre.setAdress(centreDTO.getAdress());
-        centre.setDescription(centreDTO.getDescription());
-        centre.setAvgGrade(centreDTO.getAvgGrade());
-        return centre;
-    }
 }

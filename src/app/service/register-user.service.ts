@@ -6,6 +6,7 @@ import { HttpClient, HttpParams} from '@angular/common/http';
 import { User } from '../model/user';
 import { RegisterUser } from '../model/registerUser';
 import { HttpHeaders } from '@angular/common/http';
+import { Terms } from '../model/terms';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,26 @@ export class RegisterUserservice {
     this.user.appointments.id = id;
     console.log("neki id mars", id)
     return id;
+  }
+
+  public getAllTerms(): Observable<Terms[]> {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Terms[]>('http://localhost:8082/terms/allTermsList', {
+      headers,
+    });
+  }
+
+  rateForCenter(rateForCentre: any): Observable<any> {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(
+      `http://localhost:8082/centre/rate`,
+      rateForCentre,
+      {
+        headers,
+      }
+    );
   }
 
   // public getAppointmentId(id: number){

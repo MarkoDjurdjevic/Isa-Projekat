@@ -2,6 +2,7 @@
 import { User } from "./user"
 
 export class Terms{
+    id: number;
     date: string ;
     duration: string;
     reserve: boolean = false;
@@ -10,7 +11,7 @@ export class Terms{
 
   constructor(obj?: any) {
     if (obj) {
-
+      this.id = obj.id;
       this.duration = obj.duration;
       this.date = obj.date;
       this.time = obj.time;

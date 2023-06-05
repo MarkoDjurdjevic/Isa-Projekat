@@ -24,7 +24,7 @@ public class Centre {
     private long id;
 
     private String name;
-    private String adress;
+    private String address;
     private String description;
 
     private double avgGrade;
@@ -43,8 +43,8 @@ public class Centre {
     private List<RegisterUser>registerUsers;
 
 
-    @OneToMany(mappedBy = "centre", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("centre")
+    @OneToMany(mappedBy = "centre")
+    @JsonIgnore
     private List<CentreAdmin>centreAdmins;
 
 

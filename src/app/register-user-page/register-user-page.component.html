@@ -1,0 +1,43 @@
+<button (click)="rateCentre()">Rate centre</button>
+<div *ngIf="showUpdateCentre">
+  <p>aaaaaaaaaaa</p>
+  <div class="popup-overlay"></div>
+  <div class="popup-container">
+    <h2>Update centre</h2>
+      <form (ngSubmit)="submitForm(form)" #form="ngForm">
+        <input
+        type="text"
+        placeholder="Name"
+        name="rate"
+        required
+        ngModel
+        #rate="ngModel"
+      />
+          <button>Rate Centre</button>
+        </form> 
+      </div>
+ </div> 
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Reserve</th>
+        <th>Duration</th>
+        <th></th>
+        <th></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let term of terms">
+        <td>{{ term.id }}</td>
+        <td>{{ term.date }}</td>
+        <td>{{ term.duration }}</td>
+        <td>{{ term.reserve }}</td>
+        <td>{{ term.time }}</td>
+        <td><button (click)="zakazivanjeTermina(term.id)">Zakazivanje termina</button></td>
+      </tr>
+    </tbody>
+  </table>

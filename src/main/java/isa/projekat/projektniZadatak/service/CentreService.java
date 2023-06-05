@@ -31,7 +31,7 @@ public class CentreService {
     public UserAppRepository userAppRepository;
 
     public void addNewCentre(Centre centre){
-        Optional<Centre> centreOptional = centreRepository.findCentreByAdress(centre.getAdress());
+        Optional<Centre> centreOptional = centreRepository.findCentreByAdress(centre.getAddress());
         if(centreOptional.isPresent()){
             throw new IllegalStateException("Centre already exists on the following adress");
         }
@@ -64,7 +64,7 @@ public class CentreService {
             Optional<Centre> centre = centreRepository.findById(centreAdmin1.getCentre().getId());
             if (centre.isPresent()) {
                 centre.get().setName(centreDTO.getName());
-                centre.get().setAdress(centreDTO.getAdress());
+                centre.get().setAddress(centreDTO.getAddress());
                 centre.get().setDescription(centreDTO.getDescription());
 //                centre.get().setAvgGrade(centreDTO.getAvgGrade());
                 centreRepository.save(centre.get());

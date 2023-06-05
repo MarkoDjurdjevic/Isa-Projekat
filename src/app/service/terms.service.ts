@@ -37,4 +37,16 @@ export class TermsService{
           }
         );
       }
+
+      public reserveTerms(id:any): Observable<any> {
+        console.log('Here is the userID ' + id);
+        const token = localStorage.getItem('access_token');
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+        return this.http.put<Terms>(
+          `http://localhost:8082/terms/${id}/reserve`,null,
+          {
+            headers,
+          }
+        );
+      }
 }

@@ -1,22 +1,27 @@
+<div>
+  <h2>Create equipment for appointment</h2>
+  <div class="container">
+    <form (ngSubmit)="submitForm(form)" #form="ngForm">
+          
+      <input
+      type="text"
+      placeholder="nameEquipment"
+      name="nameEquipment"
+      required
+      ngModel
+      #nameEquipment="ngModel"
+    />
 
-<body>
-    <form
-      class="form-statement"
-      #f="ngForm"
-      (ngSubmit)="addEquipment(f)"
-    >
-      <div class="form-container">
-        <label for="nameEquipment">Name of equipment:</label>
-        <input type="text" id="nameEquipment" ngModel name="nameEquipment" />
-        <br />
-        <label for="quantitiofEquipment">Amount:</label>
-        <input type="text" id="quantitiofEquipment" ngModel name="quantitiofEquipment" />
-        <br />
-        <br />
-        <br />
-        <button class="btn btn-green" type="submit">Save</button>
-      </div>
-    </form>
-     </body>
-    
-    
+    <input
+    type="text"
+    placeholder="quantitiofEquipment"
+    name="quantitiofEquipment"
+    required
+    ngModel
+    #quantitiofEquipment="ngModel"
+     />
+     
+    <button class="main-button" type="submit">Create</button>
+      </form>
+  </div>
+ </div> 

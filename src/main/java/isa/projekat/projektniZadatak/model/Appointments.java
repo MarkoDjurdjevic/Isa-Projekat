@@ -41,7 +41,7 @@ public class Appointments {
   @JsonIncludeProperties({"id", "name"})
   private RegisterUser registerUser;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.EAGER)
   private Centre centre;
 
 
@@ -51,8 +51,8 @@ public class Appointments {
 
 
 
-  @OneToMany(mappedBy = "appointments")
-  @JsonIgnore
+  @OneToMany(mappedBy = "appointments",fetch = FetchType.EAGER)
+  @JsonIgnoreProperties("appointments")
   private List<Equipment> equipmentList;
 
 //

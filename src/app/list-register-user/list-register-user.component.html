@@ -20,11 +20,11 @@
 
       <input
       type="text"
-      placeholder="adress"
-      adress="adress"
+      placeholder="address"
+      name="address"
       required
       ngModel
-      #adress="ngModel"
+      #address="ngModel"
     />
 
       <input
@@ -94,14 +94,14 @@
   <div class="popup-container">
     <h2>Update centre</h2>
       <form (ngSubmit)="submitFormUpdate(form)" #form="ngForm">
-        <input
+        <!-- <input
         type="text"
         placeholder="email"
         name="email"
         required
         ngModel
         #email="ngModel"
-          />
+          /> -->
 
           <input
           type="text"
@@ -200,7 +200,7 @@
       <td>{{ user.name }}</td>
       <td>{{ user.lastname }}</td>
       <td><a [routerLink]="['/register-user', user.id]">Appointment</a></td>
-      <td><button>History of patient</button></td>
+      <!-- <td><button>History of patient</button></td> -->
     </tr>
   </tbody>
 </table>

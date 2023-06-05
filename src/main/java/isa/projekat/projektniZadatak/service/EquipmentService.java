@@ -36,9 +36,9 @@ public class EquipmentService {
 
         UserApp loggedInUser = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         if (loggedInUser.getRole().getName().equals("CENTRE_ADMINISTRATOR")) {
-            Optional<RegisterUser> registerUserOptional = regiserUserRepository.findById(id);
-            RegisterUser registerUser = registerUserOptional.get();
-            Appointments appointments = registerUser.getAppointments();
+            Optional<Appointments>appointmentsOptional = appointmentRepository.findById(id);
+            Appointments appointments = appointmentsOptional.get();
+            RegisterUser registerUser = appointments.getRegisterUser();
             HistoryOfRegisterUser historyOfRegisterUser = registerUser.getHistoryOfRegisterUser();
             if (!appointments.equals(null)) {
 

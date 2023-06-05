@@ -1,0 +1,24 @@
+<table> 
+    <thead>
+      <tr>
+       
+        <th>Name</th>
+        <th>Address</th>
+        <th>Description</th>
+        <th>AvgGrade</th>
+        <th>Rate</th>
+        <th></th>
+        <th></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let centre of centres">
+        <td>{{ centre.name }}</td>
+        <td>{{ centre.address }}</td>
+        <td>{{ centre.description }}</td>
+        <td>{{ centre.avgGrade }}</td>
+        <td>{{ centre.rate }}</td>
+      </tr>
+    </tbody>
+  </table>

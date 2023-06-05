@@ -65,7 +65,7 @@
         <ul class="centre-information">
           <!-- <li class="fixed-width">{{ centre.id }}</li> -->
           <li class="fixed-width">{{ centre.name }}</li>
-          <li class="longer-width">{{ centre.adress }}</li>
+          <li class="longer-width">{{ centre.address }}</li>
           <li class="longer-width">{{ centre.description }}</li>
           <li class="fixed-width">{{ centre.avgGrade }}</li>
           <li class="fixed-width button-container">
@@ -97,12 +97,12 @@
         [(ngModel)]="centre.name"
       />
       <br />
-      <label for="adress">Adress:</label>
+      <label for="address">Adress:</label>
       <input
         type="text"
-        id="adress"
-        formControlName="adress"
-        [(ngModel)]="centre.adress"
+        id="address"
+        formControlName="address"
+        [(ngModel)]="centre.address"
       />
       <br />
       <label for="description">Description:</label>

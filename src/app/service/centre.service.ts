@@ -75,9 +75,7 @@ export class CentreService {
     });
   }
 
-  public getAllCentre(): Observable<Centre[]>{
-    return this.http.get<Centre[]>('http://localhost:8082/centre/getAllCentreAdmin');
-  }
+
 
 
   // //slight errors here

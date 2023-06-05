@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Statement } from '../model/statement';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Equipment } from '../model/equipment';
 import { RegisterUser } from '../model/registerUser';
 import { RegisterUserservice } from '../service/register-user.service';
@@ -27,13 +27,17 @@ export class RegisterUserComponent implements OnInit {
   user:RegisterUser;
   private sub: any;
   appointment:Appointment;
+  appointmnetId:number;
+  zahtev: boolean;
+  isAvailable: boolean = true;
 
   constructor(private appointmentService: AppointmentService,
     private  modalService: NgbModal,
     private dialog: MatDialog, 
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private registerUserService: RegisterUserservice) { }
+    private registerUserService: RegisterUserservice,
+    private router:Router,) { }
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
@@ -52,6 +56,7 @@ export class RegisterUserComponent implements OnInit {
       this.appointmentService.getAppointmentRegisterUser(id).subscribe(
         appointment => {
           this.appointment = appointment;
+          this.appointmnetId = appointment.id;
         },
         error => {
           console.log('Error retrieving appointment:', error);
@@ -60,42 +65,34 @@ export class RegisterUserComponent implements OnInit {
     }
    
 
-    // this.formGroup = this.formBuilder.group({
-    //   bloodType: ['', Validators.required],
-    //   napomena: ['', Validators.required],
-    //   bakarSulfat: [''],
-    //   hemoglobinometar: [''],
-    //   srce: [''],
-    //   pluca: [''],
-    //   krvniPritisak: [''],
-    //   zahtev: [false],
-    //   napomenaPregleda: [''],
-    //   razlogOdbijanja: [''],
-    //   mestoPunkcije: [''],
-    //   kolicinaUzeteKrvi: [''],
-    //   pocetakKrvi: [''],
-    //   krajKrvi: ['']
-    // });
-
-
-    showAddStatementForm(){
-      // this.id = this.registerUserService.getMeAppointment();
-      console.log("appointment1234",this.id);
-      this.showAddStatementPopup = true;
+    showAddStatementForm(id:number){  
+      this.router.navigate(['/statement/',id]);
     }
 
     onSubmit() {
-      // this.id = this.registerUserService.getMeAppointment();
-      console.log("appointment",this.id);
-      this.appointmentService.addStatements(this.id,this.statement).subscribe((Response)=>{
+      this.appointmentService.addStatements(this.appointmnetId,this.statement).subscribe((Response)=>{
+        console.log("appointment",this.appointmnetId);
         location.reload();
         
       })
     }
  
-    showAddEquipmentForm(){
-      this.appointmentService.getId();
-      this.showAddEquipmentPopup = true;
+    showAddEquipmentForm(id:number){
+      this.router.navigate(['/equipment-appointment/',id]);
     }
+
+    updateAppointmentAvailability(id: number) {
+      this.isAvailable = !this.isAvailable; // Promeni vrednost na suprotno stanje
+      const appointment1 = this.appointment;
+      this.appointmentService.updateAvailability(id, appointment1).subscribe(
+        (response) => {
+          console.log('Availability updated successfully');
+        },
+        (error) => {
+          console.log('Error updating availability', error);
+        }
+      );
+    }
+  
 
 }

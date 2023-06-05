@@ -3,11 +3,10 @@ package isa.projekat.projektniZadatak.service;
 import isa.projekat.projektniZadatak.model.*;
 import isa.projekat.projektniZadatak.model.dto.TermsDTO;
 import isa.projekat.projektniZadatak.repository.CentreAdminRepository;
+import isa.projekat.projektniZadatak.repository.SystemAdminRepository;
 import isa.projekat.projektniZadatak.repository.TermsRepository;
 import isa.projekat.projektniZadatak.repository.UserAppRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -78,27 +77,16 @@ public class TermsService {
     }
 
     //zauzimanje termina
-    public void updateTerms(Long id) {
+    public Terms updateTerms(Long id) {
 
         Optional<Terms> termsOptional = termsRepository.findById(id);
         if (termsOptional.isPresent()) {
             Terms terms = termsOptional.get();
             if (!terms.isReserve()) {
                 termsOptional.get().setReserve(true);
-                termsRepository.save(termsOptional.get());
+                return termsRepository.save(termsOptional.get());
 
-            }
-        }
-    }
-
-    public void proveraTerms(Long id) {
-        Optional<Terms> termsOptional = termsRepository.findById(id);
-        if (termsOptional.isPresent()) {
-            Terms terms = termsOptional.get();
-            if (!terms.isReserve()) {
-                terms.setReserve(true);
-                termsRepository.save(terms);
-            } else {
+            }else {
                 // Termin je već zauzet
                 System.out.println("Termin je već zauzet");
                 throw new IllegalStateException("Termin je već zauzet");
@@ -109,5 +97,27 @@ public class TermsService {
             throw new NoSuchElementException("Termin nije pronađen");
         }
     }
+
+
+//
+//    public void proveraTerms(Long id) {
+//        Optional<Terms> termsOptional = termsRepository.findById(id);
+//        if (termsOptional.isPresent()) {
+//            Terms terms = termsOptional.get();
+//            if (!terms.isReserve()) {
+//                terms.setReserve(true);
+//                termsRepository.save(terms);
+//            } else {
+//                // Termin je već zauzet
+//                System.out.println("Termin je već zauzet");
+//                throw new IllegalStateException("Termin je već zauzet");
+//            }
+//        } else {
+//            // Termin nije pronađen
+//            System.out.println("Termin nije pronađen");
+//            throw new NoSuchElementException("Termin nije pronađen");
+//        }
+//    }
+
 
 }
