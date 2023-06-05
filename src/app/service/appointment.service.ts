@@ -90,10 +90,10 @@ export class AppointmentService {
     );
   }
 
-  public updateAvailability(id: number, appointment: Appointment): Observable<any> {
+  public updateAvailability(id: number): Observable<any> {
     const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.put<any>(`http://localhost:8082/appointments/${id}/updateAvailability`, appointment
+    return this.http.put<any>(`http://localhost:8082/appointments/${id}/updateAvailability`, null
     ,{
       headers,
     });

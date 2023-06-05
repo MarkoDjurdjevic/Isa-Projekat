@@ -59,14 +59,6 @@ public class CentreController {
         }
     }
 
-    @Secured("ROLE_ANONYMOUS")
-    @GetMapping("/searchCentre/{name}")
-//    @PreAuthorize("hasAnyAuthority('UNREGISTERED_USER','REGISTERED_USER','SYSTEM_ADMINISTRATOR','CENTRE_ADMINISTRATOR')")
-    public void searchCentre(@RequestParam String name){
-        centreService.findCentreByName(name);
-        ResponseEntity.status(HttpStatus.OK);
-    }
-
 
     @PutMapping("/update")
     @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")

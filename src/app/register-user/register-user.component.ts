@@ -84,7 +84,7 @@ export class RegisterUserComponent implements OnInit {
     updateAppointmentAvailability(id: number) {
       this.isAvailable = !this.isAvailable; // Promeni vrednost na suprotno stanje
       const appointment1 = this.appointment;
-      this.appointmentService.updateAvailability(id, appointment1).subscribe(
+      this.appointmentService.updateAvailability(id).subscribe(
         (response) => {
           console.log('Availability updated successfully');
         },

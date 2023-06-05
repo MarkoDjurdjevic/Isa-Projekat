@@ -94,5 +94,9 @@ export class AuthService {
     return this.http.get<Centre[]>('http://localhost:8082/auth/all');
   }
 
+  public searchCentre(name: string): Observable<any> {
+    return this.http.get<any>(`http://localhost:8082/auth/searchCentre/${name}`);
+  }
+
 
 }

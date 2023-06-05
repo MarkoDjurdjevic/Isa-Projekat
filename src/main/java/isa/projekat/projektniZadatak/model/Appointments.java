@@ -32,7 +32,7 @@ public class Appointments {
 
   private boolean available = true;
 
-  private boolean present=true;
+  private boolean present = true;
 
   @ManyToOne(fetch = FetchType.EAGER)
   private BloodType bloodType;

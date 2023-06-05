@@ -106,34 +106,37 @@ public class AppointmentService {
 
   //da kada na frontu pritisnem dugme za available
   // i ovo premestiti i staviti u register usera
-  public void updateAvailability(Long appointmentId,AppointmentDTO appointmentDTO){
+  public Appointments updateAvailability(Long appointmentId) {
     UserApp loggedInUser = userAppRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
     if (loggedInUser.getRole().getName().equals("CENTRE_ADMINISTRATOR")) {
-      Optional<RegisterUser>registerUserOptional = registerUserRepository.findById(appointmentId);
-      if(registerUserOptional.isPresent()){
-        RegisterUser registerUser = registerUserOptional.get();
-        Appointments appointments = registerUser.getAppointments();
+//      Optional<RegisterUser>registerUserOptional = registerUserRepository.findById(appointmentId);
+//      if(registerUserOptional.isPresent()){
+//        RegisterUser registerUser = registerUserOptional.get();
+      Optional<Appointments> appointmentsOptional = appointmentRepository.findById(appointmentId);
+      Appointments appointments = appointmentsOptional.get();
+      RegisterUser registerUser = appointments.getRegisterUser();
 //        if (appointments != null){
 //          appointments.setAvailable(true);
 //          appointments.setPresent(true);
 //          appointmentRepository.save(appointments);
-          if(appointments.isAvailable()){
-            appointments.setAvailable(!appointmentDTO.isAvailable());
-            appointments.setPresent(false);
-            int penal = registerUser.getPenal();
-            penal = penal+1;
-            registerUser.setPenal(penal);
-            appointmentRepository.save(appointments);
-            registerUserRepository.save(registerUser);
-          }
+      if (appointments.isAvailable()) {
+        appointments.setAvailable(false);
+        appointments.setPresent(false);
+        int penal = registerUser.getPenal();
+        penal = penal + 1;
+        registerUser.setPenal(penal);
+        appointmentRepository.save(appointments);
+        registerUserRepository.save(registerUser);
+        return appointments;
+      }
 //          else{
 //            appointments.setAvailable(is);
 //            appointments.setPresent(true);
 //            appointmentRepository.save(appointments);
 //          }
-        }
-      }
 
+    }
+    return null;
 
   }
 

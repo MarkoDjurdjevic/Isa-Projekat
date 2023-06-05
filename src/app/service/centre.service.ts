@@ -75,6 +75,16 @@ export class CentreService {
     });
   }
 
+  searchUser(name: string, lastname: string): Observable<any> {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(
+      `http://localhost:8082/adminCentre/searchUser?name=${name}&lastname=${lastname}`
+      , {
+        headers,
+      });
+  }
+
 
 
 

@@ -101,8 +101,8 @@ public class AppointmentController {
 
   @PutMapping("/{id}/updateAvailability")
   @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
-  public void updateAvailability(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO) {
-      appointmentService.updateAvailability(id,appointmentDTO);
+  public Appointments updateAvailability(@PathVariable Long id) {
+      return appointmentService.updateAvailability(id);
   }
 
   //postavljam na false prisutnost i penal dodajem za 1

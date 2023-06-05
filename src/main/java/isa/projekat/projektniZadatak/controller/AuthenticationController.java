@@ -11,6 +11,7 @@ import isa.projekat.projektniZadatak.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,13 @@ public class AuthenticationController {
     @GetMapping("/all")
     public List<Centre> getCentres(){
         return centreService.getCentres();
+    }
+
+
+    @GetMapping("/searchCentre/{name}")
+    public void searchCentre(@RequestParam String name){
+        centreService.findCentreByName(name);
+        ResponseEntity.status(HttpStatus.OK);
     }
 
 

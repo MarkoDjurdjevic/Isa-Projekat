@@ -2,6 +2,9 @@
 <button (click)="showAllAdministrator()">All Centre Administrators</button>
 <button (click)="showTermsFormm()">Create terms</button>
 <button (click)="showUpdateUserForm()">Update user</button>
+<input type="text" [(ngModel)]="name" [(ngModel)]="lastname" placeholder="Unesite ime centra" />
+<button (click)="searchUser()">Pretraži</button>
+
 <h1>List of Registered Users</h1>
 <div *ngIf="showUpdateCentre">
   <p>aaaaaaaaaaa</p>

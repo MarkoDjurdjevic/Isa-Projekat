@@ -27,6 +27,8 @@ export class ListRegisterUserComponent implements OnInit {
   centre:Centre;
   showTermsForm: boolean = false;
   showUpdateUser:boolean = false;
+  name: string;
+  lastname: string;
 
   constructor(private registerUserService: RegisterUserservice,
     private appointmentService:AppointmentService,
@@ -136,6 +138,19 @@ export class ListRegisterUserComponent implements OnInit {
       },
       (error) => {
         console.log('Error registering user', error);
+      }
+    );
+  }
+
+  searchUser() {
+    this.centreService.searchUser(this.name, this.lastname).subscribe(
+      (response) => {
+        console.log('Centre search successful');
+        // Obradite odgovor na odgovarajući način
+      },
+      (error) => {
+        console.log('Error searching centre', error);
+        // Obradite grešku na odgovarajući način
       }
     );
   }

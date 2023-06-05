@@ -54,8 +54,8 @@ INSERT INTO register_user(id,penal, centre_id) values (9, 2, 1);
 
 --appointment
 INSERT INTO appointments(id, date, time,duration, available, blood_type_id,centre_id,register_user_id,present,statement_id) VALUES (nextval('appointment_seq_gen'), '2023-04-12', '12:30h', 12, true, 1, 1,8,true,null);
-INSERT INTO appointments(id, date, time,duration, available, blood_type_id,centre_id,register_user_id,present,statement_id) VALUES (nextval('appointment_seq_gen'), '2023-04-12', '12:30h', 30, false, 2, 1,4,false,null);
-INSERT INTO appointments(id, date, time,duration, available, blood_type_id,centre_id,register_user_id,present,statement_id) VALUES (nextval('appointment_seq_gen'), '2023-04-12', '12:30h', 33, false, 3, 1,9,false,null);
+INSERT INTO appointments(id, date, time,duration, available, blood_type_id,centre_id,register_user_id,present,statement_id) VALUES (nextval('appointment_seq_gen'), '2023-04-12', '12:30h', 30, true, 2, 1,4,true,null);
+INSERT INTO appointments(id, date, time,duration, available, blood_type_id,centre_id,register_user_id,present,statement_id) VALUES (nextval('appointment_seq_gen'), '2023-04-12', '12:30h', 33, true, 3, 1,9,true,null);
 --INSERT INTO appointments(id, date, time,duration, available, blood_type_id,centre_id,register_user_id,present,statement_id) VALUES (nextval('appointment_seq_gen'), '2023-04-12', '12:30h', 23, false, 4, 2,8,false,null);
 
 
