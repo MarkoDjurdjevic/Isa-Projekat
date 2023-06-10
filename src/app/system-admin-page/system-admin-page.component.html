@@ -1,1 +1,24 @@
-<p>system-admin-page works!</p>
+<h2>List Free Terms</h2>
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Reserve</th>
+        <th>Duration</th>
+        <th></th>
+        <th></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let term of terms">
+        <td>{{ term.id }}</td>
+        <td>{{ term.date }}</td>
+        <td>{{ term.duration }}</td>
+        <td>{{ term.reserve }}</td>
+        <td>{{ term.time }}</td>
+      </tr>
+    </tbody>
+  </table>

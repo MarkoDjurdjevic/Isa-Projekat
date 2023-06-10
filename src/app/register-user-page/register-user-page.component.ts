@@ -11,6 +11,8 @@ import { CentreService } from '../service/centre.service';
 import { TermsService } from '../service/terms.service';
 import { UserService } from '../service/user.service';
 import { Terms } from '../model/terms';
+import { LocationStrategy } from '@angular/common';
+
 
 @Component({
   selector: 'app-register-user-page',
@@ -25,7 +27,7 @@ export class RegisterUserPageComponent implements OnInit {
   showUpdateCentre:boolean= false;
 
   constructor(private registerUserService: RegisterUserservice,
-    private termsService:TermsService) { }
+    private termsService:TermsService,private locationStrategy: LocationStrategy) { }
 
   ngOnInit(): void {
     this.loadRegisteredUsers();
@@ -54,6 +56,7 @@ export class RegisterUserPageComponent implements OnInit {
     this.registerUserService.rateForCenter(registrationRequest).subscribe(
       (response) => {
         console.log('User successfully registered');
+        this.showUpdateCentre = false;
       },
       (error) => {
         console.log('Error registering user', error);
@@ -68,6 +71,8 @@ export class RegisterUserPageComponent implements OnInit {
       (response) => {
         console.log('User successfully registered');
         console.log(id);
+        window.location.reload();
+
       },
       (error) => {
         console.log('Error registering user', error);

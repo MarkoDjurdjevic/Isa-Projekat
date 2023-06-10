@@ -100,6 +100,7 @@ export class ListRegisterUserComponent implements OnInit {
     this.centreService.updateCentre(registrationRequest).subscribe(
       (response) => {
         console.log('User successfully registered');
+        this.showUpdateCentre = false;
       },
       (error) => {
         console.log('Error registering user', error);
@@ -120,6 +121,7 @@ export class ListRegisterUserComponent implements OnInit {
     this.termsService.addTerms(registrationRequest).subscribe(
       (response) => {
         console.log('User successfully registered');
+        this.showTermsForm = false;
       },
       (error) => {
         console.log('Error registering user', error);
@@ -151,6 +153,7 @@ export class ListRegisterUserComponent implements OnInit {
     this.userService.updateUser(registrationRequest).subscribe(
       (response) => {
         console.log('User successfully registered');
+        this.showUpdateUser = false;
       },
       (error) => {
         console.log('Error registering user', error);
@@ -174,6 +177,10 @@ export class ListRegisterUserComponent implements OnInit {
     this.filteredUsers = this.registeredUsers.filter(user =>
       user.name.toLowerCase().includes(this.searchName.toLowerCase())
     );
+  }
+
+  close(){
+    this.showTermsForm = false;
   }
 
 

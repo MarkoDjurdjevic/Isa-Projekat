@@ -95,6 +95,11 @@ data: { allowedRoles: ['CENTRE_ADMINISTRATOR'] }
 canActivate: [AuthGuard],
 data: { allowedRoles: ['CENTRE_ADMINISTRATOR', 'SYSTEM_ADMINISTRATOR'] }
 },
+
+{ path: 'system-admin-page', component: SystemAdminPageComponent,
+canActivate: [AuthGuard],
+data: { allowedRoles: ['CENTRE_ADMINISTRATOR'] }
+},
   
   
 ];

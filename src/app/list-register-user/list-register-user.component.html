@@ -1,10 +1,12 @@
 <button (click)="showUpdateCentreForm()">Update centre</button>
-<button (click)="showAllAdministrator()">All Centre Administrators</button>
-<button (click)="showTermsFormm()">Create terms</button>
+<button [routerLink]="['/all-users-list']">List of All Users</button>
 <button (click)="showUpdateUserForm()">Update user</button>
-<button [routerLink]="['/admin-profile']">Profile user</button>
+<button (click)="showAllAdministrator()">All Centre Administrators</button>
+<button [routerLink]="['/admin-profile']">Profile user</button><br>
 <button [routerLink]="['/all-terms']">All Reserve Terms</button>
-<button [routerLink]="['/all-users-list']">List of All Users</button><br>
+<button (click)="showTermsFormm()">Create terms</button>
+<button [routerLink]="['/system-admin-page']">All Free Terms</button><br>
+
 <input type="text" [(ngModel)]="name" placeholder="Enter name">
 <input type="text" [(ngModel)]="lastname" placeholder="Enter lastname">
 <button (click)="searchUser()">Search user</button>
@@ -37,7 +39,7 @@
 
       <input
         type="text"
-        placeholder="Enter your Last Name"
+        placeholder="description"
         #lastname="ngModel"
         name="description"
         required
@@ -93,6 +95,7 @@
         ngModel
       />
           <button>Create Terms</button>
+          <button (click)="close()">Close</button>
         </form> 
       </div>
  </div> 
@@ -182,7 +185,7 @@
           required
           ngModel
         />
-          <button>Update Centre</button>
+          <button>Update User</button>
         </form> 
       </div>
  </div> 
@@ -220,7 +223,6 @@
       <th>Username</th>
       <th>Name</th>
       <th>Lastname</th>
-      <th></th>
       <th></th>
     </tr>
   </thead>

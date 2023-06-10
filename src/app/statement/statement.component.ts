@@ -29,6 +29,7 @@ export class StatementComponent implements OnInit {
   id:number;
   statement:Statement;
   private sub: any;
+  showSuccessMessage = false;
 
   constructor(private http: HttpClient,
     private formBuilder:FormBuilder,
@@ -97,6 +98,7 @@ export class StatementComponent implements OnInit {
     this.appointmentService.addStatements(this.id,registrationRequest).subscribe(
       (response) => {
         console.log('User successfully registered');
+        
       },
       (error) => {
         console.log('Error registering user', error);

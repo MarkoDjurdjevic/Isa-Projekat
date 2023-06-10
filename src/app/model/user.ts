@@ -13,6 +13,7 @@ export class User {
   name:string = '';
   lastname:string = '';
   phoneNumber:string = '';
+  bloodType:any='';
 
 
 
@@ -32,6 +33,7 @@ export class User {
       this.name= obj.name;
       this.lastname = obj.lastname;
       this.phoneNumber = obj.phoneNumber;
+      this.bloodType = obj.bloodType;
     }
   }
 }

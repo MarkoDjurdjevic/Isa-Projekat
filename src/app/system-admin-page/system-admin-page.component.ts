@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Terms } from '../model/terms';
+import { RegisterUserservice } from '../service/register-user.service';
 
 @Component({
   selector: 'app-system-admin-page',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SystemAdminPageComponent implements OnInit {
 
-  constructor() { }
+   terms: Terms[] = [];
+  term:Terms;
+  constructor(private registerUserService: RegisterUserservice,) { }
 
   ngOnInit(): void {
+     this.loadRegisteredUsers();
+  }
+
+  loadRegisteredUsers() {
+    this.registerUserService.getAllTerms().subscribe(
+      users => {
+        this.terms = users;
+      },
+      error => {
+        console.log('Error occurred while fetching registered users:', error);
+      }
+    );
   }
 
 }
