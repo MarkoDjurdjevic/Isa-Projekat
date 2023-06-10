@@ -57,4 +57,10 @@ public class TermsController {
 //        termsService.proveraTerms(id);
 //    }
 
+
+    @GetMapping("/allBusyTermsList")
+    @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR','REGISTERED_USER')")
+    public List<Terms>getAllBusyTerms(){
+        return termsService.getAllZauzetiTerms();
+    }
 }

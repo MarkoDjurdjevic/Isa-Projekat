@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdminCentreService {
@@ -37,6 +38,19 @@ public class AdminCentreService {
             RegisterUser registerUser = regiserUserRepository.findRegisterUserByNameAndLastname(name,lastname);
 
             return registerUser;
+        }
+        return null;
+
+    }
+
+
+    public CentreAdmin centreAdmin(){
+
+        UserApp loggedInUser = userAppRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        if (loggedInUser.getRole().getName().equals("CENTRE_ADMINISTRATOR")) {
+            Optional<CentreAdmin> centreAdmin = centreAdminRepository.findById(loggedInUser.getId());
+            CentreAdmin centreAdmin1 = centreAdmin.get();
+            return centreAdmin1;
         }
         return null;
 

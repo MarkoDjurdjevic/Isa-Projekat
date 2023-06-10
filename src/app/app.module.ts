@@ -30,6 +30,10 @@ import { AdminListComponent } from './admin-list/admin-list.component';
 import { AvailabilityPageComponent } from './availability-page/availability-page.component';
 import { RegisterUserPageComponent } from './register-user-page/register-user-page.component';
 import { AllCentrePageComponent } from './all-centre-page/all-centre-page.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { AllTermsComponent } from './all-terms/all-terms.component';
+import { AllUsersListComponent } from './all-users-list/all-users-list.component';
+import { SystemAdminPageComponent } from './system-admin-page/system-admin-page.component';
 
 const appRoutes: Routes = [
   {
@@ -77,6 +81,20 @@ const appRoutes: Routes = [
     data: { allowedRoles: ['REGISTERED_USER'] }
  },
  { path: 'all-centre-page', component: AllCentrePageComponent},
+ 
+ { path: 'admin-profile', component: AdminProfileComponent,
+ canActivate: [AuthGuard],
+ data: { allowedRoles: ['CENTRE_ADMINISTRATOR'] }
+},
+{ path: 'all-terms', component: AllTermsComponent,
+canActivate: [AuthGuard],
+data: { allowedRoles: ['CENTRE_ADMINISTRATOR'] }
+},
+
+{ path: 'all-users-list', component: AllUsersListComponent,
+canActivate: [AuthGuard],
+data: { allowedRoles: ['CENTRE_ADMINISTRATOR', 'SYSTEM_ADMINISTRATOR'] }
+},
   
   
 ];
@@ -102,6 +120,10 @@ const appRoutes: Routes = [
     AvailabilityPageComponent,
     RegisterUserPageComponent,
     AllCentrePageComponent,
+    AdminProfileComponent,
+    AllTermsComponent,
+    AllUsersListComponent,
+    SystemAdminPageComponent,
     
   ],
   imports: [

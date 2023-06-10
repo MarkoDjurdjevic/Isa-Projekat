@@ -1,6 +1,7 @@
 package isa.projekat.projektniZadatak.controller;
 
 import isa.projekat.projektniZadatak.auth.RegistrationRequestDto;
+import isa.projekat.projektniZadatak.model.RegisterUser;
 import isa.projekat.projektniZadatak.model.UserApp;
 import isa.projekat.projektniZadatak.model.dto.CentreDTO;
 import isa.projekat.projektniZadatak.service.UserAppService;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path ="/userapp")
@@ -26,5 +29,19 @@ public class UserAppController {
         ResponseEntity.status(HttpStatus.OK);
 
     }
+
+    @GetMapping("/listOfAllUsers")
+    @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR', 'SYSTEM_ADMINISTRATOR')")
+    public List<UserApp> listOfAllUsers(){
+        return userAppService.listOfALlUsers();
+
+    }
+
+    @GetMapping("/searchUser")
+    @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR', 'SYSTEM_ADMINISTRATOR')")
+    public UserApp searchUser(@RequestParam("name") String name, @RequestParam("lastname") String lastname) {
+        return userAppService.searchUserApp(name, lastname);
+    }
+
 
 }

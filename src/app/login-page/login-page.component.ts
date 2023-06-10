@@ -30,6 +30,10 @@ export class LoginPageComponent implements OnInit {
         {
           this.router.navigate(['/register-user-page']);
         }
+        if(role === 'SYSTEM_ADMINISTRATOR')
+        {
+          this.router.navigate(['/all-users-list']);
+        }
         console.log('You have successfuly logged in!');
       },
       (error) => {

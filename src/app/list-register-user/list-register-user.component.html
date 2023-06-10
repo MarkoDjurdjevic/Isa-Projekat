@@ -1,7 +1,10 @@
 <button (click)="showUpdateCentreForm()">Update centre</button>
 <button (click)="showAllAdministrator()">All Centre Administrators</button>
 <button (click)="showTermsFormm()">Create terms</button>
-<button (click)="showUpdateUserForm()">Update user</button><br>
+<button (click)="showUpdateUserForm()">Update user</button>
+<button [routerLink]="['/admin-profile']">Profile user</button>
+<button [routerLink]="['/all-terms']">All Reserve Terms</button>
+<button [routerLink]="['/all-users-list']">List of All Users</button><br>
 <input type="text" [(ngModel)]="name" placeholder="Enter name">
 <input type="text" [(ngModel)]="lastname" placeholder="Enter lastname">
 <button (click)="searchUser()">Search user</button>

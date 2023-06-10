@@ -1,6 +1,7 @@
 package isa.projekat.projektniZadatak.controller;
 
 import isa.projekat.projektniZadatak.model.Appointments;
+import isa.projekat.projektniZadatak.model.CentreAdmin;
 import isa.projekat.projektniZadatak.model.RegisterUser;
 import isa.projekat.projektniZadatak.service.AdminCentreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,12 @@ public class AdminCentreController {
     @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
     public RegisterUser searchUser(@RequestParam("name") String name, @RequestParam("lastname") String lastname) {
         return adminCentreService.searchRegisterUser(name, lastname);
+    }
+
+    @GetMapping("/getCentreAdmin")
+    @PreAuthorize("hasAnyAuthority('CENTRE_ADMINISTRATOR')")
+    public CentreAdmin getCentreAdmin() {
+        return adminCentreService.centreAdmin();
     }
 
 }

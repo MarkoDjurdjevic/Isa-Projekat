@@ -1,0 +1,48 @@
+<input type="text" [(ngModel)]="name" placeholder="Enter name">
+<input type="text" [(ngModel)]="lastname" placeholder="Enter lastname">
+<button (click)="searchUser()">Search user</button>
+<h2>List of All Users</h2>
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Address</th>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Lastname</th>
+        <th>Phone</th>
+        <th>Jmbg</th>
+        <th>Role</th>
+
+        
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngIf="foundUser">
+          <tr>
+            <td>{{ foundUser.id }}</td>
+            <td>{{ foundUser.username }}</td>
+            <td>{{ foundUser.address }}</td>
+            <td>{{ foundUser.email }}</td>
+            <td>{{ foundUser.name }}</td>
+            <td>{{ foundUser.lastname }}</td>
+            <td>{{ foundUser.phoneNumber }}</td>
+            <td>{{ foundUser.jmbg }}</td>
+            <td>{{ foundUser.role.name }}</td>
+            
+          </tr>
+        </ng-container>
+      <tr *ngFor="let t of usersList">
+        <td>{{ t.id }}</td>
+        <td>{{ t.username }}</td>
+        <td>{{ t.address }}</td>
+        <td>{{ t.email }}</td>
+        <td>{{ t.name }}</td>
+        <td>{{ t.lastname }}</td>
+        <td>{{ t.phoneNumber }}</td>
+        <td>{{ t.jmbg }}</td>
+        <td>{{ t.role.name }}</td>
+      </tr>
+    </tbody>
+  </table>

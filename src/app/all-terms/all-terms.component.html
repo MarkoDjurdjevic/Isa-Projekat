@@ -1,0 +1,22 @@
+<h2>List of Reserve Terms</h2>
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Duration</th>
+        <th>Reserve</th>
+
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of terms">
+        <td>{{ t.id }}</td>
+        <td>{{ t.date }}</td>
+        <td>{{ t.duration }}</td>
+        <td>{{ t.reserve }}</td>
+      </tr>
+    </tbody>
+  </table>
+  

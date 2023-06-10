@@ -99,6 +99,21 @@ public class TermsService {
     }
 
 
+    public List<Terms>getAllZauzetiTerms(){
+        List<Terms>termsList = termsRepository.findAll();
+        List<Terms>newTermsList = new ArrayList<>();
+
+        for (Terms t:termsList
+             ) {
+            if(t.isReserve()){
+                newTermsList.add(t);
+            }
+
+        }
+        return newTermsList;
+    }
+
+
 //
 //    public void proveraTerms(Long id) {
 //        Optional<Terms> termsOptional = termsRepository.findById(id);

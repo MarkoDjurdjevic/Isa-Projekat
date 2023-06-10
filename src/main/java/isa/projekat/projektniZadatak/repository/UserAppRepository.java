@@ -1,5 +1,6 @@
 package isa.projekat.projektniZadatak.repository;
 
+import isa.projekat.projektniZadatak.model.RegisterUser;
 import isa.projekat.projektniZadatak.model.UserApp;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,4 +17,5 @@ public interface UserAppRepository extends JpaRepository<UserApp, Long> {
 
     public List<UserApp> findUserAppsByActive(Boolean active);
 
+    UserApp findRegisterUserByNameAndLastname(String name, String lastname);
 }

@@ -10,6 +10,7 @@ import { NgForm } from '@angular/forms';
 import { CentreService } from '../service/centre.service';
 import { TermsService } from '../service/terms.service';
 import { UserService } from '../service/user.service';
+import { CentreAdmin } from '../model/centreAdmin';
 
 @Component({
   selector: 'app-list-register-user',
@@ -32,6 +33,7 @@ export class ListRegisterUserComponent implements OnInit {
   searchName: string = ''; // Svojstvo za čuvanje vrednosti unetog imena
   filteredUsers: any[] = []; // Niz za filtrirane korisnike
   foundUser: any;
+  centreAdmin:CentreAdmin
 
   constructor(private registerUserService: RegisterUserservice,
     private appointmentService:AppointmentService,
@@ -49,6 +51,17 @@ export class ListRegisterUserComponent implements OnInit {
     this.registerUserService.registerUserByAppointment().subscribe(
       users => {
         this.registeredUsers = users;
+      },
+      error => {
+        console.log('Error occurred while fetching registered users:', error);
+      }
+    );
+  }
+
+  showProfileOfUser(){
+    this.centreService.getCentreAdmin().subscribe(
+      users => {
+        this.centreAdmin = users;
       },
       error => {
         console.log('Error occurred while fetching registered users:', error);
@@ -162,6 +175,7 @@ export class ListRegisterUserComponent implements OnInit {
       user.name.toLowerCase().includes(this.searchName.toLowerCase())
     );
   }
+
 
 
   

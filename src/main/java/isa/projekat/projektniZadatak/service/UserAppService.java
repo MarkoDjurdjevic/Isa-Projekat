@@ -87,5 +87,16 @@ public class UserAppService implements UserDetailsService {
         return userAppRepository.findByEmail(username);
     }
 
+    public List<UserApp>listOfALlUsers(){
+        return userAppRepository.findAll();
+    }
+
+    public UserApp searchUserApp(String name, String lastname){
+            UserApp userApp = userAppRepository.findRegisterUserByNameAndLastname(name,lastname);
+            return userApp;
+
+
+    }
+
 }
 

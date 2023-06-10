@@ -49,4 +49,13 @@ export class TermsService{
           }
         );
       }
+
+      
+  public getBusyTerms(): Observable<Terms[]> {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Terms[]>('http://localhost:8082/terms/allBusyTermsList', {
+      headers,
+    });
+  }
 }
