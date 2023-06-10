@@ -40,10 +40,10 @@ public class AuthenticationController {
     }
 
 
-    @GetMapping("/searchCentre/{name}")
-    public void searchCentre(@RequestParam String name){
-        centreService.findCentreByName(name);
-        ResponseEntity.status(HttpStatus.OK);
+    @GetMapping("/searchCentre")
+    public Centre searchCentre(@RequestParam("name") String name){
+        return centreService.findCentreByName(name);
+
     }
 
 

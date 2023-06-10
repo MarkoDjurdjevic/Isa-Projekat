@@ -1,9 +1,11 @@
 <button (click)="showUpdateCentreForm()">Update centre</button>
 <button (click)="showAllAdministrator()">All Centre Administrators</button>
 <button (click)="showTermsFormm()">Create terms</button>
-<button (click)="showUpdateUserForm()">Update user</button>
-<input type="text" [(ngModel)]="name" [(ngModel)]="lastname" placeholder="Unesite ime centra" />
-<button (click)="searchUser()">Pretraži</button>
+<button (click)="showUpdateUserForm()">Update user</button><br>
+<input type="text" [(ngModel)]="name" placeholder="Enter name">
+<input type="text" [(ngModel)]="lastname" placeholder="Enter lastname">
+<button (click)="searchUser()">Search user</button>
+<!-- <input type="text" [(ngModel)]="searchName" (input)="applyFilter()" placeholder="Search by name" /> -->
 
 <h1>List of Registered Users</h1>
 <div *ngIf="showUpdateCentre">
@@ -181,9 +183,9 @@
         </form> 
       </div>
  </div> 
-
+<!-- 
 <table>
-  <thead>
+   <thead>
     <tr>
       <th>ID</th>
       <th>Email</th>
@@ -203,7 +205,42 @@
       <td>{{ user.name }}</td>
       <td>{{ user.lastname }}</td>
       <td><a [routerLink]="['/register-user', user.id]">Appointment</a></td>
-      <!-- <td><button>History of patient</button></td> -->
     </tr>
+  </tbody>
+</table>  -->
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Lastname</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="foundUser">
+      <tr>
+        <td>{{ foundUser.id }}</td>
+        <td>{{ foundUser.email }}</td>
+        <td>{{ foundUser.username }}</td>
+        <td>{{ foundUser.name }}</td>
+        <td>{{ foundUser.lastname }}</td>
+        <td><a [routerLink]="['/register-user', foundUser.id]">Appointment</a></td>
+      </tr>
+    </ng-container>
+    <ng-container *ngFor="let user of registeredUsers">
+      <tr *ngIf="!(foundUser && user.id === foundUser.id)">
+        <td>{{ user.id }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.lastname }}</td>
+        <td><a [routerLink]="['/register-user', user.id]">Appointment</a></td>
+      </tr>
+    </ng-container>
   </tbody>
 </table>

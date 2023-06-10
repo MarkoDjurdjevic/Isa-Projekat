@@ -1,6 +1,7 @@
 import { Appointment } from './appointment';
 
 export class Centre {
+  id:number;
   name: string = '';
   address: string = '';
   description: string = '';
@@ -9,7 +10,7 @@ export class Centre {
 
   constructor(obj?: any) {
     if (obj) {
-
+      this.id = obj.id;
       this.name = obj.name;
       this.address = obj.address;
       this.description = obj.description;

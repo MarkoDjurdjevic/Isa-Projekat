@@ -1,4 +1,4 @@
-<input type="text" [(ngModel)]="name" placeholder="Unesite ime centra" />
+<input type="text" [(ngModel)]="name" placeholder="Search by name" />
 <button (click)="searchCentre()">Pretraži</button>
 <table> 
     <thead>
@@ -15,12 +15,30 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let centre of centres">
+      <!-- <tr *ngFor="let centre of centres">
         <td>{{ centre.name }}</td>
         <td>{{ centre.address }}</td>
         <td>{{ centre.description }}</td>
         <td>{{ centre.avgGrade }}</td>
         <td>{{ centre.rate }}</td>
-      </tr>
+      </tr> -->
+      <ng-container *ngIf="foundUser">
+        <tr>
+          <td>{{ foundUser.name }}</td>
+          <td>{{ foundUser.address }}</td>
+          <td>{{ foundUser.description }}</td>
+          <td>{{ foundUser.avgGrade }}</td>
+          <td>{{ foundUser.rate }}</td>
+        </tr>
+      </ng-container>
+      <ng-container *ngFor="let centre of centres ">
+        <tr *ngIf="!(foundUser && centre.id === foundUser.id)">
+          <td>{{ centre.name }}</td>
+          <td>{{ centre.address }}</td>
+          <td>{{ centre.description }}</td>
+          <td>{{ centre.avgGrade }}</td>
+          <td>{{ centre.rate }}</td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>

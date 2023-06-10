@@ -29,6 +29,9 @@ export class ListRegisterUserComponent implements OnInit {
   showUpdateUser:boolean = false;
   name: string;
   lastname: string;
+  searchName: string = ''; // Svojstvo za čuvanje vrednosti unetog imena
+  filteredUsers: any[] = []; // Niz za filtrirane korisnike
+  foundUser: any;
 
   constructor(private registerUserService: RegisterUserservice,
     private appointmentService:AppointmentService,
@@ -146,12 +149,17 @@ export class ListRegisterUserComponent implements OnInit {
     this.centreService.searchUser(this.name, this.lastname).subscribe(
       (response) => {
         console.log('Centre search successful');
-        // Obradite odgovor na odgovarajući način
+        this.foundUser = response; 
       },
       (error) => {
         console.log('Error searching centre', error);
-        // Obradite grešku na odgovarajući način
       }
+    );
+  }
+  
+    applyFilter() {
+    this.filteredUsers = this.registeredUsers.filter(user =>
+      user.name.toLowerCase().includes(this.searchName.toLowerCase())
     );
   }
 

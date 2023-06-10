@@ -2,6 +2,7 @@ package isa.projekat.projektniZadatak.controller;
 
 import isa.projekat.projektniZadatak.model.Centre;
 import isa.projekat.projektniZadatak.model.CentreAdmin;
+import isa.projekat.projektniZadatak.model.RegisterUser;
 import isa.projekat.projektniZadatak.model.dto.CentreDTO;
 import isa.projekat.projektniZadatak.model.dto.RateForCentreDTO;
 import isa.projekat.projektniZadatak.service.CentreService;
@@ -48,7 +49,7 @@ public class CentreController {
     }
 
     @GetMapping("/search")
-    @PreAuthorize("hasAnyAuthority('UNREGISTERED_USER','REGISTERED_USER','SYSTEM_ADMINISTRATOR','CENTRE_ADMINISTRATOR')")
+//    @PreAuthorize("hasAnyAuthority('UNREGISTERED_USER','REGISTERED_USER','SYSTEM_ADMINISTRATOR','CENTRE_ADMINISTRATOR')")
     public ResponseEntity<Optional<Centre>> searchCentres(@RequestParam String name, @RequestParam String adress){
 
         Optional<Centre> centre = centreService.searchCentres(name,adress);
@@ -73,8 +74,6 @@ public class CentreController {
     public List<CentreAdmin> getAllCentreAdmin(){
         return centreService.getAllCentreAdmin();
     }
-
-
 
 
 //
@@ -147,6 +146,8 @@ public class CentreController {
     public void rateForCenter(@RequestBody RateForCentreDTO rateForCentreDTO) {
         rateForCentreService.RateCentre(rateForCentreDTO);
     }
+
+
 
 
 

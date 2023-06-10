@@ -14,6 +14,7 @@ export class AllCentrePageComponent implements OnInit {
   centres: Centre[];
   centre:Centre;
   name: string;
+  foundUser: any;
 
   constructor(private authService: AuthService, private router: Router,
     private centreService:CentreService) { }
@@ -38,6 +39,7 @@ export class AllCentrePageComponent implements OnInit {
       (response) => {
         console.log('Centre search successful');
         // Obradite odgovor na odgovarajući način
+        this.foundUser = response; 
       },
       (error) => {
         console.log('Error searching centre', error);

@@ -95,7 +95,7 @@ export class AuthService {
   }
 
   public searchCentre(name: string): Observable<any> {
-    return this.http.get<any>(`http://localhost:8082/auth/searchCentre/${name}`);
+    return this.http.get<any>(`http://localhost:8082/auth/searchCentre?name=${name}`);
   }
 
 

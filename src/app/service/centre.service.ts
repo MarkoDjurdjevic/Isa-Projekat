@@ -9,6 +9,7 @@ import { Centre } from '../model/centre';
 import { Subject } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { CentreAdmin } from '../model/centreAdmin';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -75,14 +76,26 @@ export class CentreService {
     });
   }
 
+  // searchUser(name: string, lastname: string): Observable<any> {
+  //   const token = localStorage.getItem('access_token');
+  //   const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  //   return this.http.get<any>(
+  //     `http://localhost:8082/adminCentre/searchUser?name=${name}&lastname=${lastname}`
+  //     , {
+  //       headers,
+  //     });
+  // }
+
+
   searchUser(name: string, lastname: string): Observable<any> {
     const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<any>(
-      `http://localhost:8082/adminCentre/searchUser?name=${name}&lastname=${lastname}`
-      , {
+      `http://localhost:8082/adminCentre/searchUser?name=${name}&lastname=${lastname}`, {
         headers,
-      });
+      }).pipe(
+        tap(response => console.log(response)) // Dodajte ovaj deo za ispis odgovora u konzoli
+      );
   }
 
 

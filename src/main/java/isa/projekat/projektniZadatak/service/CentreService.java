@@ -4,6 +4,7 @@ import isa.projekat.projektniZadatak.model.*;
 import isa.projekat.projektniZadatak.model.dto.CentreDTO;
 import isa.projekat.projektniZadatak.repository.CentreAdminRepository;
 import isa.projekat.projektniZadatak.repository.CentreRepository;
+import isa.projekat.projektniZadatak.repository.RegisterUserRepository;
 import isa.projekat.projektniZadatak.repository.UserAppRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,8 +21,10 @@ public class CentreService {
     private final CentreRepository centreRepository;
 
     @Autowired
-    public CentreService(CentreRepository centreRepository) {
+    public CentreService(CentreRepository centreRepository,
+                         RegisterUserRepository registerUserRepository) {
         this.centreRepository = centreRepository;
+        this.registerUserRepository = registerUserRepository;
     }
 
     @Autowired
@@ -29,6 +32,7 @@ public class CentreService {
 
     @Autowired
     public UserAppRepository userAppRepository;
+    private final RegisterUserRepository registerUserRepository;
 
     public void addNewCentre(Centre centre){
         Optional<Centre> centreOptional = centreRepository.findCentreByAdress(centre.getAddress());
@@ -105,6 +109,7 @@ public class CentreService {
 
     }
 
+
 //
 //bez duration
 //    public List<Centre> getAvailableCentres(LocalDate date, String time){
@@ -135,11 +140,13 @@ public class CentreService {
 
     public Centre findCentreByName(String name){
         Optional<Centre> centreOptional = centreRepository.findByName(name);
-        Centre centre = new Centre();
-        if(centreOptional.isPresent()){
-            centre = centreOptional.get();
-        }
+        Centre centre = centreOptional.get();
         return centre;
+//        Centre centre = new Centre();
+//        if(centreOptional.isPresent()){
+//            centre = centreOptional.get();
+//        }
+//        return centre;
     }
 
 //    public List<RegisterUser>registerUserList(Long id){
