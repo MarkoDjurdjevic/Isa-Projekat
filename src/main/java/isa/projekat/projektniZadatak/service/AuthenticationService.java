@@ -86,7 +86,6 @@ public class AuthenticationService {
                 case "SYSTEM_ADMINISTRATOR":
                     System.out.println("aaaaaaaaa");
                     userAppService.save(new SystemAdmin(userToRegister));
-                    System.out.println("aaaaaaaaabbababababaa");
                     break;
                 case "REGISTERED_USER":
                     userAppService.save(new RegisterUser(userToRegister));
@@ -95,15 +94,12 @@ public class AuthenticationService {
                     userAppService.save(new CentreAdmin(userToRegister));
                     break;
                 case "UNREGISTERED_USER":
-                    System.out.println("aaaaaaaaa");
                     userAppService.save(new UnregisterUser(userToRegister));
-                    System.out.println("aaaaaaaaabbababababaa");
                     break;
                 default:
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                             .body("Invalid role name.");
             }
-            System.out.println("aaaaaaaaa"+userToRegister);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         catch (Exception e){
@@ -119,23 +115,17 @@ public class AuthenticationService {
             UserApp attemptedLoginUser = userAppRepository.findByEmail(loginRequestDto.getEmail());
             if(attemptedLoginUser != null){
                 attemptedLoginPasswordSalt = attemptedLoginUser.getPasswordSalt();
-                System.out.println("aaaaaaaaabbababababaa");
             }
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     loginRequestDto.getEmail(), loginRequestDto.getPassword() + attemptedLoginPasswordSalt));
-            System.out.println("aaaaaaaaabbababababaaq1111");
             // Ukoliko je autentifikacija uspesna, ubaci korisnika u trenutni security kontekst
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            System.out.println("aaaaaaaaabbababababaaq11112222");
             // Kreiraj token za tog korisnika
             UserApp user = (UserApp) authentication.getPrincipal();
-            System.out.println("bzvz mrzim teeee" + user.getEmail() + user.getRole().getName());
             String jwt = tokenUtils.generateToken(user.getEmail(), user.getRole().getName());
-            System.out.println("aaaaaaaaabbababababaaq111133333");
             int expiresIn = tokenUtils.getExpiredIn();
             UUID refreshToken = refreshTokenService.generateRefreshToken(user);
             // Vrati token kao odgovor na uspesnu autentifikaciju
-            System.out.println("stoko radi");
             return ResponseEntity.ok(new UserTokenState(jwt, refreshToken.toString(), expiresIn));
         }catch (AuthenticationException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)

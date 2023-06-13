@@ -10,6 +10,7 @@ import { CentreAdmin } from '../model/centreAdmin';
 export class AdminListComponent implements OnInit {
 
   registeredUsers: CentreAdmin[] = [];
+  user: CentreAdmin;
 
   constructor(private centreService:CentreService) { }
 

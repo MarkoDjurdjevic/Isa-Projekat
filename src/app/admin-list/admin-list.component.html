@@ -3,11 +3,13 @@
       <tr>
         <th>ID</th>
         <th>Email</th>
-        <th>Username</th>
         <th>Name</th>
         <th>Lastname</th>
-        <th></th>
-        <th></th>
+        <th>Address</th>
+        <th>JMBG</th>
+        <th>Phone number</th>
+        <th>Centre</th>
+      
         
       </tr>
     </thead>
@@ -15,9 +17,12 @@
       <tr *ngFor="let user of registeredUsers">
         <td>{{ user.id }}</td>
         <td>{{ user.email }}</td>
-        <td>{{ user.username }}</td>
         <td>{{ user.name }}</td>
         <td>{{ user.lastname }}</td>
+        <td>{{ user.address }}</td>    
+        <td>{{ user.jmbg }}</td>    
+        <td>{{ user.phoneNumber }}</td>      
+        <td>{{ user.centre.name}}</td>
       </tr>
     </tbody>
   </table>

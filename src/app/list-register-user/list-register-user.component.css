@@ -97,3 +97,13 @@ table {
   .popup-container button:hover {
     background-color: #0056b3;
   }
+
+  .sort-button {
+    background-color: rgb(20, 19, 19); /* Promenite boju pozadine prema želji */
+    color: white; /* Promenite boju teksta prema želji */
+    border-radius: 5px; /* Dodajte zaobljeni oblik */
+    padding: 5px 10px; /* Promenite dimenzije dugmeta prema želji */
+    margin-right: 20px;
+    float: right;
+  }
+  

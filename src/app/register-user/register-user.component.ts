@@ -87,6 +87,7 @@ export class RegisterUserComponent implements OnInit {
       this.appointmentService.updateAvailability(id).subscribe(
         (response) => {
           console.log('Availability updated successfully');
+          location.reload();
         },
         (error) => {
           console.log('Error updating availability', error);

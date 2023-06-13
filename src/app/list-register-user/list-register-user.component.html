@@ -11,6 +11,8 @@
 <input type="text" [(ngModel)]="lastname" placeholder="Enter lastname">
 <button (click)="searchUser()">Search user</button>
 <!-- <input type="text" [(ngModel)]="searchName" (input)="applyFilter()" placeholder="Search by name" /> -->
+<button class="sort-button" (click)="sortUsersByName()">Sort by Name</button>
+<button class="sort-button" (click)="sortUsersByLastName()">Sort by Last Name</button>
 
 <h1>List of Registered Users</h1>
 <div *ngIf="showUpdateCentre">

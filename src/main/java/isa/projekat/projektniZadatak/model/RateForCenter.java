@@ -29,6 +29,6 @@ public class RateForCenter {
     @ManyToOne
     private Centre centre;
 
-    @ManyToOne
+    @OneToOne
     private RegisterUser registerUser;
 }

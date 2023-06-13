@@ -51,11 +51,41 @@ export class ListRegisterUserComponent implements OnInit {
     this.registerUserService.registerUserByAppointment().subscribe(
       users => {
         this.registeredUsers = users;
+        this.sortUsersByName();
+        this.sortUsersByLastName()
       },
       error => {
         console.log('Error occurred while fetching registered users:', error);
       }
     );
+  }
+
+  sortUsersByName() {
+    this.registeredUsers.sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
+  sortUsersByLastName() {
+    this.registeredUsers.sort((a, b) => {
+      const lastNameA = a.lastname.toLowerCase();
+      const lastNameB = b.lastname.toLowerCase();
+      if (lastNameA < lastNameB) {
+        return -1;
+      }
+      if (lastNameA > lastNameB) {
+        return 1;
+      }
+      return 0;
+    });
   }
 
   showProfileOfUser(){

@@ -32,9 +32,9 @@ public class RegisterUser extends UserApp{
 //    @JsonIgnoreProperties("registerUser")
 //    private Centre centre;
 
-    @OneToMany(mappedBy = "registerUser")
+    @OneToOne(mappedBy = "registerUser")
     @JsonIgnore
-    private List<RateForCenter>rateForCenters;
+    private RateForCenter rateForCenters;
 
     private int penal;
 
